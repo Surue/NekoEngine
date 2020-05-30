@@ -102,7 +102,6 @@ void BasicEngine::Init()
 	EASY_FUNCTION(profiler::colors::Magenta);
 #endif
 	instance_ = this;
-	logDebug("Current path: " + GetCurrentPath());
 	jobSystem_.Init();
 }
 

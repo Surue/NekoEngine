@@ -69,11 +69,15 @@ if(Neko_Profile)
 endif()
 
 include("cmake/data.cmake")
+#core
 set(NEKO_CORE_DIR "${CMAKE_SOURCE_DIR}/core/" CACHE INTERNAL "")
 add_subdirectory(${NEKO_CORE_DIR})
 if(NOT Emscripten)
 target_precompile_headers(Neko_Core PRIVATE "${NEKO_CORE_DIR}/include/core_pch.h")
 endif()
+#tools
+set(NEKO_TOOL_DIR "${CMAKE_SOURCE_DIR}/tools/" CACHE INTERNAL "")
+add_subdirectory(${NEKO_TOOL_DIR})
 #imgui
 set(IMGUI_VERSION "1.74" CACHE INTERNAL "")
 set(IMGUI_ROOT "${EXTERNAL_DIR}/imgui-${IMGUI_VERSION}" CACHE STRING "")
