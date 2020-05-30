@@ -2,11 +2,11 @@
 
 #include <sdl_engine/sdl_engine.h>
 
-namespace neko::editor
+namespace neko
 {
-class PhysicsEngine : public sdl::SdlEngine
+class PhysicsEngine final : public sdl::SdlEngine
 {
 public:
 	explicit PhysicsEngine(Configuration* config = nullptr);
 };
-}
+} // namespace neko
