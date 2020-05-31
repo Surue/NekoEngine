@@ -65,7 +65,7 @@ foreach(DATA ${DATA_FILES})
     )
     list(APPEND DATA_BINARY_FILES ${DATA_OUTPUT})
 endforeach(DATA)
-
+message("AddCustomTarget")
 add_custom_target(
         DataTarget
         DEPENDS ${DATA_BINARY_FILES} ${DATA_FILES})
