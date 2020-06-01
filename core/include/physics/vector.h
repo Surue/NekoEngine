@@ -92,6 +92,33 @@ public:
         //TODO Complete this function.
     }
 
-private:
+    float Dot(const Vec2 other){
+        //TODO Complete this function.
+        return 0;
+    }
+
+    static float Dot(const Vec2 v1, const Vec2 v2) {
+        //TODO Complete this function.
+        return 0;
+    }
+
+    float AngleBetween(const Vec2 other){
+        //TODO Complete this function.
+        return 0;
+    }
+
+    static float AngleBetween(const Vec2 v1, const Vec2 v2){
+        //TODO Complete this function.
+        return 0;
+    }
+
+    std::string ToString(){
+        //TODO Complete this function.
+        return "";
+    }
+};
+
+class Vec3 {
+    float x, y, z;
 };
 } // namespace neko::physics

@@ -23,9 +23,25 @@
  */
 #pragma once
 
+#include <engine/system.h>
+
 namespace neko::physics{
-class World {
+class World : public SystemInterface{
 public:
+    float GetFixedDeltaTime() const { return fixedDeltaTime_; }
+    void SetFixedDeltaTime(float dt) { fixedDeltaTime_ = dt; }
+
+    float GetGravity() const { return gravity_; }
+    void SetGravity(float gravity) { gravity_ = gravity;}
+
+    void Init() override;
+
+    void Update(seconds dt) override;
+
+    void Destroy() override;
+
 private:
+    float fixedDeltaTime_;
+    float gravity_;
 };
 } // namespace neko::physics

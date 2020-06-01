@@ -206,14 +206,6 @@ void BasicEngine::GenerateUiFrame()
 #ifdef EASY_PROFILE_USE
     EASY_BLOCK("Generate ImGui Frame");
 #endif
-	ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
-	ImGui::Begin("Neko Window");
-
-	std::ostringstream oss;
-	oss << "App FPS: " << 1.0f / GetDeltaTime() << '\n'
-		<< '\n';
-	ImGui::Text("%s", oss.str().c_str());
-	ImGui::End();
 	drawImGuiAction_.Execute();
 }
 

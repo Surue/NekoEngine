@@ -2,7 +2,7 @@
 
 #include <physics/vector.h>
 
-TEST(Physics, Vecteur)
+TEST(Physics, Vector)
 {
     std::cout << "Start testing Vec2\n";
 
@@ -20,9 +20,21 @@ TEST(Physics, Vecteur)
     std::cout << "Success\n";
 
     //Test operator -
-    std::cout << "  Test operator => ";
+    std::cout << "  Test operator - => ";
     c = a - b;
     ASSERT_EQ(c.x, a.x - b.x);
     ASSERT_EQ(c.y, a.y - b.y);
     std::cout << "Success\n";
+
+    //Test operator +=
+    std::cout << "  Test operator += => ";
+    neko::physics::Vec2 d;
+    d += a;
+    ASSERT_EQ(d.x, a.x);
+    ASSERT_EQ(d.y, a.y);
+    std::cout << "Success\n";
+}
+
+TEST(Physics, Matrix){
+
 }
