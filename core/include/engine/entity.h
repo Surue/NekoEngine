@@ -162,23 +162,4 @@ private:
     EntityManager& entityManager_;
     std::unordered_map<Entity, std::vector<Entity>> entityHierarchyMap_;
 };
-
-/**
- * ImGui class that allows to show the active entities and select them
- */
-class EntityViewer : public DrawImGuiInterface
-{
-public:
-    explicit EntityViewer(EntityManager& entityManager, EntityHierarchy& entityHierarchy);
-    [[nodiscard]] Entity GetSelectedEntity() const { return selectedEntity_; }
-	void DrawImGui() override;
-protected:
-    void DrawEntityHierarchy(neko::Entity entity,
-                             bool draw,
-                             bool destroy);
-    EntityHierarchy& entityHierarchy_;
-    EntityManager& entityManager_;
-    Entity selectedEntity_ = INVALID_ENTITY;
-};
-
 }

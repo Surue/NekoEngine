@@ -5,6 +5,7 @@
 #include "gl/shape.h"
 #include "gl/shader.h"
 #include "sdl_engine/sdl_camera.h"
+#include <entity_viewer.h>
 
 namespace neko
 {
@@ -25,7 +26,7 @@ private:
 	EntityHierarchy entityHierarchy_;
 	Transform3dManager transform3dManager_;
 	//ImGui Viewer
-	EntityViewer entityViewer_;
+	tool::EntityViewer entityViewer_;
 	Transform3dViewer transformViewer_;
 
 	//Initialization data

@@ -23,16 +23,30 @@
  */
 #pragma once
 
-#include <sdl_engine/sdl_engine.h>
-#include <physics/world.h>
+#include <engine/entity.h>
 
-namespace neko
+namespace neko::tool
 {
-class PhysicsEngine final : public sdl::SdlEngine
+/**
+ * ImGui class that allows to show the active entities and select them
+ */
+class EntityViewer : public DrawImGuiInterface
 {
 public:
-	explicit PhysicsEngine(Configuration* config = nullptr);
+    explicit EntityViewer(EntityManager& entityManager, EntityHierarchy& entityHierarchy);
 
-	physics::World world_;
+    [[nodiscard]] Entity GetSelectedEntity() const
+    { return selectedEntity_; }
+
+    void DrawImGui() override;
+
+protected:
+    void DrawEntityHierarchy(neko::Entity entity,
+                             bool draw,
+                             bool destroy);
+
+    EntityHierarchy& entityHierarchy_;
+    EntityManager& entityManager_;
+    Entity selectedEntity_ = INVALID_ENTITY;
 };
-} // namespace neko
+} // namespace neko::tool

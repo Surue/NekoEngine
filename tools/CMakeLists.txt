@@ -7,7 +7,7 @@ List(APPEND Neko_SRC ${Neko_TOOLS_SRC})
 		
 include_directories(${NEKO_CORE_DIR}/include)
 
-add_library(Neko_Tool STATIC ${Neko_SRC})
+add_library(Neko_Tool STATIC ${Neko_SRC} include/entity_viewer.h src/entity_viewer.cpp)
 target_link_libraries(Neko_Tool PRIVATE Neko_Core)
 
 target_compile_options(Neko_Tool PRIVATE $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
