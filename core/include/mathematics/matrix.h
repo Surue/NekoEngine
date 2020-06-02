@@ -59,6 +59,24 @@ public:
 	{
 		return columns_[column];
 	}
+
+    Mat3<T> operator*(const Mat3<T> & rhs) const noexcept
+    {
+        std::array<Vec3<T>, 3> v;
+        for (int column = 0; column < 3; column++)
+        {
+            for (int row = 0; row < 3; row++)
+            {
+                v[column][row] = 0;
+                for (int i = 0; i < 3; i++)
+                {
+                    v[column][row] += columns_[i][row] * rhs[column][i];
+                }
+            }
+        }
+        return Mat3<T>(v);
+    }
+
 	inline Mat3<T> Transpose() const
 	{
 		std::array<Vec3<T>, 3> v;

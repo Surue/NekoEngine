@@ -74,11 +74,34 @@ public:
 
 };
 
-class Transform2dManager : public ComponentManager<Mat3f, ComponentType::TRANSFORM2D>
+class Transform2dManager : public DoubleBufferComponentManager<Mat3f, ComponentType::TRANSFORM2D>, public OnChangeParentInterface
 {
 public:
-protected:
+    Transform2dManager(EntityManager& entityManager);
+    void Init();
 
+    Vec2f GetPosition(Entity entity) const;
+    void SetPosition(Entity entity, Vec2f position);
+
+    Vec2f GetScale(Entity entity) const;
+    void SetScale(Entity entity, Vec2f scale);
+
+    float GetRotation(Entity entity);
+    void SetRotation(Entity entity, float angle);
+
+    void OnChangeParent(Entity entity, Entity newParent, Entity oldParent) override;
+
+    void UpdateDirtyComponent(Entity entity) override;
+
+    void Update();
+    Index AddComponent(Entity entity) override;
+protected:
+    void UpdateTransform(Entity entity);
+
+    Position2dManager position2DManager_;
+    Scale2dManager scale2DManager_;
+    Rotation2dManager rotation2DManager_;
+    DirtyManager dirtyManager_;
 };
 
 class Transform3dManager : public DoubleBufferComponentManager<Mat4f, ComponentType::TRANSFORM3D>,

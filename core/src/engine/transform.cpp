@@ -168,4 +168,89 @@ Index Transform3dManager::AddComponent(Entity entity)
 	rotation3DManager_.AddComponent(entity);
 	return DoubleBufferComponentManager::AddComponent(entity);
 }
+
+Transform2dManager::Transform2dManager(EntityManager& entityManager) :
+    DoubleBufferComponentManager(entityManager),
+    position2DManager_(entityManager),
+    scale2DManager_(entityManager),
+    rotation2DManager_(entityManager),
+    dirtyManager_(entityManager)
+{
+    entityManager_.RegisterOnChangeParent(this);
+    dirtyManager_.RegisterComponentManager(this);
+}
+
+void Transform2dManager::Init()
+{
+    RendererLocator::get().RegisterSyncBuffersFunction(this);
+}
+
+Vec2f Transform2dManager::GetPosition(Entity entity) const
+{
+    return position2DManager_.GetComponent(entity);
+}
+
+void Transform2dManager::SetPosition(Entity entity, Vec2f position)
+{
+    position2DManager_.SetComponent(entity, position);
+}
+
+Vec2f Transform2dManager::GetScale(Entity entity) const
+{
+    return scale2DManager_.GetComponent(entity);
+}
+
+void Transform2dManager::SetScale(Entity entity, Vec2f scale)
+{
+    scale2DManager_.SetComponent(entity, scale);
+}
+
+float Transform2dManager::GetRotation(Entity entity)
+{
+    return rotation2DManager_.GetComponent(entity);
+}
+
+void Transform2dManager::SetRotation(Entity entity, float angle)
+{
+    rotation2DManager_.SetComponent(entity, angle);
+}
+
+void Transform2dManager::OnChangeParent(Entity entity, Entity newParent, Entity oldParent)
+{
+    dirtyManager_.SetDirty(entity);
+}
+
+void Transform2dManager::UpdateTransform(Entity entity)
+{
+    Mat3f transform = Mat3f::Identity;
+    transform = Transform2d::Rotate(transform, rotation2DManager_.GetComponent(entity));
+    transform = Transform2d::Scale(transform, scale2DManager_.GetComponent(entity));
+    transform = Transform2d::Translate(transform, position2DManager_.GetComponent(entity));
+
+    const auto parent = entityManager_.GetEntityParent(entity);
+    if (parent != INVALID_ENTITY)
+    {
+        transform =  GetComponent(parent) * transform;
+    }
+
+    SetComponent(entity, transform);
+}
+
+void Transform2dManager::Update()
+{
+    dirtyManager_.UpdateDirtyEntities();
+}
+
+Index Transform2dManager::AddComponent(Entity entity)
+{
+    position2DManager_.AddComponent(entity);
+    scale2DManager_.AddComponent(entity);
+    rotation2DManager_.AddComponent(entity);
+    return DoubleBufferComponentManager::AddComponent(entity);
+}
+
+void Transform2dManager::UpdateDirtyComponent(Entity entity)
+{
+    UpdateTransform(entity);
+}
 }

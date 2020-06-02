@@ -209,3 +209,48 @@ Mat4f Perspective(radian_t fovy, float aspect, float near, float far)
     return perspective;
 }
 }
+
+neko::Mat3f neko::Transform2d::Translate(const neko::Mat3f& transform, const neko::Vec2f translation)
+{
+    return TranslationMatrixFrom(translation) * transform;
+}
+
+const neko::Mat3f neko::Transform2d::TranslationMatrixFrom(const neko::Vec2f translation)
+{
+    return Mat3f(
+            std::array<Vec3f, 3>
+                    {
+                        Vec3f(1.0f, 0, 0),
+                        Vec3f(0, 1.0f, 0),
+                        Vec3f(translation[0], translation[1],  1.0f)});
+}
+
+neko::Mat3f neko::Transform2d::Scale(const neko::Mat3f& transform, const neko::Vec2f scale)
+{
+    return ScalingMatrixFrom(scale) * transform;
+}
+
+const neko::Mat3f neko::Transform2d::ScalingMatrixFrom(const neko::Vec2f scale)
+{
+    return Mat3f(
+            std::array<Vec3f, 3>
+                    {
+                            Vec3f(scale[0], 0, 0),
+                            Vec3f(0, scale[1], 0),
+                            Vec3f(0, 0, 1.0f)});
+}
+
+const neko::Mat3f neko::Transform2d::RotationMatrixFrom(float angle)
+{
+    return Mat3f(
+            std::array<Vec3f, 3>
+                    {
+                            Vec3f(cos(angle), -sin(angle), 0),
+                            Vec3f(sin(angle), cos(angle), 0),
+                            Vec3f(0, 0, 1.0f)});
+}
+
+neko::Mat3f neko::Transform2d::Rotate(const neko::Mat3f& transform, const float angle)
+{
+    return RotationMatrixFrom(angle) * transform;
+}
