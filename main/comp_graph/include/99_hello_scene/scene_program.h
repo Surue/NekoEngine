@@ -6,6 +6,7 @@
 #include "gl/shader.h"
 #include "sdl_engine/sdl_camera.h"
 #include <entity_viewer.h>
+#include <transforms_viewer.h>
 
 namespace neko
 {
@@ -27,7 +28,7 @@ private:
 	Transform3dManager transform3dManager_;
 	//ImGui Viewer
 	tool::EntityViewer entityViewer_;
-	Transform3dViewer transformViewer_;
+	tool::Transform3dViewer transformViewer_;
 
 	//Initialization data
 	const size_t initEntityNmb_ = 10;

@@ -78,38 +78,6 @@ void Transform3dManager::UpdateTransform(Entity entity)
     SetComponent(entity, transform);
 }
 
-Transform3dViewer::Transform3dViewer(EntityManager& entityManager, Transform3dManager& transform3dManager) :
-	entityManager_(entityManager),
-	transform3dManager_(transform3dManager)
-{
-}
-
-void Transform3dViewer::DrawImGui()
-{
-	if(selectedEntity_ == INVALID_ENTITY)
-		return;
-	if(entityManager_.HasComponent(selectedEntity_, static_cast<EntityMask>(ComponentType::TRANSFORM3D)))
-	{
-		auto position = transform3dManager_.GetPosition(selectedEntity_);
-		if (ImGui::InputFloat3("Position", &position[0]))
-		{
-			transform3dManager_.SetPosition(selectedEntity_, position);
-		}
-		auto scale = transform3dManager_.GetScale(selectedEntity_);
-		if(ImGui::InputFloat3("Scale", &scale[0]))
-		{
-			transform3dManager_.SetScale(selectedEntity_, scale);
-		}
-		const auto eulerAngles = transform3dManager_.GetAngles(selectedEntity_);
-		float angles[3] = { eulerAngles.x.value(), eulerAngles.y.value(), eulerAngles.z.value() };
-		if(ImGui::InputFloat3("Euler Angles", &angles[0]))
-		{
-			const EulerAngles newEulerAngles = EulerAngles(degree_t(angles[0]), degree_t(angles[1]), degree_t(angles[2]));
-			transform3dManager_.SetRotation(selectedEntity_, newEulerAngles);
-		}
-	}
-}
-
 void Transform3dManager::SetPosition(Entity entity, Vec3f position)
 {
 	position3DManager_.SetComponent(entity, position);

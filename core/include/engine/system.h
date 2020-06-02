@@ -25,6 +25,7 @@
  SOFTWARE.
  */
 #include <utilities/time_utility.h>
+#include "entity.h"
 
 namespace neko
 {
@@ -50,5 +51,4 @@ public:
 	virtual ~DrawImGuiInterface() = default;
 	virtual void DrawImGui() = 0;
 };
-
-}
+} // namespace neko

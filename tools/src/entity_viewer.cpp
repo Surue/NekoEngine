@@ -8,9 +8,7 @@
 namespace neko::tool {
 EntityViewer::EntityViewer(EntityManager& entityManager, EntityHierarchy& entityHierarchy) :
         entityHierarchy_(entityHierarchy),
-        entityManager_(entityManager)
-{
-}
+        entityManager_(entityManager) { }
 
 void EntityViewer::DrawImGui()
 {
@@ -51,15 +49,58 @@ void EntityViewer::DrawImGui()
     ImGui::Begin("Inspector");
     std::cout << "nb = " << log2(static_cast<double>(ComponentType::OTHER_TYPE)) << "\n";
     std::cout << "Entity mask = " << entityManager_.GetMask(selectedEntity_) << "\n";
-    for(uint32_t i = 1; i < log2(static_cast<double>(ComponentType::OTHER_TYPE)); i++){
-        if(entityManager_.HasComponent(selectedEntity_, 1u << i)){
-            std::cout << "Has component " << i << "\n";
+
+    for(auto it = componentViewers_.begin(); it != componentViewers_.end(); it++){
+        if(entityManager_.HasComponent(selectedEntity_, (EntityMask)it->second->GetComponentType())){
+            std::cout << "Entity[" << selectedEntity_ << "] has component " << (uint32_t)it->second->GetComponentType() << "\n";
+            it->second->DrawImGui(selectedEntity_);
         }
     }
 
-    if(ImGui::Button("Add Component")){
-        entityManager_.AddComponentType(selectedEntity_, EntityMask(ComponentType::POSITION2D));
+    if (ImGui::Button("Add Component")) {
+        ImGui::OpenPopup("component_popup");
     }
+
+    if (ImGui::BeginPopup("component_popup"))
+        //Display new component list
+    {
+        //Transform 2D
+        if(!entityManager_.HasComponent(selectedEntity_, EntityMask(ComponentType::TRANSFORM2D))){
+            if (ImGui::MenuItem("Transform 2d")) {
+                entityManager_.AddComponentType(selectedEntity_, EntityMask(ComponentType::TRANSFORM2D));
+            }
+        }
+
+        //Body 2D
+        if(!entityManager_.HasComponent(selectedEntity_, EntityMask(ComponentType::BODY2D))){
+            if (ImGui::MenuItem("Body 2d")) {
+                entityManager_.AddComponentType(selectedEntity_, EntityMask(ComponentType::BODY2D));
+            }
+        }
+
+        //Box collider 2D
+        if(!entityManager_.HasComponent(selectedEntity_, EntityMask(ComponentType::BOX_COLLIDER2D))){
+            if (ImGui::MenuItem("Box collider 2d")) {
+                entityManager_.AddComponentType(selectedEntity_, EntityMask(ComponentType::BOX_COLLIDER2D));
+            }
+        }
+
+        //Circle collider 2D
+        if(!entityManager_.HasComponent(selectedEntity_, EntityMask(ComponentType::CIRCLE_COLLIDER2D))){
+            if (ImGui::MenuItem("Circle collider 2d")) {
+                entityManager_.AddComponentType(selectedEntity_, EntityMask(ComponentType::CIRCLE_COLLIDER2D));
+            }
+        }
+
+        //Polygon collider 2D
+        if(!entityManager_.HasComponent(selectedEntity_, EntityMask(ComponentType::POLYGON_COLLIDER2D))){
+            if (ImGui::MenuItem("Polygon collider 2d")) {
+                entityManager_.AddComponentType(selectedEntity_, EntityMask(ComponentType::POLYGON_COLLIDER2D));
+            }
+        }
+        ImGui::EndPopup();
+    }
+
     ImGui::End();
 }
 
@@ -199,4 +240,9 @@ void EntityViewer::DrawEntityHierarchy(neko::Entity entity, bool draw, bool dest
     }
 }
 
+void EntityViewer::RegisterDrawComponentImGui(DrawComponentImGuiInterface& drawComponentImGuiInterface)
+{
+    componentViewers_[drawComponentImGuiInterface.GetComponentType()] = &drawComponentImGuiInterface;
 }
+
+} // namespace neko::tool

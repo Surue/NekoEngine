@@ -24,6 +24,7 @@
 #pragma once
 
 #include <engine/entity.h>
+#include <engine/component.h>
 
 namespace neko::tool
 {
@@ -40,10 +41,14 @@ public:
 
     void DrawImGui() override;
 
+    void RegisterDrawComponentImGui(DrawComponentImGuiInterface& drawComponentImGuiInterface);
+
 protected:
     void DrawEntityHierarchy(neko::Entity entity,
                              bool draw,
                              bool destroy);
+
+    std::map<ComponentType, DrawComponentImGuiInterface*> componentViewers_;
 
     EntityHierarchy& entityHierarchy_;
     EntityManager& entityManager_;

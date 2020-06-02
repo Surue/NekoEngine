@@ -131,21 +131,4 @@ protected:
     Rotation3dManager rotation3DManager_;
     DirtyManager dirtyManager_;
 };
-
-class Transform3dViewer : public DrawImGuiInterface
-{
-public:
-    explicit Transform3dViewer(EntityManager& entityManager, Transform3dManager& transform3dManager);
-	void DrawImGui() override;
-    void SetSelectedEntity(Entity selectedEntity) { selectedEntity_ = selectedEntity; };
-protected:
-    Entity selectedEntity_ = INVALID_ENTITY;
-    EntityManager& entityManager_;
-    Transform3dManager& transform3dManager_;
-};
-
-
-
-
-
 }

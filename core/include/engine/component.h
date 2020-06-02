@@ -183,4 +183,27 @@ public:
 protected:
     std::vector<T> currentComponents_;
 };
+
+/**
+ * \brief Interface to draw a component on a window. This type of class must be passed to the EntityViewer.
+ */
+
+class DrawComponentImGuiInterface
+{
+public:
+    virtual ~DrawComponentImGuiInterface() = default;
+    virtual void DrawImGui(Entity entity) = 0;
+    virtual ComponentType GetComponentType() const = 0;
+};
+
+template<ComponentType componentType>
+class TemplateDrawComponentImGuiInterface : virtual public DrawComponentImGuiInterface
+{
+public:
+    virtual ~TemplateDrawComponentImGuiInterface() = default;
+
+    ComponentType GetComponentType() const override {
+        return componentType;
+    }
+};
 }
