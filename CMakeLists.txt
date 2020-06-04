@@ -122,6 +122,14 @@ if(Neko_SDL2)
     endif()
 endif()
 
+if(Neko_Physics)
+    set(PHYSICS_DIR "${CMAKE_SOURCE_DIR}/common/physics" CACHE INTERNAL "")
+    add_subdirectory(${PHYSICS_DIR})
+
+    set_target_properties (physics PROPERTIES
+            FOLDER Externals)
+endif()
+
 if(Neko_Assimp)
     set(ASSIMP_VERSION 5.0.1)
     set(ASSIMP_DIR "${EXTERNAL_DIR}/assimp-${ASSIMP_VERSION}")

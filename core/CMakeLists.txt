@@ -2,27 +2,21 @@
 file(GLOB_RECURSE Neko_ENGINE_SRC src/engine/*.cpp include/engine/*.h)
 file(GLOB_RECURSE Neko_GRAPHICS_SRC src/graphics/*.cpp include/graphics/*.h)
 file(GLOB_RECURSE Neko_UTILITY_SRC src/utilities/*.cpp include/utilities/*.h)
-file(GLOB_RECURSE Neko_PHYSICS_SRC src/physics/*.cpp include/physics/*.h)
 file(GLOB_RECURSE Neko_SOUND_SRC src/sound/*.cpp include/sound/*.h)
 file(GLOB_RECURSE Neko_MATH_SRC src/mathematics/*.cpp include/mathematics/*.h)
-file(GLOB_RECURSE Neko_PHYSICS_SRC src/mathematics/*.cpp include/mathematics/*.h)
 
 source_group("Graphics"				FILES ${Neko_GRAPHICS_SRC})
 source_group("Engine"				FILES ${Neko_ENGINE_SRC})
 source_group("Utility"				FILES ${Neko_UTILITY_SRC})
-source_group("Physics"				FILES ${Neko_PHYSICS_SRC})
 source_group("Sound"				FILES ${Neko_SOUND_SRC})
 source_group("Maths"			    FILES ${Neko_MATH_SRC})
-source_group("Physcis"			    FILES ${Neko_PHYSICS_SRC})
 
 List(APPEND Neko_SRC
         ${Neko_ENGINE_SRC}
         ${Neko_GRAPHICS_SRC}
         ${Neko_UTILITY_SRC}
-        ${Neko_PHYSICS_SRC}
         ${Neko_SOUND_SRC}
-        ${Neko_MATH_SRC}
-        ${Neko_PHYSICS_SRC})
+        ${Neko_MATH_SRC})
 
 
 #Utility
@@ -31,7 +25,7 @@ set(UTILITIES_DIR ${EXTERNAL_DIR}/utilities/)
 set(TASKFLOW_DIR ${EXTERNAL_DIR}/taskflow-2.2)
 include_directories(${TASKFLOW_DIR})
 
-add_library(Neko_Core STATIC ${Neko_SRC} include/physics/vector.h src/physics/vector.cpp include/physics/matrix.h src/physics/matrix.cpp include/physics/world.h src/physics/world.cpp include/physics/aabb.h src/physics/aabb.cpp)
+add_library(Neko_Core STATIC ${Neko_SRC} ../common/physics/include/vector.h ../common/physics/src/vector.cpp ../common/physics/include/matrix.h ../common/physics/src/matrix.cpp ../common/physics/include/world.h ../common/physics/src/world.cpp ../common/physics/include/aabb.h ../common/physics/src/aabb.cpp ../common/physics/include/body.h ../common/physics/src/body.cpp)
 target_link_libraries(Neko_Core PUBLIC imgui)
 if (APPLE)
     target_link_libraries(Neko_Core PUBLIC ${Boost_LIBRARIES})

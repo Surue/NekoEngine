@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <physics/vector.h>
+#include "../common/physics/include/vector.h"
 
 TEST(Physics, Vector)
 {

@@ -5,6 +5,7 @@
 #include <stats.h>
 #include <entity_viewer.h>
 #include <transforms_viewer.h>
+#include <body_viewer.h>
 
 int main(int argc, char** argv)
 {
@@ -17,6 +18,7 @@ int main(int argc, char** argv)
 
 	// Components manager
 	neko::Transform2dManager transform2DManager = neko::Transform2dManager(entityManager);
+	neko::physics::Body2dManager body2DManager = neko::physics::Body2dManager(entityManager);
 
 	//List of every tool
 	neko::tool::StatsTool statsTool = neko::tool::StatsTool();
@@ -24,8 +26,10 @@ int main(int argc, char** argv)
 
 	// Components viewers
 	neko::tool::Transform2dViewer transform2DViewer = neko::tool::Transform2dViewer(entityManager, transform2DManager);
+	neko::tool::BodyViewer body2DViewer = neko::tool::BodyViewer(entityManager, body2DManager);
 
 	entityViewer.RegisterDrawComponentImGui(transform2DViewer);
+	entityViewer.RegisterDrawComponentImGui(body2DViewer);
 
 	//Assign every tools
 	engine.RegisterOnDrawUi(statsTool);

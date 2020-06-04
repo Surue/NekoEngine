@@ -47,8 +47,6 @@ void EntityViewer::DrawImGui()
     if(selectedEntity_ == INVALID_ENTITY) { return; }
 
     ImGui::Begin("Inspector");
-    std::cout << "nb = " << log2(static_cast<double>(ComponentType::OTHER_TYPE)) << "\n";
-    std::cout << "Entity mask = " << entityManager_.GetMask(selectedEntity_) << "\n";
 
     for(auto it = componentViewers_.begin(); it != componentViewers_.end(); it++){
         if(entityManager_.HasComponent(selectedEntity_, (EntityMask)it->second->GetComponentType())){
@@ -62,7 +60,6 @@ void EntityViewer::DrawImGui()
     }
 
     if (ImGui::BeginPopup("component_popup"))
-        //Display new component list
     {
         //Transform 2D
         if(!entityManager_.HasComponent(selectedEntity_, EntityMask(ComponentType::TRANSFORM2D))){

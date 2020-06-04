@@ -1,14 +1,14 @@
 #source files
 file(GLOB_RECURSE Neko_TOOLS_SRC src/*.cpp include/*.h)
 
-source_group("Tools"				FILES ${Neko_TOOLS_SRC})
+source_group("Tools" FILES ${Neko_TOOLS_SRC})
 
 List(APPEND Neko_SRC ${Neko_TOOLS_SRC})
 		
 include_directories(${NEKO_CORE_DIR}/include)
 
-add_library(Neko_Tool STATIC ${Neko_SRC} include/entity_viewer.h src/entity_viewer.cpp include/transforms_viewer.h src/transforms_viewer.cpp)
-target_link_libraries(Neko_Tool PRIVATE Neko_Core)
+add_library(Neko_Tool STATIC ${Neko_SRC} )
+target_link_libraries(Neko_Tool Neko_Core sdl_engine gles3_wrapper lua_wrapper)
 
 target_compile_options(Neko_Tool PRIVATE $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
         -Wall -Wextra>

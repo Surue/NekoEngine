@@ -23,6 +23,8 @@
  */
 #pragma once
 
+#include <string>
+
 namespace neko::physics{
 
 /**
@@ -30,8 +32,14 @@ namespace neko::physics{
  */
 class Vec2 {
 public:
-    float x;
-    float y;
+
+    union {
+        struct {
+            float x;
+            float y;
+        };
+        float coord[2];
+    };
 
     Vec2(): x(0), y(0){}
     Vec2(float x, float y) : x(x), y (y){}
@@ -57,6 +65,14 @@ public:
     //TODO Add operator *=
     //TODO Add operator /
     //TODO Add operator /=
+
+    const float& operator[](size_t component) const {
+        return coord[component];
+    }
+
+    float& operator[](size_t component) {
+        return coord[component];
+    }
 
     /**
      * \brief Calculate the magnitude of the vector.

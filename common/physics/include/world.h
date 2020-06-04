@@ -23,47 +23,28 @@
  */
 #pragma once
 
-#include <physics/vector.h>
+#include <engine/system.h>
+#include "body.h"
 
 namespace neko::physics{
-struct Mat22 {
+class World : public SystemInterface{
+public:
+    float GetFixedDeltaTime() const { return fixedDeltaTime_; }
+    void SetFixedDeltaTime(float dt) { fixedDeltaTime_ = dt; }
 
-    Mat22(){}
-    Mat22(const Vec2 v1, const Vec2 v2) : v1(v1), v2(v2) {}
+    float GetGravity() const { return gravity_; }
+    void SetGravity(float gravity) { gravity_ = gravity;}
 
-    Mat22 operator+(const Mat22& rhs){
-        //TODO Complete this function,
-        return {};
-    };
-    Mat22 operator += (const Mat22& rhs){
-        //TODO Complete this function,
-        return {};
-    }
+    void Init() override;
 
-    Mat22 operator-(const Mat22& rhs){
-        //TODO Complete this function,
-        return {};
-    }
-    Mat22 operator-=(const Mat22& rhs){
-        //TODO Complete this function,
-        return {};
-    }
+    void Update(seconds dt) override;
 
-    static Mat22 Identity(){
-        //TODO Complete this function,
-        return {};
-    }
+    void Destroy() override;
 
-    static Mat22 GetRotationMatrix(float angleInRad){
-        //TODO Complete this function,
-        return {};
-    }
+private:
+    float fixedDeltaTime_;
+    float gravity_;
 
-    std::string ToString(){
-        //TODO Complete this function,
-        return "";
-    }
-
-    Vec2 v1, v2;
+    std::vector<Body*> bodies_;
 };
 } // namespace neko::physics

@@ -23,25 +23,20 @@
  */
 #pragma once
 
-#include <engine/system.h>
+#include <engine/entity.h>
+#include "../../common/physics/include/body.h"
 
-namespace neko::physics{
-class World : public SystemInterface{
+namespace neko::tool {
+class BodyViewer : public TemplateDrawComponentImGuiInterface<ComponentType::BODY2D>{
 public:
-    float GetFixedDeltaTime() const { return fixedDeltaTime_; }
-    void SetFixedDeltaTime(float dt) { fixedDeltaTime_ = dt; }
+    explicit BodyViewer(EntityManager& entityManager, physics::Body2dManager& body2dManager);;
+    ~BodyViewer() = default;
 
-    float GetGravity() const { return gravity_; }
-    void SetGravity(float gravity) { gravity_ = gravity;}
+    void DrawImGui(Entity entity) override;
+protected:
+    EntityManager& entityManager_;
+    physics::Body2dManager& body2dManager_;
 
-    void Init() override;
-
-    void Update(seconds dt) override;
-
-    void Destroy() override;
-
-private:
-    float fixedDeltaTime_;
-    float gravity_;
 };
-} // namespace neko::physics
+} //namespace neko::tool
+
