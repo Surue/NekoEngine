@@ -27,10 +27,13 @@
 
 namespace neko::physics{
 
+// Prototypes
+struct Vec3;
+
 /**
  * \brief Class used to represent a 2D vector.
  */
-class Vec2 {
+struct Vec2 {
 public:
 
     union {
@@ -47,24 +50,31 @@ public:
     Vec2 operator+(const Vec2 rhs) const {
         return {x + rhs.x, y + rhs.y};
     }
+    void operator+=(const Vec2 rhs){
+        //TODO Complete this function.
+    }
 
     Vec2 operator-(const Vec2 rhs) const {
         //TODO Complete this function.
         return {};
     }
-
-    void operator+=(const Vec2 rhs){
-        //TODO Complete this function.
-    }
-
     void operator-=(const Vec2 rhs){
         //TODO Complete this function.
     }
 
-    //TODO Add operator *
-    //TODO Add operator *=
-    //TODO Add operator /
-    //TODO Add operator /=
+    Vec2 operator*(const float scalar) const {
+        //TODO Complete this function.
+    }
+    void operator*=(const float scalar){
+        //TODO Complete this function.
+    }
+
+    Vec2 operator/(const float scalar) const {
+        //TODO Complete this function.
+    }
+    void operator/=(const float scalar){
+        //TODO Complete this function.
+    }
 
     const float& operator[](size_t component) const {
         return coord[component];
@@ -108,7 +118,7 @@ public:
         //TODO Complete this function.
     }
 
-    float Dot(const Vec2 other){
+    float Dot(const Vec2 other) const {
         //TODO Complete this function.
         return 0;
     }
@@ -118,7 +128,7 @@ public:
         return 0;
     }
 
-    float AngleBetween(const Vec2 other){
+    float AngleBetween(const Vec2 other) const {
         //TODO Complete this function.
         return 0;
     }
@@ -128,6 +138,10 @@ public:
         return 0;
     }
 
+    Vec3 Cross(const Vec2 other) const;
+
+    static Vec3 Cross(const Vec2 v1, const Vec2 v2);
+
     std::string ToString(){
         //TODO Complete this function.
         return "";
@@ -136,5 +150,7 @@ public:
 
 class Vec3 {
     float x, y, z;
+
+    Vec3() :x(0), y(0), z(0) {}
 };
 } // namespace neko::physics
