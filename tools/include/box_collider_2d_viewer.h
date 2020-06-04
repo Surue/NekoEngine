@@ -23,45 +23,20 @@
  */
 #pragma once
 
-#include "vector.h"
+#include <engine/entity.h>
+#include "../../common/physics/include/box_collider_2d.h"
 
-namespace neko::physics {
-/**
- * \brief Bounding volume around collider used in broad phase of the physics engine.
- */
-struct AABB {
+namespace neko::tool {
+class BoxCollider2dViewer : public TemplateDrawComponentImGuiInterface<ComponentType::BOX_COLLIDER2D>{
+public:
+    explicit BoxCollider2dViewer(EntityManager& entityManager, physics::BoxCollider2dManager& boxCollider2DManager);
+    ~BoxCollider2dViewer() = default;
 
-    Vec2 bottomLeft;
-    Vec2 topRight;
+    void DrawImGui(Entity entity) override;
+protected:
+    EntityManager& entityManager_;
+    physics::BoxCollider2dManager& boxCollider2DManager_;
 
-    AABB() : bottomLeft(), topRight(){};
-    AABB(Vec2 bottomLeft, Vec2 topRight) : bottomLeft(bottomLeft), topRight(topRight) {};
-
-    /**
-     * \brief Return the center of the aabb
-     */
-    Vec2 GetCenter() const {
-        //TODO Complete this function
-        return {};
-    }
-
-    /**
-     * \brief Compute the extent of the aabb
-     */
-    Vec2 GetExtent() const {
-        //TODO Complete this function
-        return {};
-    }
-
-    /**
-     * \brief Test if 2 aabbs are overlapping.
-     * \param other aabb which is test against the current aabb.
-     * \return true if both aabb are overlapping.
-     */
-    bool Overlap(const AABB& other) const{
-        //TODO complete this function
-        return false;
-    }
 };
-} // namespace neko::physics
+} //namespace neko::tool
 

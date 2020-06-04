@@ -24,12 +24,12 @@
 #pragma once
 
 #include <engine/entity.h>
-#include "../../common/physics/include/body.h"
+#include "../../common/physics/include/body_2d.h"
 
 namespace neko::tool {
 class BodyViewer : public TemplateDrawComponentImGuiInterface<ComponentType::BODY2D>{
 public:
-    explicit BodyViewer(EntityManager& entityManager, physics::Body2dManager& body2dManager);;
+    explicit BodyViewer(EntityManager& entityManager, physics::Body2dManager& body2dManager);
     ~BodyViewer() = default;
 
     void DrawImGui(Entity entity) override;

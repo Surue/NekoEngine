@@ -23,45 +23,34 @@
  */
 #pragma once
 
-#include "vector.h"
+#include <vector>
 
-namespace neko::physics {
-/**
- * \brief Bounding volume around collider used in broad phase of the physics engine.
- */
-struct AABB {
+#include "collider_2d.h"
+#include <engine/component.h>
 
-    Vec2 bottomLeft;
-    Vec2 topRight;
+namespace neko::physics
+{
+class PolygonCollider2d : public Collider2d
+{
+public:
+    PolygonCollider2d() : Collider2d() {}
 
-    AABB() : bottomLeft(), topRight(){};
-    AABB(Vec2 bottomLeft, Vec2 topRight) : bottomLeft(bottomLeft), topRight(topRight) {};
+    const std::vector<Vec2>& GetVertices() const { return vertices_; }
+    void SetVertices(const std::vector<Vec2>& vertices) { vertices_ = vertices; }
 
-    /**
-     * \brief Return the center of the aabb
-     */
-    Vec2 GetCenter() const {
+    AABB ComputeAABB() const override {
         //TODO Complete this function
-        return {};
+        return AABB();
     }
 
-    /**
-     * \brief Compute the extent of the aabb
-     */
-    Vec2 GetExtent() const {
-        //TODO Complete this function
-        return {};
-    }
-
-    /**
-     * \brief Test if 2 aabbs are overlapping.
-     * \param other aabb which is test against the current aabb.
-     * \return true if both aabb are overlapping.
-     */
-    bool Overlap(const AABB& other) const{
-        //TODO complete this function
-        return false;
-    }
+private:
+    std::vector<Vec2> vertices_;
 };
-} // namespace neko::physics
+
+class PolygonCollider2dManager : public ComponentManager<PolygonCollider2d, ComponentType::POLYGON_COLLIDER2D>
+{
+    using ComponentManager::ComponentManager;
+};
+} //namespace neko::physics
+
 

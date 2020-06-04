@@ -23,9 +23,8 @@
  */
 #pragma once
 
+#include "vector.h"
 #include <engine/component.h>
-
-#include "../include/vector.h"
 
 namespace neko::physics {
 

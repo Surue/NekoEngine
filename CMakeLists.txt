@@ -18,6 +18,7 @@ set(Neko_Test ON CACHE BOOL "Activate Test")
 set(Neko_Assert ON CACHE BOOL "Activate Neko Assertion")
 set(Neko_Benchmark ON CACHE BOOL "Activate Benchmark")
 set(Neko_Lua ON CACHE BOOL "Activate Lua Wrapper")
+set(Neko_Physics ON CACHE BOOL "Activate Physics")
 set(Neko_Assimp ON CACHE BOOL "Activate Assimp Wrapper")
 
 MESSAGE("CMAKE SYSTEM NAME: ${CMAKE_SYSTEM_NAME}")

@@ -55,6 +55,8 @@ void EntityViewer::DrawImGui()
         }
     }
 
+    ImGui::Dummy(ImVec2(0.0f, 20.0f));
+
     if (ImGui::Button("Add Component")) {
         ImGui::OpenPopup("component_popup");
     }

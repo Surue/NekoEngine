@@ -23,45 +23,33 @@
  */
 #pragma once
 
-#include "vector.h"
+#include "collider_2d.h"
+#include <engine/component.h>
 
-namespace neko::physics {
-/**
- * \brief Bounding volume around collider used in broad phase of the physics engine.
- */
-struct AABB {
+namespace neko::physics
+{
+class BoxCollider2d : public Collider2d
+{
+public:
+    BoxCollider2d() :
+        Collider2d() {}
 
-    Vec2 bottomLeft;
-    Vec2 topRight;
-
-    AABB() : bottomLeft(), topRight(){};
-    AABB(Vec2 bottomLeft, Vec2 topRight) : bottomLeft(bottomLeft), topRight(topRight) {};
-
-    /**
-     * \brief Return the center of the aabb
-     */
-    Vec2 GetCenter() const {
+    AABB ComputeAABB() const override {
         //TODO Complete this function
         return {};
     }
 
-    /**
-     * \brief Compute the extent of the aabb
-     */
-    Vec2 GetExtent() const {
-        //TODO Complete this function
-        return {};
-    }
+    Vec2 GetExtent() const { return extent_; }
+    void SetExtent(const Vec2 extent) { extent_ = extent; };
 
-    /**
-     * \brief Test if 2 aabbs are overlapping.
-     * \param other aabb which is test against the current aabb.
-     * \return true if both aabb are overlapping.
-     */
-    bool Overlap(const AABB& other) const{
-        //TODO complete this function
-        return false;
-    }
+private:
+    Vec2 extent_;
 };
-} // namespace neko::physics
+
+class BoxCollider2dManager : public ComponentManager<BoxCollider2d, ComponentType::BOX_COLLIDER2D>
+{
+    using ComponentManager::ComponentManager;
+};
+} //namespace neko::physics
+
 

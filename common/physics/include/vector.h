@@ -64,6 +64,7 @@ public:
 
     Vec2 operator*(const float scalar) const {
         //TODO Complete this function.
+        return {};
     }
     void operator*=(const float scalar){
         //TODO Complete this function.
@@ -71,6 +72,7 @@ public:
 
     Vec2 operator/(const float scalar) const {
         //TODO Complete this function.
+        return {};
     }
     void operator/=(const float scalar){
         //TODO Complete this function.
@@ -90,6 +92,7 @@ public:
      */
     float Magnitude() const {
         //TODO Complete this function.
+        return 0;
     }
 
     /**
@@ -138,9 +141,9 @@ public:
         return 0;
     }
 
-    Vec3 Cross(const Vec2 other) const;
-
-    static Vec3 Cross(const Vec2 v1, const Vec2 v2);
+//    Vec3 Cross(const Vec2 other) const;
+//
+//    static Vec3 Cross(const Vec2 v1, const Vec2 v2);
 
     std::string ToString(){
         //TODO Complete this function.
@@ -148,9 +151,9 @@ public:
     }
 };
 
-class Vec3 {
-    float x, y, z;
-
-    Vec3() :x(0), y(0), z(0) {}
-};
+//struct Vec3 {
+//    float x, y, z;
+//
+//    Vec3() :x(0), y(0), z(0) {}
+//};
 } // namespace neko::physics

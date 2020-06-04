@@ -23,8 +23,8 @@
  */
 #pragma once
 
+#include "body_2d.h"
 #include <engine/system.h>
-#include "body.h"
 
 namespace neko::physics{
 class World : public SystemInterface{

@@ -25,7 +25,7 @@ set(UTILITIES_DIR ${EXTERNAL_DIR}/utilities/)
 set(TASKFLOW_DIR ${EXTERNAL_DIR}/taskflow-2.2)
 include_directories(${TASKFLOW_DIR})
 
-add_library(Neko_Core STATIC ${Neko_SRC} ../common/physics/include/vector.h ../common/physics/src/vector.cpp ../common/physics/include/matrix.h ../common/physics/src/matrix.cpp ../common/physics/include/world.h ../common/physics/src/world.cpp ../common/physics/include/aabb.h ../common/physics/src/aabb.cpp ../common/physics/include/body.h ../common/physics/src/body.cpp)
+add_library(Neko_Core STATIC ${Neko_SRC})
 target_link_libraries(Neko_Core PUBLIC imgui)
 if (APPLE)
     target_link_libraries(Neko_Core PUBLIC ${Boost_LIBRARIES})
