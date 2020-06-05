@@ -23,47 +23,29 @@
  */
 #pragma once
 
-#include "body_2d.h"
-#include "quad_tree.h"
-#include "contact.h"
+#include "collider_2d.h"
 
-#include <engine/system.h>
+namespace neko::physics {
 
-namespace neko::physics{
-class World : public SystemInterface{
+/**
+ * \brief Represents a contact between two collider
+ */
+class Contact {
 public:
-
-    void Init() override;
-
-    void Update(seconds dt) override;
-
-    void Destroy() override;
-
-    /**
-     * \brief Set bodies for the current frame.
-     * \param bodies
-     */
-    void SetBodies(std::vector<Body*>& bodies) { bodies_ = bodies; }
-    /**
-     * \brief Get the bodies after the physics update.
-     * \return updated bodies
-     */
-    std::vector<Body*>& RetriveBodies() { return bodies_; }
-
-    float GetFixedDeltaTime() const { return fixedDeltaTime_; }
-    void SetFixedDeltaTime(float dt) { fixedDeltaTime_ = dt; }
-
-    float GetGravity() const { return gravity_; }
-    void SetGravity(float gravity) { gravity_ = gravity;}
-
+    //TODO Complete this class
 private:
-    float fixedDeltaTime_;
-    float gravity_;
+    Collider2d* colliderA_;
+    Collider2d* colliderB_;
+};
 
-    std::vector<Body*> bodies_;
-
-    ContactManager contactManager_;
-
-    QuadTree quadTree_;
+/**
+ * \brief Holds all currents contact
+ */
+class ContactManager {
+public:
+    //TODO Complete this class
+private:
+    std::vector<Contact> contacts_;
 };
 } // namespace neko::physics
+

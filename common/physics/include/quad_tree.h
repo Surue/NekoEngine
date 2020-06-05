@@ -24,46 +24,53 @@
 #pragma once
 
 #include "body_2d.h"
-#include "quad_tree.h"
 #include "contact.h"
 
-#include <engine/system.h>
-
-namespace neko::physics{
-class World : public SystemInterface{
-public:
-
-    void Init() override;
-
-    void Update(seconds dt) override;
-
-    void Destroy() override;
+namespace neko::physics {
+/**
+ * \brief Object used to do space partitionning used in the broad phase
+ */
+class QuadTree {
 
     /**
-     * \brief Set bodies for the current frame.
-     * \param bodies
+     * \brief This function is called to split a node into 4 smaller node.
      */
-    void SetBodies(std::vector<Body*>& bodies) { bodies_ = bodies; }
+    void Split(){
+        //TODO Complete this function
+    }
+
     /**
-     * \brief Get the bodies after the physics update.
-     * \return updated bodies
+     * \brief Return the index of the child tree of the given body.
+     * \param body to test
+     * \return index of the node
      */
-    std::vector<Body*>& RetriveBodies() { return bodies_; }
+    int GetIndex(const Body* body) {
+        //TODO Complete this function
+        return 0;
+    }
 
-    float GetFixedDeltaTime() const { return fixedDeltaTime_; }
-    void SetFixedDeltaTime(float dt) { fixedDeltaTime_ = dt; }
+    /**
+     * \brief Insert a body into the quadtree
+     * \param body
+     */
+    void Insert(const Body* body) {
+    //TODO Complete this function
+    }
 
-    float GetGravity() const { return gravity_; }
-    void SetGravity(float gravity) { gravity_ = gravity;}
+    /**
+     * \brief Return all possible contact
+     * \details Those possible contact are checked only using their aabbs
+     * \return
+     */
+    std::vector<Contact> Retrive(){
+        //TODO Complete this function
+        return {};
+    }
 
 private:
-    float fixedDeltaTime_;
-    float gravity_;
+    static const int NB_CHILD_NODE = 4;
 
     std::vector<Body*> bodies_;
-
-    ContactManager contactManager_;
-
-    QuadTree quadTree_;
+    std::unique_ptr<QuadTree> childNodes_[NB_CHILD_NODE];
 };
 } // namespace neko::physics
