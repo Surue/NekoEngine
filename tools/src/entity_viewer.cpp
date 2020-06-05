@@ -50,7 +50,6 @@ void EntityViewer::DrawImGui()
 
     for(auto it = componentViewers_.begin(); it != componentViewers_.end(); it++){
         if(entityManager_.HasComponent(selectedEntity_, (EntityMask)it->second->GetComponentType())){
-            std::cout << "Entity[" << selectedEntity_ << "] has component " << (uint32_t)it->second->GetComponentType() << "\n";
             it->second->DrawImGui(selectedEntity_);
         }
     }
