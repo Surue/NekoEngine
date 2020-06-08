@@ -23,21 +23,17 @@
  */
 #pragma once
 
-#include "vector.h"
 #include "aabb.h"
 
-namespace neko::physics {
-class Collider2d {
+namespace neko::physics
+{
+class Collider2d
+{
 public:
     /**
      * \brief Create a default trigger
      */
-    Collider2d() :
-        isTrigger_(true),
-        restitution_(0),
-        friction_(0),
-        offset_(),
-        centroid_(){};
+    Collider2d();
 
     /**
      * \brief
@@ -47,30 +43,30 @@ public:
      * \param friction
      * \param offset
      */
-    Collider2d(bool isTrigger, float restitution, float friction, Vec2 offset) :
-        isTrigger_(isTrigger),
-        restitution_(restitution),
-        friction_(friction),
-        offset_(offset),
-        centroid_(){};
+    Collider2d(bool isTrigger, float restitution, float friction, Vec2 offset);
 
     virtual ~Collider2d() = default;
 
     virtual AABB ComputeAABB() const = 0;
 
     bool IsTrigger() const { return isTrigger_; }
+
     void SetIsTrigger(bool isTrigger) { isTrigger_ = isTrigger; }
 
     float GetRestitution() const { return restitution_; }
+
     void SetRestitution(float restitution) { restitution_ = restitution; }
 
     float GetFriction() const { return friction_; }
+
     void SetFriction(float friction) { friction_ = friction; }
 
     Vec2 GetOffset() const { return offset_; }
+
     void SetOffset(const Vec2 offset) { offset_ = offset; }
 
     Vec2 GetCentroid() const { return centroid_; }
+
     void SetCentroid(const Vec2 centroid) { centroid_ = centroid; }
 
 protected:

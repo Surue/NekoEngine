@@ -27,8 +27,10 @@
 #include <engine/transform.h>
 #include "world.h"
 
-namespace neko{
-class TransformToWorld : public SystemInterface {
+namespace neko
+{
+class TransformToWorld : public SystemInterface
+{
 public:
     TransformToWorld(
             physics::World& world,

@@ -31,15 +31,16 @@ namespace neko::physics
 class BoxCollider2d : public Collider2d
 {
 public:
-    BoxCollider2d() :
-        Collider2d() {}
+    BoxCollider2d();
 
-    AABB ComputeAABB() const override {
+    AABB ComputeAABB() const override
+    {
         //TODO Complete this function
         return {};
     }
 
     Vec2 GetExtent() const { return extent_; }
+
     void SetExtent(const Vec2 extent) { extent_ = extent; };
 
 private:

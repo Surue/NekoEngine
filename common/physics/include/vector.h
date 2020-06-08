@@ -25,7 +25,8 @@
 
 #include <string>
 
-namespace neko::physics{
+namespace neko::physics
+{
 
 // Prototypes
 struct Vec3;
@@ -33,56 +34,74 @@ struct Vec3;
 /**
  * \brief Class used to represent a 2D vector.
  */
-struct Vec2 {
+struct Vec2
+{
 public:
 
-    union {
-        struct {
+    union
+    {
+        struct
+        {
             float x;
             float y;
         };
         float coord[2];
     };
 
-    Vec2(): x(0), y(0){}
-    Vec2(float x, float y) : x(x), y (y){}
+    Vec2() : x(0), y(0) {}
 
-    Vec2 operator+(const Vec2 rhs) const {
+    Vec2(float x, float y) : x(x), y(y) {}
+
+    Vec2 operator+(const Vec2 rhs) const
+    {
         return {x + rhs.x, y + rhs.y};
     }
-    void operator+=(const Vec2 rhs){
+
+    void operator+=(const Vec2 rhs)
+    {
         //TODO Complete this function.
     }
 
-    Vec2 operator-(const Vec2 rhs) const {
+    Vec2 operator-(const Vec2 rhs) const
+    {
         //TODO Complete this function.
         return {};
     }
-    void operator-=(const Vec2 rhs){
+
+    void operator-=(const Vec2 rhs)
+    {
         //TODO Complete this function.
     }
 
-    Vec2 operator*(const float scalar) const {
+    Vec2 operator*(const float scalar) const
+    {
         //TODO Complete this function.
         return {};
     }
-    void operator*=(const float scalar){
+
+    void operator*=(const float scalar)
+    {
         //TODO Complete this function.
     }
 
-    Vec2 operator/(const float scalar) const {
+    Vec2 operator/(const float scalar) const
+    {
         //TODO Complete this function.
         return {};
     }
-    void operator/=(const float scalar){
+
+    void operator/=(const float scalar)
+    {
         //TODO Complete this function.
     }
 
-    const float& operator[](size_t component) const {
+    const float& operator[](size_t component) const
+    {
         return coord[component];
     }
 
-    float& operator[](size_t component) {
+    float& operator[](size_t component)
+    {
         return coord[component];
     }
 
@@ -90,7 +109,8 @@ public:
      * \brief Calculate the magnitude of the vector.
      * \return the magnitude
      */
-    float Magnitude() const {
+    float Magnitude() const
+    {
         //TODO Complete this function.
         return 0;
     }
@@ -100,7 +120,8 @@ public:
      * \details This operation is faster than the function Magnitude().
      * \return the square magnitude
      */
-    float SqrMagnitude() const {
+    float SqrMagnitude() const
+    {
         //TODO Complete this function.
         return 0;
     }
@@ -109,7 +130,8 @@ public:
      * \brief Return a normalized vector without changing the original one.
      * \return a normalized vector.
      */
-    Vec2 Normalized() const {
+    Vec2 Normalized() const
+    {
         //TODO Complete this function.
         return {};
     }
@@ -117,43 +139,50 @@ public:
     /**
      * \brief Normalize the original vector
      */
-    void Normalize() {
+    void Normalize()
+    {
         //TODO Complete this function.
     }
 
-    float Dot(const Vec2 other) const {
-        //TODO Complete this function.
-        return 0;
-    }
-
-    static float Dot(const Vec2 v1, const Vec2 v2) {
+    float Dot(const Vec2 other) const
+    {
         //TODO Complete this function.
         return 0;
     }
 
-    float AngleBetween(const Vec2 other) const {
+    static float Dot(const Vec2 v1, const Vec2 v2)
+    {
         //TODO Complete this function.
         return 0;
     }
 
-    static float AngleBetween(const Vec2 v1, const Vec2 v2){
+    float AngleBetween(const Vec2 other) const
+    {
         //TODO Complete this function.
         return 0;
     }
 
-//    Vec3 Cross(const Vec2 other) const;
-//
-//    static Vec3 Cross(const Vec2 v1, const Vec2 v2);
+    static float AngleBetween(const Vec2 v1, const Vec2 v2)
+    {
+        //TODO Complete this function.
+        return 0;
+    }
 
-    std::string ToString(){
+    Vec3 Cross(const Vec2 other) const;
+
+    static Vec3 Cross(const Vec2 v1, const Vec2 v2);
+
+    std::string ToString()
+    {
         //TODO Complete this function.
         return "";
     }
 };
 
-//struct Vec3 {
-//    float x, y, z;
-//
-//    Vec3() :x(0), y(0), z(0) {}
-//};
+struct Vec3
+{
+    float x, y, z;
+
+    Vec3() : x(0), y(0), z(0) {}
+};
 } // namespace neko::physics

@@ -25,12 +25,14 @@
 
 #include "collider_2d.h"
 
-namespace neko::physics {
+namespace neko::physics
+{
 
 /**
  * \brief Represents a contact between two collider
  */
-class Contact {
+class Contact
+{
 public:
     //TODO Complete this class
 private:
@@ -41,7 +43,8 @@ private:
 /**
  * \brief Holds all currents contact
  */
-class ContactManager {
+class ContactManager
+{
 public:
     //TODO Complete this class
 private:

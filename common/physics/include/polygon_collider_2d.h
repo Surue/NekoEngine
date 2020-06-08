@@ -33,12 +33,14 @@ namespace neko::physics
 class PolygonCollider2d : public Collider2d
 {
 public:
-    PolygonCollider2d() : Collider2d() {}
+    PolygonCollider2d();
 
     const std::vector<Vec2>& GetVertices() const { return vertices_; }
+
     void SetVertices(const std::vector<Vec2>& vertices) { vertices_ = vertices; }
 
-    AABB ComputeAABB() const override {
+    AABB ComputeAABB() const override
+    {
         //TODO Complete this function
         return AABB();
     }

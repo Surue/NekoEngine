@@ -1,5 +1,6 @@
-#include "../include/aabb.h"
+#include <aabb.h>
 
-namespace neko::physics{
+namespace neko::physics
+{
 
 } // namespace neko::physics

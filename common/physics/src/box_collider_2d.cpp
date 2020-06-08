@@ -1,5 +1,7 @@
-//
-// Created by surue on 6/4/20.
-//
+#include <box_collider_2d.h>
 
-#include "../include/box_collider_2d.h"
+namespace neko::physics
+{
+BoxCollider2d::BoxCollider2d() :
+        Collider2d() {}
+} //namespace neko::physics

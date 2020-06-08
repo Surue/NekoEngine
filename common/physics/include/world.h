@@ -23,14 +23,16 @@
  */
 #pragma once
 
-#include "body_2d.h"
-#include "quad_tree.h"
-#include "contact.h"
+#include <body_2d.h>
+#include <quad_tree.h>
+#include <contact.h>
 
 #include <engine/system.h>
 
-namespace neko::physics{
-class World : public SystemInterface{
+namespace neko::physics
+{
+class World : public SystemInterface
+{
 public:
 
     void Init() override;
@@ -44,6 +46,7 @@ public:
      * \param bodies
      */
     void SetBodies(std::vector<Body2d>& bodies) { bodies_ = bodies; }
+
     /**
      * \brief Get the bodies after the physics update.
      * \return updated bodies
@@ -51,10 +54,12 @@ public:
     std::vector<Body2d>& RetriveBodies() { return bodies_; }
 
     float GetFixedDeltaTime() const { return fixedDeltaTime_; }
+
     void SetFixedDeltaTime(float dt) { fixedDeltaTime_ = dt; }
 
     float GetGravity() const { return gravity_; }
-    void SetGravity(float gravity) { gravity_ = gravity;}
+
+    void SetGravity(float gravity) { gravity_ = gravity; }
 
 private:
     float fixedDeltaTime_;

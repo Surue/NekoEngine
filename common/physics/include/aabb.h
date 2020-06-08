@@ -25,22 +25,28 @@
 
 #include "vector.h"
 
-namespace neko::physics {
+namespace neko::physics
+{
 /**
  * \brief Bounding volume around collider used in broad phase of the physics engine.
  */
-struct AABB {
-
+struct AABB
+{
     Vec2 bottomLeft;
     Vec2 topRight;
 
-    AABB() : bottomLeft(), topRight(){};
-    AABB(Vec2 bottomLeft, Vec2 topRight) : bottomLeft(bottomLeft), topRight(topRight) {};
+    /**
+     * \brief Construct a AABB with bottomLeft == (0, 0) and topRight == (0, 0)
+     */
+    AABB() : bottomLeft(), topRight() {}
+
+    AABB(Vec2 bottomLeft, Vec2 topRight) : bottomLeft(bottomLeft), topRight(topRight) {}
 
     /**
      * \brief Return the center of the aabb
      */
-    Vec2 GetCenter() const {
+    Vec2 GetCenter() const
+    {
         //TODO Complete this function
         return {};
     }
@@ -48,7 +54,8 @@ struct AABB {
     /**
      * \brief Compute the extent of the aabb
      */
-    Vec2 GetExtent() const {
+    Vec2 GetExtent() const
+    {
         //TODO Complete this function
         return {};
     }
@@ -58,7 +65,8 @@ struct AABB {
      * \param other aabb which is test against the current aabb.
      * \return true if both aabb are overlapping.
      */
-    bool Overlap(const AABB& other) const{
+    bool Overlap(const AABB& other) const
+    {
         //TODO complete this function
         return false;
     }

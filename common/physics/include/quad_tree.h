@@ -26,16 +26,19 @@
 #include "body_2d.h"
 #include "contact.h"
 
-namespace neko::physics {
+namespace neko::physics
+{
 /**
  * \brief Object used to do space partitionning used in the broad phase
  */
-class QuadTree {
+class QuadTree
+{
 
     /**
      * \brief This function is called to split a node into 4 smaller node.
      */
-    void Split(){
+    void Split()
+    {
         //TODO Complete this function
     }
 
@@ -44,7 +47,8 @@ class QuadTree {
      * \param body to test
      * \return index of the node
      */
-    int GetIndex(const Body2d* body) {
+    int GetIndex(const Body2d* body)
+    {
         //TODO Complete this function
         return 0;
     }
@@ -53,8 +57,9 @@ class QuadTree {
      * \brief Insert a body into the quadtree
      * \param body
      */
-    void Insert(const Body2d* body) {
-    //TODO Complete this function
+    void Insert(const Body2d* body)
+    {
+        //TODO Complete this function
     }
 
     /**
@@ -62,7 +67,8 @@ class QuadTree {
      * \details Those possible contact are checked only using their aabbs
      * \return
      */
-    std::vector<Contact> Retrive(){
+    std::vector<Contact> Retrive()
+    {
         //TODO Complete this function
         return {};
     }

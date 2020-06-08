@@ -1,6 +1,7 @@
-#include "../include/body_2d.h"
+#include <body_2d.h>
 
-namespace neko{
+namespace neko::physics
+{
 
-}
+} //namespace neko::physics
 

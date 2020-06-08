@@ -26,45 +26,57 @@
 #include "vector.h"
 #include <engine/component.h>
 
-namespace neko::physics {
+namespace neko::physics
+{
 
-enum class BodyType : uint8_t {
+enum class BodyType : uint8_t
+{
     STATIC = 0,
     DYNAMIC,
     KINEMATIC
 };
 
-class Body2d {
+class Body2d
+{
 public:
     Vec2 GetPosition() const { return position_; }
+
     void SetPosition(const Vec2 position) { position_ = position; }
 
     float GetAngle() const { return angle_; }
+
     void SetAngle(float angle) { angle_ = angle; }
 
     float GetGravityScale() const { return gravityScale_; }
+
     void SetGravityScale(float gravityScale) { gravityScale_ = gravityScale; }
 
     const Vec2 GetLinearVelocity() const { return linearVelocity; }
-    void SetLinearVelocity(const Vec2& linearVelocity){ Body2d::linearVelocity = linearVelocity; }
+
+    void SetLinearVelocity(const Vec2& linearVelocity) { Body2d::linearVelocity = linearVelocity; }
 
     float GetAngularVelocity() const { return angularVelocity; }
 
     void SetAngularVelocity(float angularVelocity) { Body2d::angularVelocity = angularVelocity; }
 
     const Vec2 GetForce() const { return force_; }
+
     void SetForce(const Vec2& force) { force_ = force; }
 
     float GetTorque() const { return torque_; }
+
     void SetTorque(float torque) { torque_ = torque; }
 
     float GetMass() const { return mass_; }
+
     void SetMass(float mass) { mass_ = mass; }
 
     float GetInvMass() const { return invMass_; }
+
     void SetInvMass(float invMass) { invMass_ = invMass; }
 
     BodyType GetBodyType() const { return bodyType_; }
+
     void SetBodyType(BodyType bodyType) { bodyType_ = bodyType; }
 
 private:

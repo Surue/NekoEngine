@@ -31,14 +31,16 @@ namespace neko::physics
 class CircleCollider2d : public Collider2d
 {
 public:
-    CircleCollider2d() : Collider2d() {};
+    CircleCollider2d();;
 
-    AABB ComputeAABB() const override {
+    AABB ComputeAABB() const override
+    {
         //TODO Complete this function
         return {};
     }
 
     float GetRadius() const { return radius_; }
+
     void SetRadius(float radius) { radius_ = radius; }
 
 private:

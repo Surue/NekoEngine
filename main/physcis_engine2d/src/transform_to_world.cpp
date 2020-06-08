@@ -2,7 +2,8 @@
 
 #include "body_2d.h"
 
-namespace neko {
+namespace neko
+{
 
 TransformToWorld::TransformToWorld(
         physics::World& world,
@@ -12,22 +13,26 @@ TransformToWorld::TransformToWorld(
         world_(world),
         entityManager_(entityManager),
         transform2DManager_(transform2DManager),
-        body2DManager_(body2DManager) {}
+        body2DManager_(body2DManager)
+{}
 
-void TransformToWorld::Init() {
+void TransformToWorld::Init()
+{
 
 }
 
-void TransformToWorld::Update(seconds dt) {
+void TransformToWorld::Update(seconds dt)
+{
     std::cout << "Transform To World\n";
 
-    const EntityMask entityMask = EntityMask((uint32_t)ComponentType::BODY2D | (uint32_t)ComponentType::TRANSFORM2D);
+    const EntityMask entityMask = EntityMask((uint32_t) ComponentType::BODY2D | (uint32_t) ComponentType::TRANSFORM2D);
 
     const std::vector<Entity> entities = entityManager_.FilterEntities(entityMask);
 
     std::vector<physics::Body2d> bodies(entities.size());
 
-    for(int i = 0; i < entities.size(); i++){
+    for (int i = 0; i < entities.size(); i++)
+    {
         auto body = body2DManager_.GetComponent(entities[i]);
 
         //Update position
@@ -46,7 +51,8 @@ void TransformToWorld::Update(seconds dt) {
     world_.SetBodies(bodies);
 }
 
-void TransformToWorld::Destroy() {
+void TransformToWorld::Destroy()
+{
 
 }
 } //namespace neko
