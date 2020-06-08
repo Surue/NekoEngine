@@ -1,6 +1,9 @@
 #include <gtest/gtest.h>
 
+#include <mathematics/const.h>
+
 #include <cmath>
+#include <matrix.h>
 
 #include "../common/physics/include/vector.h"
 #include "../common/physics/include/aabb.h"
@@ -159,8 +162,68 @@ TEST(Physics, Vec2_CrossProduct)
 //    ASSERT_EQ(neko::physics::Vec2::Cross(a, b).z, a.x * b.y - a.y * b.x);
 }
 
-TEST(Physics, Matrix){
+TEST(Physics, Matrix_Addition){
+    const neko::physics::Mat22 a{{2.0f, 1.0f}, {1.0f, 0.0f}};
+    const neko::physics::Mat22 b{{-2.0f, -3.0f}, {4.0f, 2.0f}};
 
+    auto c = a + b;
+
+    ASSERT_EQ(c.v1.x, a.v1.x + b.v1.x);
+    ASSERT_EQ(c.v1.y, a.v1.y + b.v1.y);
+    ASSERT_EQ(c.v2.x, a.v2.x + b.v2.x);
+    ASSERT_EQ(c.v2.y, a.v2.y + b.v2.y);
+}
+
+TEST(Physics, Matrix_Substaction){
+    const neko::physics::Mat22 a{{2.0f, 1.0f}, {1.0f, 0.0f}};
+    const neko::physics::Mat22 b{{-2.0f, -3.0f}, {4.0f, 2.0f}};
+
+    auto c = a - b;
+
+    ASSERT_EQ(c.v1.x, a.v1.x - b.v1.x);
+    ASSERT_EQ(c.v1.y, a.v1.y - b.v1.y);
+    ASSERT_EQ(c.v2.x, a.v2.x - b.v2.x);
+    ASSERT_EQ(c.v2.y, a.v2.y - b.v2.y);
+}
+
+TEST(Physics, Matrix_Identity){
+    const neko::physics::Mat22 identity = neko::physics::Mat22::Identity();
+
+    ASSERT_EQ(identity.v1.x, 1);
+    ASSERT_EQ(identity.v1.y, 0);
+    ASSERT_EQ(identity.v2.x, 0);
+    ASSERT_EQ(identity.v2.y, 1);
+}
+
+TEST(Physics, Matrix_MultiplicationMatrix){
+    const neko::physics::Mat22 a{{2.0f, 1.0f}, {1.0f, 0.0f}};
+    const neko::physics::Mat22 b{{-2.0f, -3.0f}, {4.0f, 2.0f}};
+
+    auto c = a - b;
+
+    ASSERT_EQ(c.v1.x, a.v1.x * b.v1.x + a.v2.x * b.v1.y);
+    ASSERT_EQ(c.v1.y, a.v1.y * b.v2.x + a.v2.y * b.v2.y);
+    ASSERT_EQ(c.v2.x, a.v2.x * b.v1.x + a.v2.x * b.v1.y);
+    ASSERT_EQ(c.v2.x, a.v2.y * b.v2.x + a.v2.y * b.v2.y);
+}
+
+TEST(Physics, Matrix_MultiplicationVector){
+    const neko::physics::Mat22 a{{2.0f, 1.0f}, {1.0f, 0.0f}};
+    const neko::physics::Vec2 b{-2.0f, -3.0f};
+
+    auto c = a * b;
+
+    ASSERT_EQ(c.x, a.v1.x * b.x + a.v2.x * b.y);
+    ASSERT_EQ(c.y, a.v1.y * b.x + a.v2.y * b.y);
+}
+
+TEST(Physics, Matrix_RotationMatrix){
+    const neko::physics::Mat22 a = neko::physics::Mat22::GetRotationMatrix(45 * (neko::PI / 180.0f));
+
+    ASSERT_EQ(a.v1.x, cos(45));
+    ASSERT_EQ(a.v1.y, sin(45));
+    ASSERT_EQ(a.v2.x, -sin(45));
+    ASSERT_EQ(a.v2.y, cos(45));
 }
 
 TEST(Physics, AABB_GetCenter){

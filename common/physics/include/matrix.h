@@ -33,7 +33,7 @@ struct Mat22
 
     Mat22(const Vec2 v1, const Vec2 v2) : v1(v1), v2(v2) {}
 
-    Mat22 operator+(const Mat22& rhs)
+    Mat22 operator+(const Mat22& rhs) const
     {
         //TODO Complete this function,
         return {};
@@ -45,7 +45,7 @@ struct Mat22
         return {};
     }
 
-    Mat22 operator-(const Mat22& rhs)
+    Mat22 operator-(const Mat22& rhs) const
     {
         //TODO Complete this function,
         return {};
@@ -56,6 +56,31 @@ struct Mat22
         //TODO Complete this function,
         return {};
     }
+
+    Mat22 operator*(const Mat22& rhs) const
+    {
+        //TODO Complete this function,
+        return {};
+    }
+
+    Mat22 operator*=(const Mat22& rhs)
+    {
+        //TODO Complete this function,
+        return {};
+    }
+
+    Vec2 operator*(const Vec2& rhs) const
+    {
+        //TODO Complete this function,
+        return {};
+    }
+
+    Vec2 operator*=(const Vec2& rhs)
+    {
+        //TODO Complete this function,
+        return {};
+    }
+
 
     static Mat22 Identity()
     {
