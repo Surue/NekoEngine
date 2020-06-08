@@ -27,7 +27,7 @@
 #include "world.h"
 #include <stats.h>
 #include <entity_viewer.h>
-#include <body_viewer.h>
+#include <body_2d_viewer.h>
 #include <transforms_viewer.h>
 #include <box_collider_2d_viewer.h>
 #include <circle_collider_2d_viewer.h>
@@ -60,7 +60,7 @@ private:
 
     // Components viewers
     tool::Transform2dViewer transform2DViewer;
-    tool::BodyViewer body2DViewer;
+    tool::Body2dViewer body2DViewer;
     tool::BoxCollider2dViewer boxCollider2dViewer;
     tool::CircleCollider2dViewer circleCollider2dViewer;
     tool::PolygonCollider2dViewer polygonCollider2dViewer;

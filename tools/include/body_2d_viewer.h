@@ -27,10 +27,10 @@
 #include "../../common/physics/include/body_2d.h"
 
 namespace neko::tool {
-class BodyViewer : public TemplateDrawComponentImGuiInterface<ComponentType::BODY2D>{
+class Body2dViewer : public TemplateDrawComponentImGuiInterface<ComponentType::BODY2D>{
 public:
-    explicit BodyViewer(EntityManager& entityManager, physics::Body2dManager& body2dManager);
-    ~BodyViewer() = default;
+    explicit Body2dViewer(EntityManager& entityManager, physics::Body2dManager& body2dManager);
+    ~Body2dViewer() = default;
 
     void DrawImGui(Entity entity) override;
 protected:

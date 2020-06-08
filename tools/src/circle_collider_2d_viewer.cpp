@@ -17,14 +17,14 @@ void CircleCollider2dViewer::DrawImGui(Entity entity)
 
         // Restitution
         auto restitution = newCollider.GetRestitution();
-        if (ImGui::InputFloat("Restitution", &restitution))
+        if (ImGui::DragFloat("Restitution", &restitution))
         {
             newCollider.SetRestitution(restitution);
         }
 
         // Friction
         auto friction = newCollider.GetFriction();
-        if (ImGui::InputFloat("Friction", &friction))
+        if (ImGui::DragFloat("Friction", &friction))
         {
             newCollider.SetFriction(friction);
         }
@@ -38,25 +38,39 @@ void CircleCollider2dViewer::DrawImGui(Entity entity)
 
         // Offset
         auto offset = newCollider.GetOffset();
-        if (ImGui::InputFloat2("Offset", &offset[0]))
+        if (ImGui::DragFloat2("Offset", &offset[0]))
         {
             newCollider.SetOffset(offset);
-        }
-        // Centroid
-        auto centroid = newCollider.GetCentroid();
-        if (ImGui::InputFloat2("Centroid", &centroid[0]))
-        {
-            newCollider.SetCentroid(centroid);
         }
 
         // Radius
         auto radius = newCollider.GetRadius();
-        if (ImGui::InputFloat("radius", &radius))
+        if (ImGui::DragFloat("radius", &radius))
         {
             newCollider.SetRadius(radius);
         }
 
         circleCollider2DManager_.SetComponent(entity, newCollider);
+
+        //Infos
+        const ImVec2 padding{10, 10};
+        const ImVec2 p0 = ImGui::GetCursorScreenPos();
+        ImGui::SetCursorScreenPos(ImVec2(p0.x + padding.x, p0.y + padding.y));
+        ImGui::BeginGroup();
+        ImGui::TextColored({0.6f, 0.6f, 0.6f, 1.0f}, "Infos:");
+        //Centroid
+        ImGui::TextColored(
+                {0.5f, 0.5f, 0.5f, 1.0f},
+                "Centroid : (%.2f, %.2f)",
+                newCollider.GetCentroid().x,
+                newCollider.GetCentroid().y);
+
+        ImGui::EndGroup();
+        ImVec2 p1 = ImVec2(
+                ImGui::GetItemRectMax().x + padding.x,
+                ImGui::GetItemRectMax().y + padding.y);
+        ImGui::Dummy(ImVec2(0.0f, padding.y));
+        ImGui::GetWindowDrawList()->AddRect(p0, p1, IM_COL32(120, 120, 120, 255), 10.0f);
     }
 }
 } // namespace neko::tool

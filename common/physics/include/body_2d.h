@@ -88,6 +88,9 @@ private:
 
 class Body2dManager : public ComponentManager<Body, ComponentType::BODY2D>
 {
+public:
+
+private:
     using ComponentManager::ComponentManager;
 };
 } // namespace neko::physics
