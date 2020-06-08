@@ -18,11 +18,13 @@ PhysicsEngine::PhysicsEngine(Configuration* config) :
         boxCollider2DViewer_(entityManager_, boxCollider2DManager_),
         circleCollider2DViewer_(entityManager_, circleCollider2DManager_),
         polygonCollider2DViewer_(entityManager_, polygonCollider2DManager_),
-        transformToWorld_(world_, entityManager_, transform2DManager_, body2DManager_){
+        transformToWorld_(world_, entityManager_, transform2DManager_, body2DManager_),
+        worldToTransform_(world_, entityManager_, transform2DManager_, body2DManager_){
 
     //Register systems
     RegisterSystem(transformToWorld_);
     RegisterSystem(world_);
+    RegisterSystem(worldToTransform_);
 
     //Register component viewers
     entityViewer_.RegisterDrawComponentImGui(transform2DViewer_);

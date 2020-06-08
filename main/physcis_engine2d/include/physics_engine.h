@@ -26,6 +26,7 @@
 #include <sdl_engine/sdl_engine.h>
 #include "world.h"
 #include "transform_to_world.h"
+#include "world_to_transform.h"
 #include <stats.h>
 #include <entity_viewer.h>
 #include <body_2d_viewer.h>
@@ -68,5 +69,6 @@ private:
 
     //Systems
     TransformToWorld transformToWorld_;
+    WorldToTransform worldToTransform_;
 };
 } // namespace neko

@@ -21,22 +21,21 @@ void TransformToWorld::Init() {
 void TransformToWorld::Update(seconds dt) {
     std::cout << "Transform To World\n";
 
-    EntityMask entityMask = EntityMask((uint32_t)ComponentType::BODY2D | (uint32_t)ComponentType::TRANSFORM2D);
+    const EntityMask entityMask = EntityMask((uint32_t)ComponentType::BODY2D | (uint32_t)ComponentType::TRANSFORM2D);
 
-    std::vector<Entity> entities = entityManager_.FilterEntities(entityMask);
+    const std::vector<Entity> entities = entityManager_.FilterEntities(entityMask);
 
-    std::vector<physics::Body2d> bodies;
-    bodies.resize(entities.size());
+    std::vector<physics::Body2d> bodies(entities.size());
 
     for(int i = 0; i < entities.size(); i++){
         auto body = body2DManager_.GetComponent(entities[i]);
 
         //Update position
-        auto pos = transform2DManager_.GetPosition(entities[i]);
+        const auto pos = transform2DManager_.GetPosition(entities[i]);
         body.SetPosition(physics::Vec2(pos.x, pos.y));
 
         //Update angle
-        auto angle = transform2DManager_.GetRotation(entities[i]);
+        const auto angle = transform2DManager_.GetRotation(entities[i]);
         body.SetAngle(angle);
 
         body2DManager_.SetComponent(entities[i], body);

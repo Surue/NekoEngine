@@ -12,7 +12,13 @@ void World::Update(seconds dt) {
 
         Vec2 bodyPosition = body.GetPosition();
 
-        bodyPosition = bodyPosition + Vec2(1, 0);
+        Vec2 vel = body.GetLinearVelocity();
+
+        vel = vel + Vec2(9.81f  * dt.count(), 0);
+
+        body.SetLinearVelocity(vel);
+
+        bodyPosition = bodyPosition + vel;
 
         body.SetPosition(bodyPosition);
     }
