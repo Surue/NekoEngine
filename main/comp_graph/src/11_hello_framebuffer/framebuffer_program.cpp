@@ -20,22 +20,24 @@ void HelloFramebufferProgram::Init()
     const auto& config = BasicEngine::GetInstance()->config;
     screenFrame_.Init();
     cube_.Init();
+	//Create Screen FBO
     glGenFramebuffers(1, &fbo_);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo_);
-
-    glGenTextures(1, &fboTexture_);
-    glBindTexture(GL_TEXTURE_2D, fboTexture_);
+    //Generate Color Buffer for FBO
+    glGenTextures(1, &fboColorBufferTexture_);
+    glBindTexture(GL_TEXTURE_2D, fboColorBufferTexture_);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, config.windowSize.x, config.windowSize.y, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glBindTexture(GL_TEXTURE_2D, 0);
-
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fboTexture_, 0);
-
+    //Bind the Color Buffer
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fboColorBufferTexture_, 0);
+    //Generate the Depth-Stencil RenderBuffer Object
     glGenRenderbuffers(1, &rbo_);
     glBindRenderbuffer(GL_RENDERBUFFER, rbo_);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, config.windowSize.x, config.windowSize.y);
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	//Bind depth-stencil RBO to screen FBO 
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo_);
     if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
     {
@@ -85,7 +87,7 @@ void HelloFramebufferProgram::Destroy()
     containerTexture_.Destroy();
 
     glDeleteFramebuffers(1, &fbo_);
-    glDeleteTextures(1, &fboTexture_);
+    glDeleteTextures(1, &fboColorBufferTexture_);
     glDeleteRenderbuffers(1, &rbo_);
 
     cube_.Destroy();
@@ -120,9 +122,45 @@ void HelloFramebufferProgram::DrawImGui()
 
 void HelloFramebufferProgram::Render()
 {
+
     if(!containerTexture_.IsLoaded())
         return;
     std::lock_guard<std::mutex> lock(updateMutex_);
+    if(hasScreenResize_)
+    {
+        //When the screen resize, we need to resize
+        glDeleteFramebuffers(1, &fbo_);
+        glDeleteTextures(1, &fboColorBufferTexture_);
+        glDeleteRenderbuffers(1, &rbo_);
+
+        const auto& config = BasicEngine::GetInstance()->config;
+        glGenFramebuffers(1, &fbo_);
+        glBindFramebuffer(GL_FRAMEBUFFER, fbo_);
+
+        glGenTextures(1, &fboColorBufferTexture_);
+        glBindTexture(GL_TEXTURE_2D, fboColorBufferTexture_);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, config.windowSize.x, config.windowSize.y, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fboColorBufferTexture_, 0);
+
+        glGenRenderbuffers(1, &rbo_);
+        glBindRenderbuffer(GL_RENDERBUFFER, rbo_);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, config.windowSize.x, config.windowSize.y);
+        glBindRenderbuffer(GL_RENDERBUFFER, 0);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo_);
+        if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        {
+            logDebug("[Error] Framebuffer is not complete afetr resize!");
+        }
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        hasScreenResize_ = false;
+
+        logDebug("Framebuffer resized with size: "+std::to_string(config.windowSize.x)+", "+std::to_string(config.windowSize.y));
+    }
+
     //Bind framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, fbo_);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -166,7 +204,7 @@ void HelloFramebufferProgram::Render()
     glDisable(GL_DEPTH_TEST);
     currentShader->SetInt("screenTexture", 0);
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, fboTexture_);
+    glBindTexture(GL_TEXTURE_2D, fboColorBufferTexture_);
     screenFrame_.Draw();
 
 
@@ -174,6 +212,13 @@ void HelloFramebufferProgram::Render()
 void HelloFramebufferProgram::OnEvent(const SDL_Event& event)
 {
     camera_.OnEvent(event);
+    if (event.type == SDL_WINDOWEVENT)
+    {
+        if (event.window.event == SDL_WINDOWEVENT_RESIZED)
+        {
+            hasScreenResize_ = true;
+        }
+    }
 }
 
 

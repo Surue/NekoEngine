@@ -46,6 +46,7 @@ private:
 	std::vector<Vec3f> asteroidPositions_;
 	std::vector<Vec3f> asteroidVelocities_;
 	std::vector<Vec3f> asteroidForces_;
+	
 	unsigned int instanceVBO_ = 0;
 
 	const float gravityConst = 1000.0f;

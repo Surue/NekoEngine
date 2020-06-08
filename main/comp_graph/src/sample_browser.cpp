@@ -18,7 +18,16 @@
 #include "11_hello_framebuffer/framebuffer_program.h"
 #include "12_hello_stencil/stencil_program.h"
 #include "13_hello_depth/depth_program.h"
+#include "14_hello_outline/outline_program.h"
+#include "15_hello_cubemaps/cubemaps_program.h"
+#include "16_hello_culling/culling_program.h"
+#include "17_hello_frustum/frustum_program.h"
+#include "18_hello_normal/normal_program.h"
+#include "19_hello_hdr/hdr_program.h"
+#include "20_hello_bloom/bloom_program.h"
+#include "21_hello_shadow/shadow_program.h"
 
+#include "98_hello_line/line_program.h"
 #include "99_hello_scene/scene_program.h"
 
 namespace neko
@@ -39,7 +48,18 @@ void SampleBrowser::Init()
 	RegisterRenderProgram("11 Hello Framebuffer", std::make_unique<HelloFramebufferProgram>());
     RegisterRenderProgram("12 Hello Stencil", std::make_unique<HelloStencilProgam>());
     RegisterRenderProgram("13 Hello Depth", std::make_unique<HelloDepthProgram>());
+    RegisterRenderProgram("14 Hello Outline", std::make_unique<HelloOutlineProgram>());
+    RegisterRenderProgram("15 Hello Cubemaps", std::make_unique<HelloCubemapsProgram>());
+    RegisterRenderProgram("16 Hello Culling", std::make_unique<HelloCullingProgram>());
+    RegisterRenderProgram("17 Hello Frustum Culling", std::make_unique<HelloFrustumProgram>());
+    RegisterRenderProgram("18 Hello Normal", std::make_unique<HelloNormalProgram>());
+    RegisterRenderProgram("19 Hello Hdr", std::make_unique<HelloHdrProgram>());
+    RegisterRenderProgram("20 Hello Bloom", std::make_unique<HelloBloomProgram>());
+    RegisterRenderProgram("21 Hello Shadow", std::make_unique<HelloShadowProgram>());
+
+    RegisterRenderProgram("98 Hello Line", std::make_unique<HelloLineProgram>());
     RegisterRenderProgram("99 Hello Scene", std::make_unique<HelloSceneProgram>());
+	
 	programs_[currentProgramIndex_]->Init();
 }
 
@@ -56,9 +76,9 @@ void SampleBrowser::Destroy()
 
 void SampleBrowser::SwitchToProgram(size_t index)
 {
-    const auto previousindex = currentProgramIndex_;
+    const auto previousIndex = currentProgramIndex_;
     currentProgramIndex_ = index;
-    programs_[previousindex]->Destroy();
+    programs_[previousIndex]->Destroy();
     programs_[currentProgramIndex_]->Init();
 }
 
