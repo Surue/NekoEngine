@@ -43,12 +43,12 @@ public:
      * \brief Set bodies for the current frame.
      * \param bodies
      */
-    void SetBodies(std::vector<Body*>& bodies) { bodies_ = bodies; }
+    void SetBodies(std::vector<Body2d>& bodies) { bodies_ = bodies; }
     /**
      * \brief Get the bodies after the physics update.
      * \return updated bodies
      */
-    std::vector<Body*>& RetriveBodies() { return bodies_; }
+    std::vector<Body2d>& RetriveBodies() { return bodies_; }
 
     float GetFixedDeltaTime() const { return fixedDeltaTime_; }
     void SetFixedDeltaTime(float dt) { fixedDeltaTime_ = dt; }
@@ -60,7 +60,7 @@ private:
     float fixedDeltaTime_;
     float gravity_;
 
-    std::vector<Body*> bodies_;
+    std::vector<Body2d> bodies_;
 
     ContactManager contactManager_;
 

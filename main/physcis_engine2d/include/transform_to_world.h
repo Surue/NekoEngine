@@ -23,54 +23,30 @@
  */
 #pragma once
 
-#include "body_2d.h"
-#include "contact.h"
+#include <engine/system.h>
+#include <engine/transform.h>
+#include "world.h"
 
-namespace neko::physics {
-/**
- * \brief Object used to do space partitionning used in the broad phase
- */
-class QuadTree {
+namespace neko{
+class TransformToWorld : public SystemInterface {
+public:
+    TransformToWorld(
+            physics::World& world,
+            EntityManager& entityManager,
+            Transform2dManager& transform2DManager,
+            physics::Body2dManager& body2DManager);
 
-    /**
-     * \brief This function is called to split a node into 4 smaller node.
-     */
-    void Split(){
-        //TODO Complete this function
-    }
+    void Init() override;
 
-    /**
-     * \brief Return the index of the child tree of the given body.
-     * \param body to test
-     * \return index of the node
-     */
-    int GetIndex(const Body2d* body) {
-        //TODO Complete this function
-        return 0;
-    }
+    void Update(seconds dt) override;
 
-    /**
-     * \brief Insert a body into the quadtree
-     * \param body
-     */
-    void Insert(const Body2d* body) {
-    //TODO Complete this function
-    }
-
-    /**
-     * \brief Return all possible contact
-     * \details Those possible contact are checked only using their aabbs
-     * \return
-     */
-    std::vector<Contact> Retrive(){
-        //TODO Complete this function
-        return {};
-    }
+    void Destroy() override;
 
 private:
-    static const int NB_CHILD_NODE = 4;
+    physics::World& world_;
 
-    std::vector<Body2d*> bodies_;
-    std::unique_ptr<QuadTree> childNodes_[NB_CHILD_NODE];
+    EntityManager& entityManager_;
+    Transform2dManager& transform2DManager_;
+    physics::Body2dManager& body2DManager_;
 };
-} // namespace neko::physics
+} //namespace neko

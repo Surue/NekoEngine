@@ -7,13 +7,14 @@ void World::Init() {
 }
 
 void World::Update(seconds dt) {
-    for (Body* body : bodies_) {
+    std::cout << "World\n";
+    for (Body2d& body : bodies_) {
 
-        Vec2 bodyPosition = body->GetPosition();
+        Vec2 bodyPosition = body.GetPosition();
 
         bodyPosition = bodyPosition + Vec2(1, 0);
 
-        body->SetPosition(bodyPosition);
+        body.SetPosition(bodyPosition);
     }
 }
 

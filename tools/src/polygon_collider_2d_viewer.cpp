@@ -43,7 +43,6 @@ void PolygonCollider2dViewer::DrawImGui(Entity entity)
         }
 
         // Points
-
         ImGui::Text("Vertices");
         const auto vertices = newCollider.GetVertices();
         std::vector<physics::Vec2> newVertices;

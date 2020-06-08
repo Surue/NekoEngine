@@ -34,7 +34,7 @@ enum class BodyType : uint8_t {
     KINEMATIC
 };
 
-class Body {
+class Body2d {
 public:
     Vec2 GetPosition() const { return position_; }
     void SetPosition(const Vec2 position) { position_ = position; }
@@ -46,11 +46,11 @@ public:
     void SetGravityScale(float gravityScale) { gravityScale_ = gravityScale; }
 
     const Vec2 GetLinearVelocity() const { return linearVelocity; }
-    void SetLinearVelocity(const Vec2& linearVelocity){ Body::linearVelocity = linearVelocity; }
+    void SetLinearVelocity(const Vec2& linearVelocity){ Body2d::linearVelocity = linearVelocity; }
 
     float GetAngularVelocity() const { return angularVelocity; }
 
-    void SetAngularVelocity(float angularVelocity) { Body::angularVelocity = angularVelocity; }
+    void SetAngularVelocity(float angularVelocity) { Body2d::angularVelocity = angularVelocity; }
 
     const Vec2 GetForce() const { return force_; }
     void SetForce(const Vec2& force) { force_ = force; }
@@ -86,7 +86,7 @@ private:
     BodyType bodyType_;
 };
 
-class Body2dManager : public ComponentManager<Body, ComponentType::BODY2D>
+class Body2dManager : public ComponentManager<Body2d, ComponentType::BODY2D>
 {
 public:
 

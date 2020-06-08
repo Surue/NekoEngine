@@ -4,33 +4,35 @@ namespace neko
 {
 PhysicsEngine::PhysicsEngine(Configuration* config) :
         SdlEngine(config),
-        entityManager(),
-        entityHierarchy(entityManager),
-        transform2DManager(entityManager),
-        body2DManager(entityManager),
-        boxCollider2DManager(entityManager),
-        circleCollider2DManager(entityManager),
-        polygonCollider2DManager(entityManager),
-        statsTool(),
-        entityViewer(entityManager, entityHierarchy),
-        transform2DViewer(entityManager, transform2DManager),
-        body2DViewer(entityManager, body2DManager),
-        boxCollider2dViewer(entityManager, boxCollider2DManager),
-        circleCollider2dViewer(entityManager, circleCollider2DManager),
-        polygonCollider2dViewer(entityManager, polygonCollider2DManager) {
+        entityManager_(),
+        entityHierarchy_(entityManager_),
+        transform2DManager_(entityManager_),
+        body2DManager_(entityManager_),
+        boxCollider2DManager_(entityManager_),
+        circleCollider2DManager_(entityManager_),
+        polygonCollider2DManager_(entityManager_),
+        statsTool_(),
+        entityViewer_(entityManager_, entityHierarchy_),
+        transform2DViewer_(entityManager_, transform2DManager_),
+        body2DViewer_(entityManager_, body2DManager_),
+        boxCollider2DViewer_(entityManager_, boxCollider2DManager_),
+        circleCollider2DViewer_(entityManager_, circleCollider2DManager_),
+        polygonCollider2DViewer_(entityManager_, polygonCollider2DManager_),
+        transformToWorld_(world_, entityManager_, transform2DManager_, body2DManager_){
 
     //Register systems
+    RegisterSystem(transformToWorld_);
     RegisterSystem(world_);
 
     //Register component viewers
-    entityViewer.RegisterDrawComponentImGui(transform2DViewer);
-    entityViewer.RegisterDrawComponentImGui(body2DViewer);
-    entityViewer.RegisterDrawComponentImGui(boxCollider2dViewer);
-    entityViewer.RegisterDrawComponentImGui(circleCollider2dViewer);
-    entityViewer.RegisterDrawComponentImGui(polygonCollider2dViewer);
+    entityViewer_.RegisterDrawComponentImGui(transform2DViewer_);
+    entityViewer_.RegisterDrawComponentImGui(body2DViewer_);
+    entityViewer_.RegisterDrawComponentImGui(boxCollider2DViewer_);
+    entityViewer_.RegisterDrawComponentImGui(circleCollider2DViewer_);
+    entityViewer_.RegisterDrawComponentImGui(polygonCollider2DViewer_);
 
     //Assign every tools
-    RegisterOnDrawUi(statsTool);
-    RegisterOnDrawUi(entityViewer);
+    RegisterOnDrawUi(statsTool_);
+    RegisterOnDrawUi(entityViewer_);
 }
 } //namespace neko

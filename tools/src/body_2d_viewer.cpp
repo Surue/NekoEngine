@@ -12,7 +12,7 @@ void neko::tool::Body2dViewer::DrawImGui(neko::Entity entity) {
 
     if(ImGui::CollapsingHeader("Body2d"))
     {
-        physics::Body newBody = body2dManager_.GetComponent(entity);
+        physics::Body2d newBody = body2dManager_.GetComponent(entity);
 
         //Gravity scale
         auto gravityScale = newBody.GetGravityScale();

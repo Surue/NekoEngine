@@ -25,6 +25,7 @@
 
 #include <sdl_engine/sdl_engine.h>
 #include "world.h"
+#include "transform_to_world.h"
 #include <stats.h>
 #include <entity_viewer.h>
 #include <body_2d_viewer.h>
@@ -44,25 +45,28 @@ private:
 	physics::World world_;
 
 	// Entity
-    EntityManager entityManager;
-    EntityHierarchy entityHierarchy;
+    EntityManager entityManager_;
+    EntityHierarchy entityHierarchy_;
 
     // Components manager
-    Transform2dManager transform2DManager;
-    physics::Body2dManager body2DManager;
-    physics::BoxCollider2dManager boxCollider2DManager;
-    physics::CircleCollider2dManager circleCollider2DManager;
-    physics::PolygonCollider2dManager polygonCollider2DManager;
+    Transform2dManager transform2DManager_;
+    physics::Body2dManager body2DManager_;
+    physics::BoxCollider2dManager boxCollider2DManager_;
+    physics::CircleCollider2dManager circleCollider2DManager_;
+    physics::PolygonCollider2dManager polygonCollider2DManager_;
 
     //List of every tool
-    tool::StatsTool statsTool;
-    tool::EntityViewer entityViewer ;
+    tool::StatsTool statsTool_;
+    tool::EntityViewer entityViewer_;
 
     // Components viewers
-    tool::Transform2dViewer transform2DViewer;
-    tool::Body2dViewer body2DViewer;
-    tool::BoxCollider2dViewer boxCollider2dViewer;
-    tool::CircleCollider2dViewer circleCollider2dViewer;
-    tool::PolygonCollider2dViewer polygonCollider2dViewer;
+    tool::Transform2dViewer transform2DViewer_;
+    tool::Body2dViewer body2DViewer_;
+    tool::BoxCollider2dViewer boxCollider2DViewer_;
+    tool::CircleCollider2dViewer circleCollider2DViewer_;
+    tool::PolygonCollider2dViewer polygonCollider2DViewer_;
+
+    //Systems
+    TransformToWorld transformToWorld_;
 };
 } // namespace neko
