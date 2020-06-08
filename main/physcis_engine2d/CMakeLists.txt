@@ -2,7 +2,11 @@ include_directories("include/")
 
 file(GLOB_RECURSE physics_engine2d_src include/*.h src/*.cpp)
 
-add_executable(physics_engine2d ${physics_engine2d_src})
+file(GLOB_RECURSE shaders_src ${CMAKE_SOURCE_DIR}/data/shaders/*.vert ${CMAKE_SOURCE_DIR}/data/shaders/*.frag)
+
+source_group("Shaders"	FILES ${shaders_src})
+
+add_executable(physics_engine2d ${physics_engine2d_src} ${shaders_src})
 target_link_libraries(physics_engine2d PUBLIC Neko_Core Neko_Tool sdl_engine gles3_wrapper physics)
 neko_bin_config(physics_engine2d)
 

@@ -27,6 +27,7 @@
 #include "world.h"
 #include "transform_to_world.h"
 #include "world_to_transform.h"
+#include "gl/line.h"
 #include <stats.h>
 #include <entity_viewer.h>
 #include <body_2d_viewer.h>
@@ -41,6 +42,8 @@ public:
 	explicit PhysicsEngine(Configuration* config = nullptr);
 
 	~PhysicsEngine() = default;
+
+    void Init() override;
 
 private:
 	physics::World world_;
@@ -70,5 +73,8 @@ private:
     //Systems
     TransformToWorld transformToWorld_;
     WorldToTransform worldToTransform_;
+
+    //Graphics
+    gl::LineRenderer lineRenderer_;
 };
 } // namespace neko

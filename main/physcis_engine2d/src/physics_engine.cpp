@@ -37,4 +37,13 @@ PhysicsEngine::PhysicsEngine(Configuration* config) :
     RegisterOnDrawUi(statsTool_);
     RegisterOnDrawUi(entityViewer_);
 }
+
+void PhysicsEngine::Init()
+{
+    SdlEngine::Init();
+
+    //Graphics
+    lineRenderer_.Init();
+    RendererLocator::get().RegisterSyncBuffersFunction(&lineRenderer_);
+}
 } //namespace neko
