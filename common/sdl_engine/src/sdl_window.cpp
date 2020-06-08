@@ -117,4 +117,9 @@ void sdl::SdlWindow::RenderUi()
     ImGui::Render();
 }
 
+Vec2u sdl::SdlWindow::GetSize() const {
+    Vec2i size;
+    SDL_GetWindowSize(window_, &size[0], &size[1]);
+    return (Vec2u)size;
+}
 }

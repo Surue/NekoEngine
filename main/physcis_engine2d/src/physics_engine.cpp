@@ -25,6 +25,7 @@ PhysicsEngine::PhysicsEngine(Configuration* config) :
     RegisterSystem(transformToWorld_);
     RegisterSystem(world_);
     RegisterSystem(worldToTransform_);
+    RegisterSystem(debugDrawer2D_);
 
     //Register component viewers
     entityViewer_.RegisterDrawComponentImGui(transform2DViewer_);
@@ -36,14 +37,20 @@ PhysicsEngine::PhysicsEngine(Configuration* config) :
     //Assign every tools
     RegisterOnDrawUi(statsTool_);
     RegisterOnDrawUi(entityViewer_);
+
+    //Locator
+    physics::DebugDrawer2dLocator::provide(&debugDrawer2D_);
 }
 
 void PhysicsEngine::Init()
 {
     SdlEngine::Init();
+}
 
-    //Graphics
-    lineRenderer_.Init();
-    RendererLocator::get().RegisterSyncBuffersFunction(&lineRenderer_);
+void PhysicsEngine::SetWindowAndRenderer(Window* window, Renderer* renderer)
+{
+    BasicEngine::SetWindowAndRenderer(window, renderer);
+
+    debugDrawer2D_.SetWindow(window);
 }
 } //namespace neko

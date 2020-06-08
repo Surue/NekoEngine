@@ -1,4 +1,6 @@
-#include "../include/world.h"
+#include <world.h>
+
+#include <debug_drawer_2d.h>
 
 namespace neko::physics
 {
@@ -22,9 +24,11 @@ void World::Update(seconds dt)
 
         body.SetLinearVelocity(vel);
 
-        bodyPosition = bodyPosition + vel;
+        DebugDrawer2dLocator::get().DrawLine(Vec2{0, 0}, bodyPosition);
 
-        body.SetPosition(bodyPosition);
+//        bodyPosition = bodyPosition + vel;
+
+//        body.SetPosition(bodyPosition);
     }
 }
 

@@ -1,5 +1,5 @@
 
-LIST(APPEND PHYSICS_LIBS Neko_Core)
+LIST(APPEND PHYSICS_LIBS Neko_Core gles3_wrapper)
 file(GLOB_RECURSE physics_src include/*.h src/*.cpp)
 
 add_library(physics STATIC ${physics_src})

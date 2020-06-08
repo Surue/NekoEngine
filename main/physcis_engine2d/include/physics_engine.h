@@ -35,6 +35,7 @@
 #include <box_collider_2d_viewer.h>
 #include <circle_collider_2d_viewer.h>
 #include <polygon_collider_2d_viewer.h>
+#include <debug_drawer_2d.h>
 
 namespace neko {
 class PhysicsEngine final : public sdl::SdlEngine {
@@ -44,6 +45,8 @@ public:
 	~PhysicsEngine() = default;
 
     void Init() override;
+
+    void SetWindowAndRenderer(Window* window, Renderer* renderer) override;
 
 private:
 	physics::World world_;
@@ -73,8 +76,6 @@ private:
     //Systems
     TransformToWorld transformToWorld_;
     WorldToTransform worldToTransform_;
-
-    //Graphics
-    gl::LineRenderer lineRenderer_;
+    physics::DebugDrawer2d debugDrawer2D_;
 };
 } // namespace neko

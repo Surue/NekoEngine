@@ -80,7 +80,7 @@ public:
 
     void EngineLoop();
 
-    void SetWindowAndRenderer(Window* window, Renderer* renderer);
+    virtual void SetWindowAndRenderer(Window* window, Renderer* renderer);
 
     Configuration config;
 

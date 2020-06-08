@@ -1,8 +1,7 @@
-#pragma once
 /*
  MIT License
 
- Copyright (c) 2017 SAE Institute Switzerland AG
+ Copyright (c) 2020 SAE Institute Switzerland AG
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -22,47 +21,45 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
  */
-#include "engine/system.h"
-#include "mathematics/vector.h"
-#include "engine/jobsystem.h"
+#pragma once
 
-namespace neko
+#include <engine/window.h>
+#include <utilities/service_locator.h>
+#include <vector.h>
+#include <gl/line.h>
+
+namespace neko::physics
 {
-class Window : public SystemInterface
-{
+class DebugDrawer2dInterface{
 public:
-    Window() : swapBufferJob_([this]
-    {
-        SwapBuffer();
-#if defined(__ANDROID__)
-        LeaveCurrentContext();
-#endif
-    })
-    {
-	    
-    }
-    virtual void GenerateUiFrame() = 0;
-    /**
-     * \brief Called at the end of a graphics frame to switch the double
-     */
-    virtual void SwapBuffer() = 0;
-    /**
-     * \brief Called by the render thread to render the Ui
-     */
-    virtual void RenderUi() = 0;
-    virtual void OnResize(Vec2u newWindowSize) = 0;
-    virtual Vec2u GetSize() const = 0;
-
-    Job* GetSwapBufferJob() { return &swapBufferJob_; }
-    /**
-     * \brief Called by a render thread to take ownership of the context, typically used in OpenGL
-     */
-    virtual void MakeCurrentContext() {}
-    void ResetJobs() { swapBufferJob_.Reset(); }
-    virtual void LeaveCurrentContext() {};
-protected:
-    Job swapBufferJob_;
+    virtual void DrawLine(physics::Vec2 p1, physics::Vec2 p2) = 0;
 };
 
+class DebugDrawer2d : public DebugDrawer2dInterface, public SystemInterface{
+public:
+    void Init() override;
+    void Update(seconds dt) override;
+    void Destroy() override;
 
-}
+    void DrawLine(physics::Vec2 p1, physics::Vec2 p2) override;
+
+    void SetWindow(Window* window){ window_ = window;}
+
+private:
+
+    const int pixelPerUnit_ = 50;
+
+    Vec3f WorldToScreen(physics::Vec2 pos);
+
+    gl::LineRenderer lineRenderer_;
+
+    Window* window_;
+};
+
+class NullDebugDrawer2d : public DebugDrawer2dInterface{
+public:
+    void DrawLine(physics::Vec2 p1, physics::Vec2 p2) override{}
+};
+
+using DebugDrawer2dLocator = Locator<DebugDrawer2dInterface, NullDebugDrawer2d>;
+} //namespace neko::physics

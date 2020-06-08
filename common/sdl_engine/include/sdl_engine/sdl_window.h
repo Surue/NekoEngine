@@ -16,6 +16,8 @@ public:
 
     virtual void ImguiNewFrame();
 
+    virtual Vec2u GetSize() const override;
+
 protected:
     void SwapBuffer() override;
 

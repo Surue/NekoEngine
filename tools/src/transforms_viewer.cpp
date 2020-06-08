@@ -20,7 +20,7 @@ void Transform2dViewer::DrawImGui(Entity entity)
         if (entityManager_.HasComponent(entity, static_cast<EntityMask>(ComponentType::POSITION2D)))
         {
             auto position = transform2dManager_.GetPosition(entity);
-            if (ImGui::DragFloat2("Position", &position[0]))
+            if (ImGui::DragFloat2("Position", &position[0], 0.1f))
             {
                 transform2dManager_.SetPosition(entity, position);
             }
@@ -40,7 +40,7 @@ void Transform2dViewer::DrawImGui(Entity entity)
         if (entityManager_.HasComponent(entity, static_cast<EntityMask>(ComponentType::ROTATION2D)))
         {
             auto eulerAngle = transform2dManager_.GetRotation(entity);
-            if (ImGui::DragFloat("Euler Angle", &eulerAngle))
+            if (ImGui::DragFloat("Euler Angle", &eulerAngle, 0.1f))
             {
                 transform2dManager_.SetRotation(entity, eulerAngle);
             }
