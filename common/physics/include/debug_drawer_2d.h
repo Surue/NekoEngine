@@ -30,24 +30,41 @@
 
 namespace neko::physics
 {
-class DebugDrawer2dInterface{
+class DebugDrawer2dInterface
+{
 public:
-    virtual void DrawLine(physics::Vec2 p1, physics::Vec2 p2) = 0;
+    virtual void DrawLine(Vec2 p1, Vec2 p2) = 0;
+
+    virtual void DrawVector(Vec2 origin, Vec2 direction, float length) = 0;
+
+    virtual void DrawAABB(Vec2 bottomLeft, Vec2 topRight) = 0;
+
+    virtual void DrawCircle(Vec2 center, float radius) = 0;
 };
 
-class DebugDrawer2d : public DebugDrawer2dInterface, public SystemInterface{
+class DebugDrawer2d : public DebugDrawer2dInterface, public SystemInterface
+{
 public:
     void Init() override;
+
     void Update(seconds dt) override;
+
     void Destroy() override;
 
-    void DrawLine(physics::Vec2 p1, physics::Vec2 p2) override;
+    void DrawLine(Vec2 p1, Vec2 p2) override;
 
-    void SetWindow(Window* window){ window_ = window;}
+    void DrawVector(Vec2 origin, Vec2 direction, float length) override;
+
+    void DrawAABB(Vec2 bottomLeft, Vec2 topRight) override;
+
+    void DrawCircle(Vec2 center, float radius) override;
+
+    void SetWindow(Window* window) { window_ = window; }
 
 private:
 
     const int pixelPerUnit_ = 50;
+    const int nbSegmentCircle_ = 20;
 
     Vec3f WorldToScreen(physics::Vec2 pos);
 
@@ -56,9 +73,16 @@ private:
     Window* window_;
 };
 
-class NullDebugDrawer2d : public DebugDrawer2dInterface{
+class NullDebugDrawer2d : public DebugDrawer2dInterface
+{
 public:
-    void DrawLine(physics::Vec2 p1, physics::Vec2 p2) override{}
+    void DrawLine(Vec2 p1, Vec2 p2) override {}
+
+    void DrawVector(Vec2 origin, Vec2 direction, float length) override {}
+
+    void DrawAABB(Vec2 bottomLeft, Vec2 topRight) override {}
+
+    void DrawCircle(Vec2 center, float radius) override {}
 };
 
 using DebugDrawer2dLocator = Locator<DebugDrawer2dInterface, NullDebugDrawer2d>;

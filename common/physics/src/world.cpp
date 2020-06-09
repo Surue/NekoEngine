@@ -12,6 +12,9 @@ void World::Init()
 
 void World::Update(seconds dt)
 {
+    DebugDrawer2dLocator::get().DrawAABB({0, 0}, {1, 1});
+    DebugDrawer2dLocator::get().DrawCircle({0, 0}, 5);
+
     std::cout << "World\n";
     for (Body2d& body : bodies_)
     {

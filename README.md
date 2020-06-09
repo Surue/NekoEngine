@@ -29,6 +29,23 @@ This repos has been specifically made to create a custom 2D physics engine as a 
 7. When it's finish you can open the project
 8. To check that everything is working, select main/physics_engine2d as the launching project and start the project.
 
+## Drawing debug data
+It's possible to draw basics shapes on the screen:
+### Line
+``` DebugDrawer2dLocator::get().DrawLine(p1, p2); ```
+
+### AABB
+``` DebugDrawer2dLocator::get().DrawAABB(bottomLeft, topRight); ```
+
+### Circle
+``` DebugDrawer2dLocator::get().DrawCircle(center, radius); ```
+
+### Add new drawing function
+To add a new function:
+1. Add an abstract function in DebugDrawer2dInterface (in debug_drawer_2d.h)
+2. Override it in DebugDrawer2d and NullDebugDrawer2d (int debug_drawer_2d.h)
+3. Draw stuff only using line by calling ``` lineRenderer_.DrawLine(Line(p1, p2)) ```
+
 ## FAQ
-Q. I don't know my Python's version \
+Q. How can I know my Python's version? \
 A. Open a console/terminal and enter ```python --version```

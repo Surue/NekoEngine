@@ -76,7 +76,7 @@ public:
     Vec2 operator*(const float scalar) const
     {
         //TODO Complete this function.
-        return {};
+        return {x * scalar, y * scalar};
     }
 
     void operator*=(const float scalar)
