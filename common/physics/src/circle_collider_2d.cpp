@@ -2,7 +2,7 @@
 
 namespace neko::physics
 {
-CircleCollider2d::CircleCollider2d() : Collider2d() {}
+CircleCollider2d::CircleCollider2d() : Collider2dTemplate() {}
 }
 
 //namespace neko::physics

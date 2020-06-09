@@ -2,5 +2,5 @@
 
 namespace neko::physics {
 
-PolygonCollider2d::PolygonCollider2d() : Collider2d() {}
+PolygonCollider2d::PolygonCollider2d() : Collider2dTemplate() {}
 } //namespace neko::physics

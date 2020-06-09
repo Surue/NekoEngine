@@ -33,12 +33,33 @@ namespace neko::physics
 class DebugDrawer2dInterface
 {
 public:
+    /**
+     * \brief Draw a line between p1 and p2
+     * @param p1
+     * @param p2
+     */
     virtual void DrawLine(Vec2 p1, Vec2 p2) = 0;
 
+    /**
+     * \brief Draw a vector from an origin with a certain direction and length
+     * \param origin
+     * \param direction
+     * \param length
+     */
     virtual void DrawVector(Vec2 origin, Vec2 direction, float length) = 0;
 
+    /**
+     * \brief Draw an AABB
+     * \param bottomLeft
+     * \param topRight
+     */
     virtual void DrawAABB(Vec2 bottomLeft, Vec2 topRight) = 0;
 
+    /**
+     * \brief Draw a circle a the center with the given radius
+     * \param center
+     * \param radius
+     */
     virtual void DrawCircle(Vec2 center, float radius) = 0;
 };
 

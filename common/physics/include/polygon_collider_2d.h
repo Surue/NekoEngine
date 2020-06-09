@@ -30,7 +30,7 @@
 
 namespace neko::physics
 {
-class PolygonCollider2d : public Collider2d
+class PolygonCollider2d : public Collider2dTemplate<ShapeType::POLYGON>
 {
 public:
     PolygonCollider2d();
@@ -39,7 +39,7 @@ public:
 
     void SetVertices(const std::vector<Vec2>& vertices) { vertices_ = vertices; }
 
-    AABB ComputeAABB() const override
+    AABB ComputeAABB(Vec2 position, float angle) const override
     {
         //TODO Complete this function
         return AABB();

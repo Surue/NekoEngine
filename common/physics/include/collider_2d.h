@@ -27,6 +27,13 @@
 
 namespace neko::physics
 {
+
+enum class ShapeType : uint8_t {
+    BOX = 0,
+    CIRCLE,
+    POLYGON
+};
+
 class Collider2d
 {
 public:
@@ -47,7 +54,13 @@ public:
 
     virtual ~Collider2d() = default;
 
-    virtual AABB ComputeAABB() const = 0;
+    /**
+     * \brief Compute the aabb for the given position and angle
+     * \param position
+     * \param angle
+     * \return the aabb
+     */
+    virtual AABB ComputeAABB(Vec2 position, float angle) const = 0;
 
     bool IsTrigger() const { return isTrigger_; }
 
@@ -69,6 +82,8 @@ public:
 
     void SetCentroid(const Vec2 centroid) { centroid_ = centroid; }
 
+    virtual ShapeType GetShapeType() const = 0;
+
 protected:
     bool isTrigger_;
     float restitution_;
@@ -76,5 +91,13 @@ protected:
 
     Vec2 offset_;
     Vec2 centroid_;
+};
+
+template<ShapeType shapeType>
+class Collider2dTemplate : public Collider2d{
+public:
+    virtual ShapeType GetShapeType() const {
+        return shapeType;
+    }
 };
 } // namespace neko::physics

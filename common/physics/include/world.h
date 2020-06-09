@@ -51,7 +51,7 @@ public:
      * \brief Get the bodies after the physics update.
      * \return updated bodies
      */
-    std::vector<Body2d>& RetriveBodies() { return bodies_; }
+    std::vector<Body2d>& RetrieveBodies() { return bodies_; }
 
     float GetFixedDeltaTime() const { return fixedDeltaTime_; }
 

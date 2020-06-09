@@ -17,7 +17,7 @@ void WorldToTransform::Init() {
 
 void WorldToTransform::Update(seconds dt) {
     std::cout << "world to transform\n";
-    const std::vector<physics::Body2d>& bodies = world_.RetriveBodies();
+    const std::vector<physics::Body2d>& bodies = world_.RetrieveBodies();
 
     const EntityMask entityMask = EntityMask((uint32_t)ComponentType::BODY2D | (uint32_t)ComponentType::TRANSFORM2D);
 

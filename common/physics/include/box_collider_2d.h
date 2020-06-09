@@ -28,12 +28,12 @@
 
 namespace neko::physics
 {
-class BoxCollider2d : public Collider2d
+class BoxCollider2d : public Collider2dTemplate<ShapeType::BOX>
 {
 public:
     BoxCollider2d();
 
-    AABB ComputeAABB() const override
+    AABB ComputeAABB(Vec2 position, float angle) const override
     {
         //TODO Complete this function
         return {};

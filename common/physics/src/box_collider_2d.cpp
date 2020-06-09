@@ -3,5 +3,5 @@
 namespace neko::physics
 {
 BoxCollider2d::BoxCollider2d() :
-        Collider2d() {}
+        Collider2dTemplate() {}
 } //namespace neko::physics

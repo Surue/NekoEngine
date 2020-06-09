@@ -1,6 +1,7 @@
 #include <world.h>
 
 #include <debug_drawer_2d.h>
+#include <box_collider_2d.h>
 
 namespace neko::physics
 {
@@ -16,6 +17,18 @@ void World::Update(seconds dt)
     DebugDrawer2dLocator::get().DrawCircle({0, 0}, 5);
 
     std::cout << "World\n";
+
+    BoxCollider2d collider2D;
+
+    if(collider2D.GetShapeType() == ShapeType::BOX){
+        std::cout << "BOX\n";
+    }
+
+    Collider2d* col = &collider2D;
+    if(col->GetShapeType() == ShapeType::BOX){
+        std::cout << "BOX\n";
+    }
+
     for (Body2d& body : bodies_)
     {
 
