@@ -31,15 +31,21 @@ void World::Update(seconds dt)
     {
         std::cout << "nb collider" << body.GetColliders().size() << "\n";
 
-        const auto& colliders = body.GetColliders();
+        auto colliders = body.GetColliders();
 
         for(int i = 0; i < colliders.size(); i++){
-            switch(colliders[i].GetShapes().shapeType){
+            switch(colliders[i].GetShape().shapeType){
                 case ShapeType::BOX:
-                    std::cout << "Box(" << std::get<BoxShape>(colliders[i].GetShapes().shape).GetExtent().x << " , " << std::get<BoxShape>(colliders[i].GetShapes().shape).GetExtent().y << "\n";
+                    BoxShape shape = std::get<BoxShape>(colliders[i].GetShape().shape);
+                    shape.SetExtent({10, 10});
+                    ShapeData data(shape.GetExtent());
+                    colliders[i].SetShape(data);
+                    std::cout << "Box(" << std::get<BoxShape>(colliders[i].GetShape().shape).GetExtent().x << " , " << std::get<BoxShape>(
+                            colliders[i].GetShape().shape).GetExtent().y << "\n";
                     break;
             }
         }
+        body.SetColliders(colliders);
 
         Vec2 bodyPosition = body.GetPosition();
 

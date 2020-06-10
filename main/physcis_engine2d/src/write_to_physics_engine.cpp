@@ -74,7 +74,7 @@ void WriteToPhysicsEngine::Update(seconds dt)
             physics::ShapeData shapeData{physics::Vec2(
                     otherCollider.extent.x,
                     otherCollider.extent.y)};
-            boxCollider.SetShapes(shapeData);
+            boxCollider.SetShape(shapeData);
 
             colliders.push_back(boxCollider);
         }
@@ -91,7 +91,7 @@ void WriteToPhysicsEngine::Update(seconds dt)
             circleCollider.SetRestitution(otherCollider.restitution);
 
             physics::ShapeData shapeData{otherCollider.radius};
-            circleCollider.SetShapes(shapeData);
+            circleCollider.SetShape(shapeData);
 
             colliders.push_back(circleCollider);
         }
@@ -113,7 +113,7 @@ void WriteToPhysicsEngine::Update(seconds dt)
             }
 
             physics::ShapeData shapeData{vertices};
-            polygonCollider.SetShapes(shapeData);
+            polygonCollider.SetShape(shapeData);
 
             colliders.push_back(polygonCollider);
         }

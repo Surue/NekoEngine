@@ -81,14 +81,14 @@ public:
         centroid_ = centroid;
     }
 
-    const ShapeData& GetShapes() const
+    ShapeData GetShape() const
     {
-        return shapes_;
+        return shape_;
     }
 
-    void SetShapes(const ShapeData& shapes)
+    void SetShape(const ShapeData& shape)
     {
-        shapes_ = shapes;
+        shape_ = shape;
     }
 
 public:
@@ -100,6 +100,6 @@ private:
     Vec2 offset_;
     Vec2 centroid_;
 
-    ShapeData shapes_;
+    ShapeData shape_;
 };
 } //namespace neko::physics
