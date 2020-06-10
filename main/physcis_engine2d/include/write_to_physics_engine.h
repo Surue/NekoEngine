@@ -25,18 +25,24 @@
 
 #include <engine/system.h>
 #include <engine/transform.h>
+#include <engine/box_collider_2d.h>
+#include <engine/circle_collider_2d.h>
+#include <engine/polygon_collider_2d.h>
 #include "world.h"
 
 namespace neko
 {
-class TransformToWorld : public SystemInterface
+class WriteToPhysicsEngine : public SystemInterface
 {
 public:
-    TransformToWorld(
+    WriteToPhysicsEngine(
             physics::World& world,
             EntityManager& entityManager,
             Transform2dManager& transform2DManager,
-            Body2dManager& body2DManager);
+            Body2dManager& body2DManager,
+            BoxCollider2dManager& boxCollider2DManager,
+            CircleCollider2dManager& circleCollider2DManager,
+            PolygonCollider2dManager& polygonCollider2DManager);
 
     void Init() override;
 
@@ -50,5 +56,8 @@ private:
     EntityManager& entityManager_;
     Transform2dManager& transform2DManager_;
     Body2dManager& body2DManager_;
+    BoxCollider2dManager& boxCollider2DManager_;
+    CircleCollider2dManager& circleCollider2DManager_;
+    PolygonCollider2dManager& polygonCollider2DManager_;
 };
 } //namespace neko

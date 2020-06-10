@@ -137,7 +137,14 @@ public:
         bodyType_ = bodyType;
     }
 
-public:
+    const std::vector<Collider>& GetColliders() const {
+        return colliders_;
+    }
+
+    void SetColliders(const std::vector<Collider>& colliders){
+        colliders_ = colliders;
+    }
+
 private:
     Vec2 position_;
     float angle_;

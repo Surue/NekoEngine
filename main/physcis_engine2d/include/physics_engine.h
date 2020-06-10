@@ -25,8 +25,8 @@
 
 #include <sdl_engine/sdl_engine.h>
 #include "world.h"
-#include "transform_to_world.h"
-#include "world_to_transform.h"
+#include "write_to_physics_engine.h"
+#include "read_from_physics_engine.h"
 #include "gl/line.h"
 #include <stats.h>
 #include <entity_viewer.h>
@@ -74,8 +74,8 @@ private:
     tool::PolygonCollider2dViewer polygonCollider2DViewer_;
 
     //Systems
-    TransformToWorld transformToWorld_;
-    WorldToTransform worldToTransform_;
+    WriteToPhysicsEngine transformToWorld_;
+    ReadFromPhysicsEngine worldToTransform_;
     physics::DebugDrawer2d debugDrawer2D_;
 };
 } // namespace neko

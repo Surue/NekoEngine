@@ -24,6 +24,7 @@
 #pragma once
 
 #include <vector>
+#include <variant>
 
 #include <engine/collider_2d.h>
 #include "vector.h"
@@ -34,12 +35,17 @@ namespace neko::physics
 class Shape
 {
 public:
+    virtual ~Shape() = default;
+
     virtual AABB ComputeAABB(Vec2 position, float angle) const = 0;
 };
 
 class CircleShape : public Shape
 {
 public:
+    CircleShape(const float radius) : radius_(radius){}
+    ~CircleShape() = default;
+
     AABB ComputeAABB(Vec2 position, float angle) const override
     {
         //TODO Complete this function
@@ -63,6 +69,9 @@ private:
 class BoxShape : public Shape
 {
 public:
+    BoxShape(const Vec2 extent) : extent_(extent){}
+    ~BoxShape() = default;
+
     AABB ComputeAABB(Vec2 position, float angle) const override
     {
         //TODO Complete this function
@@ -86,6 +95,9 @@ private:
 class PolygonShape : public Shape
 {
 public:
+    PolygonShape(const std::vector<Vec2>& vertices) : vertices_(vertices){}
+    ~PolygonShape() = default;
+
     AABB ComputeAABB(Vec2 position, float angle) const override
     {
         //TODO Complete this function
@@ -106,14 +118,26 @@ private:
     std::vector<Vec2> vertices_;
 };
 
-class ShapeData{
+class ShapeData {
 public:
-    ShapeType shapeType;
+    ShapeData() :
+        shapeType(ShapeType::CIRCLE),
+        shape(CircleShape(1)){}
 
-    union {
-        CircleShape;
-        BoxShape;
-        PolygonShape;
-    } shape;
+    ShapeData(float radius) :
+            shapeType(ShapeType::CIRCLE),
+            shape(CircleShape(radius)){}
+
+    ShapeData(Vec2 extent) :
+            shapeType(ShapeType::BOX),
+            shape(BoxShape(extent)){}
+
+    ShapeData(const std::vector<Vec2>& vertices) :
+            shapeType(ShapeType::POLYGON),
+            shape(PolygonShape(vertices)){}
+
+    ShapeType shapeType = ShapeType::CIRCLE;
+
+    std::variant<BoxShape, CircleShape, PolygonShape> shape;
 };
 } //namespace neko::physics

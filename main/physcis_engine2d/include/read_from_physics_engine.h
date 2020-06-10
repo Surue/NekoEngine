@@ -28,9 +28,9 @@
 #include "world.h"
 
 namespace neko{
-class WorldToTransform : public SystemInterface {
+class ReadFromPhysicsEngine : public SystemInterface {
 public:
-    WorldToTransform(
+    ReadFromPhysicsEngine(
             physics::World& world,
             EntityManager& entityManager,
             Transform2dManager& transform2DManager,

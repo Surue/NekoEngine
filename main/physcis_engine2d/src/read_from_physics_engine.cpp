@@ -1,11 +1,11 @@
-#include "world_to_transform.h"
+#include "read_from_physics_engine.h"
 
 #include "rigidbody.h"
 
 namespace neko{
 
-WorldToTransform::WorldToTransform(physics::World& world, EntityManager& entityManager,
-                                   Transform2dManager& transform2DManager, Body2dManager& body2DManager) :
+ReadFromPhysicsEngine::ReadFromPhysicsEngine(physics::World& world, EntityManager& entityManager,
+                                             Transform2dManager& transform2DManager, Body2dManager& body2DManager) :
         world_(world),
         entityManager_(entityManager),
         transform2DManager_(transform2DManager),
@@ -13,11 +13,11 @@ WorldToTransform::WorldToTransform(physics::World& world, EntityManager& entityM
 
 }
 
-void WorldToTransform::Init() {
+void ReadFromPhysicsEngine::Init() {
 
 }
 
-void WorldToTransform::Update(seconds dt) {
+void ReadFromPhysicsEngine::Update(seconds dt) {
     const std::vector<physics::RigidBody>& bodies = world_.RetrieveBodies();
 
     const EntityMask entityMask = EntityMask((uint32_t)ComponentType::BODY2D | (uint32_t)ComponentType::TRANSFORM2D);
@@ -50,7 +50,7 @@ void WorldToTransform::Update(seconds dt) {
     }
 }
 
-void WorldToTransform::Destroy() {
+void ReadFromPhysicsEngine::Destroy() {
 
 }
 } //namespace neko

@@ -31,6 +31,67 @@ namespace neko::physics
 class Collider
 {
 public:
+    bool IsTrigger() const
+    {
+        return isTrigger_;
+    }
+
+    void SetIsTrigger(bool isTrigger)
+    {
+        isTrigger_ = isTrigger;
+    }
+
+    float GetRestitution() const
+    {
+        return restitution_;
+    }
+
+    void SetRestitution(float restitution)
+    {
+        restitution_ = restitution;
+    }
+
+    float GetFriction() const
+    {
+        return friction_;
+    }
+
+    void SetFriction(float friction)
+    {
+        friction_ = friction;
+    }
+
+    Vec2 GetOffset() const
+    {
+        return offset_;
+    }
+
+    void SetOffset(const Vec2 offset)
+    {
+        offset_ = offset;
+    }
+
+    Vec2 GetCentroid() const
+    {
+        return centroid_;
+    }
+
+    void SetCentroid(const Vec2 centroid)
+    {
+        centroid_ = centroid;
+    }
+
+    const ShapeData& GetShapes() const
+    {
+        return shapes_;
+    }
+
+    void SetShapes(const ShapeData& shapes)
+    {
+        shapes_ = shapes;
+    }
+
+public:
 private:
     bool isTrigger_;
     float restitution_;
@@ -39,6 +100,6 @@ private:
     Vec2 offset_;
     Vec2 centroid_;
 
-    std::vector<ShapeData> shapes_;
+    ShapeData shapes_;
 };
 } //namespace neko::physics
