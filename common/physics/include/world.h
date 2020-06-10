@@ -23,7 +23,7 @@
  */
 #pragma once
 
-#include "rigidbody.h"
+#include <rigidbody.h>
 #include <quad_tree.h>
 #include <contact.h>
 
@@ -34,7 +34,6 @@ namespace neko::physics
 class World : public SystemInterface
 {
 public:
-
     void Init() override;
 
     void Update(seconds dt) override;
@@ -57,13 +56,13 @@ public:
 
     void SetFixedDeltaTime(float dt) { fixedDeltaTime_ = dt; }
 
-    float GetGravity() const { return gravity_; }
+    Vec2 GetGravity() const { return gravity_; }
 
-    void SetGravity(float gravity) { gravity_ = gravity; }
+    void SetGravity(Vec2 gravity) { gravity_ = gravity; }
 
 private:
     float fixedDeltaTime_;
-    float gravity_;
+    Vec2 gravity_;
 
     std::vector<RigidBody> bodies_;
 

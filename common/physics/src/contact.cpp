@@ -1,4 +1,4 @@
-#include "../include/contact.h"
+#include <contact.h>
 
 namespace neko::physics
 {

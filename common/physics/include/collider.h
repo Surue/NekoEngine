@@ -91,7 +91,6 @@ public:
         shape_ = shape;
     }
 
-public:
 private:
     bool isTrigger_;
     float restitution_;

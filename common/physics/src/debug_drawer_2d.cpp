@@ -10,8 +10,6 @@ void DebugDrawer2d::Init()
 
 void DebugDrawer2d::Update(seconds dt)
 {
-    DrawLine({1, 0}, {0, 0});
-
     lineRenderer_.Update(dt);
 }
 

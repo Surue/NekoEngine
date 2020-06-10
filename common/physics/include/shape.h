@@ -122,7 +122,8 @@ class ShapeData {
 public:
     ShapeData() :
         shapeType(ShapeType::CIRCLE),
-        shape(CircleShape(1)){}
+        shape(CircleShape(1)){
+    }
 
     ShapeData(float radius) :
             shapeType(ShapeType::CIRCLE),

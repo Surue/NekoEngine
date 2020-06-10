@@ -23,43 +23,68 @@
  */
 #pragma once
 
-#include "engine/body_2d.h"
+#include "rigidbody.h"
 #include "contact.h"
 
 namespace neko::physics
 {
 /**
- * \brief Object used to do space partitionning used in the broad phase
+ * \brief Object used to do space partitioning used in the broad phase
  */
 class QuadTree
 {
+public:
+    /**
+     * \brief Create a default node at depth 0 without any aabb.
+     */
+    QuadTree() = default;
+
+    /**
+     * \brief Constructor of quadtree with aabb
+     * \param nodeDepth depth of the current node
+     * \param aabb
+     */
+    QuadTree(uint8_t nodeDepth, AABB aabb) : bounds_(aabb) { }
+    ~QuadTree() = default;
 
     /**
      * \brief This function is called to split a node into 4 smaller node.
      */
     void Split()
     {
-        //TODO Complete this function
+        //TODO Create child nodes
+
+        //TODO Inset bodies into child nodes
     }
 
     /**
      * \brief Return the index of the child tree of the given body.
+     * \details by example if this node is divided, it returns the index of the quadrant
      * \param body to test
-     * \return index of the node
+     * \return index of the child's node, if it's not in a child return -1
      */
-    int GetIndex(const Body2d* body)
+    int GetIndex(const RigidBody* body)
     {
-        //TODO Complete this function
-        return 0;
+        //TODO Check if node has been split
+
+        //TODO if has been Split => call children
+
+        return -1;
     }
 
     /**
      * \brief Insert a body into the quadtree
      * \param body
      */
-    void Insert(const Body2d* body)
+    void Insert(RigidBody* body)
     {
-        //TODO Complete this function
+        //TODO Check has been split
+
+        //TODO If not split => Add direct
+
+        //TODO if too much body => Split()
+
+        //TODO  IF has been split
     }
 
     /**
@@ -67,16 +92,27 @@ class QuadTree
      * \details Those possible contact are checked only using their aabbs
      * \return
      */
-    std::vector<Contact> Retrive()
+    std::vector<Contact> Retrieve()
     {
-        //TODO Complete this function
-        return {};
+        std::vector<Contact> possibleContacts;
+
+        //TODO if node has body, check every body against the other
+
+        //TODO if node has zero body, call child.Retrieve()
+
+        return possibleContacts;
     }
 
 private:
     static const int NB_CHILD_NODE = 4;
+    static const int MAX_BODY = 10;
+    static const int MAX_DEPTH = 5;
 
-    std::vector<Body2d*> bodies_;
-    std::unique_ptr<QuadTree> childNodes_[NB_CHILD_NODE];
+    int nodeDepth_ = 0;
+
+    AABB bounds_;
+
+    std::vector<RigidBody*> bodies_;
+    std::vector<QuadTree> children_;
 };
 } // namespace neko::physics

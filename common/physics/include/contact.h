@@ -23,7 +23,7 @@
  */
 #pragma once
 
-#include <engine/collider_2d.h>
+#include "collider.h"
 #include <vector>
 
 namespace neko::physics
@@ -37,8 +37,8 @@ class Contact
 public:
     //TODO Complete this class
 private:
-    Collider2d* colliderA_;
-    Collider2d* colliderB_;
+    Collider* colliderA_;
+    Collider* colliderB_;
 };
 
 /**

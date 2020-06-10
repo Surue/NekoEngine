@@ -137,11 +137,13 @@ public:
         bodyType_ = bodyType;
     }
 
-    const std::vector<Collider>& GetColliders() const {
+    const std::vector<Collider>& GetColliders() const
+    {
         return colliders_;
     }
 
-    void SetColliders(const std::vector<Collider>& colliders){
+    void SetColliders(const std::vector<Collider>& colliders)
+    {
         colliders_ = colliders;
     }
 
@@ -149,7 +151,7 @@ private:
     Vec2 position_;
     float angle_;
 
-    float gravityScale_;
+    float gravityScale_ = 1;
 
     Vec2 linearVelocity;
     float angularVelocity;

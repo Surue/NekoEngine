@@ -83,7 +83,6 @@ public:
     void SetWindow(Window* window) { window_ = window; }
 
 private:
-
     const int pixelPerUnit_ = 50;
     const int nbSegmentCircle_ = 20;
 

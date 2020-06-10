@@ -13,53 +13,9 @@ void World::Init()
 
 void World::Update(seconds dt)
 {
-    DebugDrawer2dLocator::get().DrawAABB({0, 0}, {1, 1});
-    DebugDrawer2dLocator::get().DrawCircle({0, 0}, 5);
-
-    BoxCollider2d collider2D;
-
-    if(collider2D.GetShapeType() == ShapeType::BOX){
-        std::cout << "BOX\n";
-    }
-
-    Collider2d* col = &collider2D;
-    if(col->GetShapeType() == ShapeType::BOX){
-        std::cout << "BOX\n";
-    }
-
     for (RigidBody& body : bodies_)
     {
-        std::cout << "nb collider" << body.GetColliders().size() << "\n";
-
-        auto colliders = body.GetColliders();
-
-        for(int i = 0; i < colliders.size(); i++){
-            switch(colliders[i].GetShape().shapeType){
-                case ShapeType::BOX:
-                    BoxShape shape = std::get<BoxShape>(colliders[i].GetShape().shape);
-                    shape.SetExtent({10, 10});
-                    ShapeData data(shape.GetExtent());
-                    colliders[i].SetShape(data);
-                    std::cout << "Box(" << std::get<BoxShape>(colliders[i].GetShape().shape).GetExtent().x << " , " << std::get<BoxShape>(
-                            colliders[i].GetShape().shape).GetExtent().y << "\n";
-                    break;
-            }
-        }
-        body.SetColliders(colliders);
-
-        Vec2 bodyPosition = body.GetPosition();
-
-        Vec2 vel = body.GetLinearVelocity();
-
-        vel = vel + Vec2(0, 9.81f * dt.count());
-
-        body.SetLinearVelocity(vel);
-
-        DebugDrawer2dLocator::get().DrawLine(Vec2{0, 0}, bodyPosition);
-
-        bodyPosition = bodyPosition + vel;
-
-        body.SetPosition(bodyPosition);
+        //TODO Complete this loop
     }
 }
 

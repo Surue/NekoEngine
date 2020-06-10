@@ -5,8 +5,8 @@
 #include <cmath>
 #include <matrix.h>
 
-#include "../common/physics/include/vector.h"
-#include "../common/physics/include/aabb.h"
+#include <vector.h>
+#include <aabb.h>
 
 TEST(Physics, Vec2_Addition)
 {
@@ -151,15 +151,15 @@ TEST(Physics, Vec2_CrossProduct)
     const neko::physics::Vec2 a{2.0f, 3.0f};
     const neko::physics::Vec2 b{1.0f, -3.0f};
 
-//    //Test .Cross()
-//    ASSERT_EQ(a.Cross(b).x, 0);
-//    ASSERT_EQ(a.Cross(b).y, 0);
-//    ASSERT_EQ(a.Cross(b).z, a.x * b.y - a.y * b.x);
-//
-//    //Test static Cross()
-//    ASSERT_EQ(neko::physics::Vec2::Cross(a, b).x, 0);
-//    ASSERT_EQ(neko::physics::Vec2::Cross(a, b).y, 0);
-//    ASSERT_EQ(neko::physics::Vec2::Cross(a, b).z, a.x * b.y - a.y * b.x);
+    //Test .Cross()
+    ASSERT_EQ(a.Cross(b).x, 0);
+    ASSERT_EQ(a.Cross(b).y, 0);
+    ASSERT_EQ(a.Cross(b).z, a.x * b.y - a.y * b.x);
+
+    //Test static Cross()
+    ASSERT_EQ(neko::physics::Vec2::Cross(a, b).x, 0);
+    ASSERT_EQ(neko::physics::Vec2::Cross(a, b).y, 0);
+    ASSERT_EQ(neko::physics::Vec2::Cross(a, b).z, a.x * b.y - a.y * b.x);
 }
 
 TEST(Physics, Matrix_Addition){
