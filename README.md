@@ -29,10 +29,35 @@ This repos has been specifically made to create a custom 2D physics engine as a 
 7. When it's finish you can open the project
 8. To check that everything is working, select main/physics_engine2d as the launching project and start the project.
 
+## Objectives 
+The physics engine must simulate a 2d rigid physics. Their must be:
+ - Different type fo body (static, dynamic, kinematic)
+ - Collision/Trigger (box, circle, polygon)
+ - Bounding volume implementation (AABB)
+ - Space Partitioning (QuadTree)
+ - Position and velocity correction after a collision
+ - RayCasting
+ - Explosion effect 
+ 
+ To do so, every files in common/physics can and must be modified. You can also create your own files.
+
+Every test in test_physics must succeed and a custom test must be created to display a specific feature of the physics engine.
+
+## Update the repo
+To update the repos you must add an upstream with this repos https://github.com/Surue/NekoEngine
+```$git add remote upstream https://github.com/Surue/NekoEngine.git``` (this must be done only once)
+
+Every time you wish to update the repos :
+1. ```$git fetch upstream develop```
+2. ```$git pull upstream develop```
+
 ## Drawing debug data
 It's possible to draw basics shapes on the screen:
 ### Line
 ``` DebugDrawer2dLocator::get().DrawLine(p1, p2); ```
+
+### Vector
+``` DebugDrawer2dLocator::get().DrawVector(p1, direction, length); ```
 
 ### AABB
 ``` DebugDrawer2dLocator::get().DrawAABB(bottomLeft, topRight); ```

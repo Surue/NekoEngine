@@ -24,10 +24,11 @@
 #pragma once
 
 #include <sdl_engine/sdl_engine.h>
-#include "world.h"
-#include "write_to_physics_engine.h"
-#include "read_from_physics_engine.h"
+#include <world.h>
+#include <write_to_physics_engine.h>
+#include <read_from_physics_engine.h>
 #include "gl/line.h"
+#include <simulation_browser.h>
 #include <stats.h>
 #include <entity_viewer.h>
 #include <body_2d_viewer.h>
@@ -77,5 +78,6 @@ private:
     WriteToPhysicsEngine transformToWorld_;
     ReadFromPhysicsEngine worldToTransform_;
     physics::DebugDrawer2d debugDrawer2D_;
+    SimulationBrowser simulationBrowser_;
 };
 } // namespace neko

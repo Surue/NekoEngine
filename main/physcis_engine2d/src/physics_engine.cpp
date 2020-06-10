@@ -19,13 +19,15 @@ PhysicsEngine::PhysicsEngine(Configuration* config) :
         circleCollider2DViewer_(entityManager_, circleCollider2DManager_),
         polygonCollider2DViewer_(entityManager_, polygonCollider2DManager_),
         transformToWorld_(world_, entityManager_, transform2DManager_, body2DManager_, boxCollider2DManager_, circleCollider2DManager_, polygonCollider2DManager_),
-        worldToTransform_(world_, entityManager_, transform2DManager_, body2DManager_, boxCollider2DManager_, circleCollider2DManager_, polygonCollider2DManager_)
+        worldToTransform_(world_, entityManager_, transform2DManager_, body2DManager_, boxCollider2DManager_, circleCollider2DManager_, polygonCollider2DManager_),
+        simulationBrowser_(entityManager_, transform2DManager_, body2DManager_, boxCollider2DManager_, circleCollider2DManager_, polygonCollider2DManager_)
 {
     //Register systems
     RegisterSystem(transformToWorld_);
     RegisterSystem(world_);
     RegisterSystem(worldToTransform_);
     RegisterSystem(debugDrawer2D_);
+    RegisterSystem(simulationBrowser_);
 
     //Register component viewers
     entityViewer_.RegisterDrawComponentImGui(transform2DViewer_);
@@ -37,9 +39,13 @@ PhysicsEngine::PhysicsEngine(Configuration* config) :
     //Assign every tools
     RegisterOnDrawUi(statsTool_);
     RegisterOnDrawUi(entityViewer_);
+    RegisterOnDrawUi(simulationBrowser_);
 
     //Locator
     physics::DebugDrawer2dLocator::provide(&debugDrawer2D_);
+
+    //Register all simulation
+    simulationBrowser_.RegisterSimulation("Rigidbody with gravity", std::make_unique<RigidBodyGravityProgramProgram>());
 }
 
 void PhysicsEngine::Init()
