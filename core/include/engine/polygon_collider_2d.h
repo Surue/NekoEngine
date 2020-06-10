@@ -23,19 +23,23 @@
  */
 #pragma once
 
-#include <engine/entity.h>
-#include "engine/polygon_collider_2d.h"
+#include <vector>
 
-namespace neko::tool {
-class PolygonCollider2dViewer : public TemplateDrawComponentImGuiInterface<ComponentType::POLYGON_COLLIDER2D>{
+#include "engine/collider_2d.h"
+#include <engine/component.h>
+
+namespace neko
+{
+class PolygonCollider2d : public Collider2dTemplate<ShapeType::POLYGON>
+{
 public:
-    explicit PolygonCollider2dViewer(EntityManager& entityManager, PolygonCollider2dManager& polygonCollider2DManager);
-    ~PolygonCollider2dViewer() = default;
-
-    void DrawImGui(Entity entity) override;
-protected:
-    EntityManager& entityManager_;
-    PolygonCollider2dManager& polygonCollider2DManager_;
-
+    std::vector<Vec2f> vertices;
 };
-} //namespace neko::tool
+
+class PolygonCollider2dManager : public ComponentManager<PolygonCollider2d, ComponentType::POLYGON_COLLIDER2D>
+{
+    using ComponentManager::ComponentManager;
+};
+} //namespace neko
+
+

@@ -26,31 +26,18 @@
 #include "collider_2d.h"
 #include <engine/component.h>
 
-namespace neko::physics
+namespace neko
 {
-class CircleCollider2d : public Collider2dTemplate<ShapeType::CIRCLE>
+class BoxCollider2d : public Collider2dTemplate<ShapeType::BOX>
 {
 public:
-    CircleCollider2d();
-
-    AABB ComputeAABB(Vec2 position, float angle) const override
-    {
-        //TODO Complete this function
-        return {};
-    }
-
-    float GetRadius() const { return radius_; }
-
-    void SetRadius(float radius) { radius_ = radius; }
-
-private:
-    float radius_;
+    Vec2f extent;
 };
 
-class CircleCollider2dManager : public ComponentManager<CircleCollider2d, ComponentType::CIRCLE_COLLIDER2D>
+class BoxCollider2dManager : public ComponentManager<BoxCollider2d, ComponentType::BOX_COLLIDER2D>
 {
     using ComponentManager::ComponentManager;
 };
-} //namespace neko::physics
+} //namespace neko
 
 

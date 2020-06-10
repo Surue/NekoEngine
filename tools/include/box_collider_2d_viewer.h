@@ -24,18 +24,18 @@
 #pragma once
 
 #include <engine/entity.h>
-#include "../../common/physics/include/box_collider_2d.h"
+#include "engine/box_collider_2d.h"
 
 namespace neko::tool {
 class BoxCollider2dViewer : public TemplateDrawComponentImGuiInterface<ComponentType::BOX_COLLIDER2D>{
 public:
-    explicit BoxCollider2dViewer(EntityManager& entityManager, physics::BoxCollider2dManager& boxCollider2DManager);
+    explicit BoxCollider2dViewer(EntityManager& entityManager, BoxCollider2dManager& boxCollider2DManager);
     ~BoxCollider2dViewer() = default;
 
     void DrawImGui(Entity entity) override;
 protected:
     EntityManager& entityManager_;
-    physics::BoxCollider2dManager& boxCollider2DManager_;
+    BoxCollider2dManager& boxCollider2DManager_;
 
 };
 } //namespace neko::tool

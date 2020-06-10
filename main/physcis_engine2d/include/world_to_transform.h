@@ -34,7 +34,7 @@ public:
             physics::World& world,
             EntityManager& entityManager,
             Transform2dManager& transform2DManager,
-            physics::Body2dManager& body2DManager);
+            Body2dManager& body2DManager);
 
     void Init() override;
 
@@ -47,6 +47,6 @@ private:
 
     EntityManager& entityManager_;
     Transform2dManager& transform2DManager_;
-    physics::Body2dManager& body2DManager_;
+    Body2dManager& body2DManager_;
 };
 } //namespace neko

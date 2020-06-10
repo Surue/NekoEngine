@@ -2,7 +2,7 @@
 
 #include <imgui.h>
 
-neko::tool::Body2dViewer::Body2dViewer(neko::EntityManager& entityManager, neko::physics::Body2dManager& body2dManager) :
+neko::tool::Body2dViewer::Body2dViewer(neko::EntityManager& entityManager, neko::Body2dManager& body2dManager) :
     entityManager_(entityManager),
     body2dManager_(body2dManager){}
 
@@ -12,25 +12,19 @@ void neko::tool::Body2dViewer::DrawImGui(neko::Entity entity) {
 
     if(ImGui::CollapsingHeader("Body2d"))
     {
-        physics::Body2d newBody = body2dManager_.GetComponent(entity);
+        Body2d newBody = body2dManager_.GetComponent(entity);
 
         //Gravity scale
-        auto gravityScale = newBody.GetGravityScale();
-        if (ImGui::DragFloat("Gravity scale", &gravityScale))
-        {
-            newBody.SetGravityScale(gravityScale);
-        }
+        ImGui::DragFloat("Gravity scale", &newBody.gravityScale);
 
         //Mass
-        auto mass = newBody.GetMass();
-        if (ImGui::DragFloat("Mass", &mass))
+        if (ImGui::DragFloat("Mass", &newBody.mass))
         {
-            newBody.SetMass(mass);
-            newBody.SetInvMass(1.0f / mass);
+            newBody.invMass = 1.0f / newBody.mass;
         }
 
         //Body type
-        auto bodyType = newBody.GetBodyType();
+        auto bodyType = newBody.bodyType;
         const char* bodyTypeNames[] = {"Static", "Dynamic", "Kinematic"};
         int itemCurrent = static_cast<int>(bodyType);
 
@@ -41,7 +35,7 @@ void neko::tool::Body2dViewer::DrawImGui(neko::Entity entity) {
                 if (ImGui::Selectable(bodyTypeNames[i], isSelected)) { itemCurrent = i; }
                 if (isSelected) { ImGui::SetItemDefaultFocus(); }
             }
-            newBody.SetBodyType(static_cast<physics::BodyType>(itemCurrent));
+            newBody.bodyType= static_cast<BodyType>(itemCurrent);
             ImGui::EndCombo();
         }
 
@@ -60,44 +54,27 @@ void neko::tool::Body2dViewer::DrawImGui(neko::Entity entity) {
         ImGui::TextColored(
                 {0.5f, 0.5f, 0.5f, 1.0f},
                 "   Linear velocity : (%.2f, %.2f)",
-                newBody.GetLinearVelocity().x,
-                newBody.GetLinearVelocity().y);
+                newBody.linearVelocity.x,
+                newBody.linearVelocity.y);
 
         //Angular Velocity
         ImGui::TextColored(
                 {0.5f, 0.5f, 0.5f, 1.0f},
                 "   Angular velocity : (%.2f)",
-                newBody.GetAngularVelocity());
+                newBody.angularVelocity);
 
         //Force
         ImGui::TextColored(
                 {0.5f, 0.5f, 0.5f, 1.0f},
                 "   Force : (%.2f, %.2f)",
-                newBody.GetForce().x,
-                newBody.GetForce().y);
+                newBody.force.x,
+                newBody.force.y);
 
         //Torque
         ImGui::TextColored(
                 {0.5f, 0.5f, 0.5f, 1.0f},
                 "   Torque : (%.2f)",
-                newBody.GetTorque());
-
-        ImGui::TextColored(
-                {0.5f, 0.5f, 0.5f, 1.0f},
-                "Transform");
-
-        //Position
-        ImGui::TextColored(
-                {0.5f, 0.5f, 0.5f, 1.0f},
-                "   Position : (%.2f, %.2f)",
-                newBody.GetPosition().x,
-                newBody.GetPosition().y);
-
-        //Angle
-        ImGui::TextColored(
-                {0.5f, 0.5f, 0.5f, 1.0f},
-                "   Angle : (%.2f)",
-                newBody.GetAngle());
+                newBody.torque);
 
         ImGui::TextColored(
                 {0.5f, 0.5f, 0.5f, 1.0f},
@@ -106,7 +83,7 @@ void neko::tool::Body2dViewer::DrawImGui(neko::Entity entity) {
         ImGui::TextColored(
                 {0.5f, 0.5f, 0.5f, 1.0f},
                 "   Inv Mass : (%.2f)",
-                newBody.GetInvMass());
+                newBody.invMass);
 
         ImGui::EndGroup();
         ImVec2 p1 = ImVec2(

@@ -57,10 +57,10 @@ private:
 
     // Components manager
     Transform2dManager transform2DManager_;
-    physics::Body2dManager body2DManager_;
-    physics::BoxCollider2dManager boxCollider2DManager_;
-    physics::CircleCollider2dManager circleCollider2DManager_;
-    physics::PolygonCollider2dManager polygonCollider2DManager_;
+    Body2dManager body2DManager_;
+    BoxCollider2dManager boxCollider2DManager_;
+    CircleCollider2dManager circleCollider2DManager_;
+    PolygonCollider2dManager polygonCollider2DManager_;
 
     //List of every tool
     tool::StatsTool statsTool_;

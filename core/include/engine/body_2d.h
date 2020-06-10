@@ -23,34 +23,41 @@
  */
 #pragma once
 
-#include "collider_2d.h"
 #include <engine/component.h>
 
-namespace neko::physics
+namespace neko
 {
-class BoxCollider2d : public Collider2dTemplate<ShapeType::BOX>
+
+enum class BodyType : uint8_t
+{
+    STATIC = 0,
+    DYNAMIC,
+    KINEMATIC
+};
+
+class Body2d
 {
 public:
-    BoxCollider2d();
+    Vec2f linearVelocity;
 
-    AABB ComputeAABB(Vec2 position, float angle) const override
-    {
-        //TODO Complete this function
-        return {};
-    }
+    Vec2f force;
 
-    Vec2 GetExtent() const { return extent_; }
+    float torque;
+    float gravityScale;
 
-    void SetExtent(const Vec2 extent) { extent_ = extent; };
+    float mass;
+    float invMass;
+
+    float angularVelocity;
+    BodyType bodyType;
+};
+
+class Body2dManager : public ComponentManager<Body2d, ComponentType::BODY2D>
+{
+public:
 
 private:
-    Vec2 extent_;
-};
-
-class BoxCollider2dManager : public ComponentManager<BoxCollider2d, ComponentType::BOX_COLLIDER2D>
-{
     using ComponentManager::ComponentManager;
 };
-} //namespace neko::physics
-
+} // namespace neko
 

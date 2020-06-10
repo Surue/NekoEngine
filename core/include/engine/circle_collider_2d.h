@@ -23,36 +23,21 @@
  */
 #pragma once
 
-#include <vector>
-
 #include "collider_2d.h"
 #include <engine/component.h>
 
-namespace neko::physics
+namespace neko
 {
-class PolygonCollider2d : public Collider2dTemplate<ShapeType::POLYGON>
+class CircleCollider2d : public Collider2dTemplate<ShapeType::CIRCLE>
 {
 public:
-    PolygonCollider2d();
-
-    const std::vector<Vec2>& GetVertices() const { return vertices_; }
-
-    void SetVertices(const std::vector<Vec2>& vertices) { vertices_ = vertices; }
-
-    AABB ComputeAABB(Vec2 position, float angle) const override
-    {
-        //TODO Complete this function
-        return AABB();
-    }
-
-private:
-    std::vector<Vec2> vertices_;
+    float radius;
 };
 
-class PolygonCollider2dManager : public ComponentManager<PolygonCollider2d, ComponentType::POLYGON_COLLIDER2D>
+class CircleCollider2dManager : public ComponentManager<CircleCollider2d, ComponentType::CIRCLE_COLLIDER2D>
 {
     using ComponentManager::ComponentManager;
 };
-} //namespace neko::physics
+} //namespace neko
 
 

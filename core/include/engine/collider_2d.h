@@ -23,9 +23,10 @@
  */
 #pragma once
 
-#include "aabb.h"
 
-namespace neko::physics
+#include <mathematics/vector.h>
+
+namespace neko
 {
 
 enum class ShapeType : uint8_t {
@@ -38,59 +39,21 @@ class Collider2d
 {
 public:
     /**
-     * \brief Create a default trigger
-     */
-    Collider2d();
-
-    /**
-     * \brief
-     * \warning The centroid must be manually calculated.
-     * \param isTrigger
-     * \param restitution
-     * \param friction
-     * \param offset
-     */
-    Collider2d(bool isTrigger, float restitution, float friction, Vec2 offset);
-
-    virtual ~Collider2d() = default;
-
-    /**
      * \brief Compute the aabb for the given position and angle
      * \param position
      * \param angle
      * \return the aabb
      */
-    virtual AABB ComputeAABB(Vec2 position, float angle) const = 0;
-
-    bool IsTrigger() const { return isTrigger_; }
-
-    void SetIsTrigger(bool isTrigger) { isTrigger_ = isTrigger; }
-
-    float GetRestitution() const { return restitution_; }
-
-    void SetRestitution(float restitution) { restitution_ = restitution; }
-
-    float GetFriction() const { return friction_; }
-
-    void SetFriction(float friction) { friction_ = friction; }
-
-    Vec2 GetOffset() const { return offset_; }
-
-    void SetOffset(const Vec2 offset) { offset_ = offset; }
-
-    Vec2 GetCentroid() const { return centroid_; }
-
-    void SetCentroid(const Vec2 centroid) { centroid_ = centroid; }
+//    virtual AABB ComputeAABB(Vec2 position, float angle) const = 0;
 
     virtual ShapeType GetShapeType() const = 0;
 
-protected:
-    bool isTrigger_;
-    float restitution_;
-    float friction_;
+    bool isTrigger;
+    float restitution;
+    float friction;
 
-    Vec2 offset_;
-    Vec2 centroid_;
+    Vec2f offset;
+    Vec2f centroid;
 };
 
 template<ShapeType shapeType>
@@ -100,4 +63,4 @@ public:
         return shapeType;
     }
 };
-} // namespace neko::physics
+} // namespace neko

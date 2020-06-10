@@ -24,18 +24,18 @@
 #pragma once
 
 #include <engine/entity.h>
-#include "../../common/physics/include/circle_collider_2d.h"
+#include "engine/circle_collider_2d.h"
 
 namespace neko::tool {
 class CircleCollider2dViewer : public TemplateDrawComponentImGuiInterface<ComponentType::CIRCLE_COLLIDER2D>{
 public:
-    explicit CircleCollider2dViewer(EntityManager& entityManager, physics::CircleCollider2dManager& circleCollider2DManager);
+    explicit CircleCollider2dViewer(EntityManager& entityManager, CircleCollider2dManager& circleCollider2DManager);
     ~CircleCollider2dViewer() = default;
 
     void DrawImGui(Entity entity) override;
 protected:
     EntityManager& entityManager_;
-    physics::CircleCollider2dManager& circleCollider2DManager_;
+    CircleCollider2dManager& circleCollider2DManager_;
 
 };
 } //namespace neko::tool
