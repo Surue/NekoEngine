@@ -23,7 +23,8 @@
  */
 #pragma once
 
-#include "collider_2d.h"
+#include <engine/collider_2d.h>
+#include <vector>
 
 namespace neko::physics
 {

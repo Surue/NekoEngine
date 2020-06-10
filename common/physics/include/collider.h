@@ -23,60 +23,22 @@
  */
 #pragma once
 
-#include "engine/body_2d.h"
-#include "contact.h"
+#include "vector.h"
+#include "shape.h"
 
 namespace neko::physics
 {
-/**
- * \brief Object used to do space partitionning used in the broad phase
- */
-class QuadTree
+class Collider
 {
-
-    /**
-     * \brief This function is called to split a node into 4 smaller node.
-     */
-    void Split()
-    {
-        //TODO Complete this function
-    }
-
-    /**
-     * \brief Return the index of the child tree of the given body.
-     * \param body to test
-     * \return index of the node
-     */
-    int GetIndex(const Body2d* body)
-    {
-        //TODO Complete this function
-        return 0;
-    }
-
-    /**
-     * \brief Insert a body into the quadtree
-     * \param body
-     */
-    void Insert(const Body2d* body)
-    {
-        //TODO Complete this function
-    }
-
-    /**
-     * \brief Return all possible contact
-     * \details Those possible contact are checked only using their aabbs
-     * \return
-     */
-    std::vector<Contact> Retrive()
-    {
-        //TODO Complete this function
-        return {};
-    }
-
+public:
 private:
-    static const int NB_CHILD_NODE = 4;
+    bool isTrigger_;
+    float restitution_;
+    float friction_;
 
-    std::vector<Body2d*> bodies_;
-    std::unique_ptr<QuadTree> childNodes_[NB_CHILD_NODE];
+    Vec2 offset_;
+    Vec2 centroid_;
+
+    std::vector<ShapeData> shapes_;
 };
-} // namespace neko::physics
+} //namespace neko::physics

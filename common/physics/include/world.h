@@ -23,7 +23,7 @@
  */
 #pragma once
 
-#include <body_2d.h>
+#include "rigidbody.h"
 #include <quad_tree.h>
 #include <contact.h>
 
@@ -45,13 +45,13 @@ public:
      * \brief Set bodies for the current frame.
      * \param bodies
      */
-    void SetBodies(std::vector<Body2d>& bodies) { bodies_ = bodies; }
+    void SetBodies(std::vector<RigidBody>& bodies) { bodies_ = bodies; }
 
     /**
      * \brief Get the bodies after the physics update.
      * \return updated bodies
      */
-    std::vector<Body2d>& RetrieveBodies() { return bodies_; }
+    std::vector<RigidBody>& RetrieveBodies() { return bodies_; }
 
     float GetFixedDeltaTime() const { return fixedDeltaTime_; }
 
@@ -65,7 +65,7 @@ private:
     float fixedDeltaTime_;
     float gravity_;
 
-    std::vector<Body2d> bodies_;
+    std::vector<RigidBody> bodies_;
 
     ContactManager contactManager_;
 

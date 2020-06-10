@@ -23,60 +23,97 @@
  */
 #pragma once
 
-#include "engine/body_2d.h"
-#include "contact.h"
+#include <vector>
+
+#include <engine/collider_2d.h>
+#include "vector.h"
+#include "aabb.h"
 
 namespace neko::physics
 {
-/**
- * \brief Object used to do space partitionning used in the broad phase
- */
-class QuadTree
+class Shape
 {
+public:
+    virtual AABB ComputeAABB(Vec2 position, float angle) const = 0;
+};
 
-    /**
-     * \brief This function is called to split a node into 4 smaller node.
-     */
-    void Split()
-    {
-        //TODO Complete this function
-    }
-
-    /**
-     * \brief Return the index of the child tree of the given body.
-     * \param body to test
-     * \return index of the node
-     */
-    int GetIndex(const Body2d* body)
-    {
-        //TODO Complete this function
-        return 0;
-    }
-
-    /**
-     * \brief Insert a body into the quadtree
-     * \param body
-     */
-    void Insert(const Body2d* body)
-    {
-        //TODO Complete this function
-    }
-
-    /**
-     * \brief Return all possible contact
-     * \details Those possible contact are checked only using their aabbs
-     * \return
-     */
-    std::vector<Contact> Retrive()
+class CircleShape : public Shape
+{
+public:
+    AABB ComputeAABB(Vec2 position, float angle) const override
     {
         //TODO Complete this function
         return {};
     }
 
-private:
-    static const int NB_CHILD_NODE = 4;
+    float GetRadius() const
+    {
+        return radius_;
+    }
 
-    std::vector<Body2d*> bodies_;
-    std::unique_ptr<QuadTree> childNodes_[NB_CHILD_NODE];
+    void SetRadius(float radius)
+    {
+        radius_ = radius;
+    }
+
+private:
+    float radius_;
 };
-} // namespace neko::physics
+
+class BoxShape : public Shape
+{
+public:
+    AABB ComputeAABB(Vec2 position, float angle) const override
+    {
+        //TODO Complete this function
+        return {};
+    }
+
+    Vec2 GetExtent() const
+    {
+        return extent_;
+    }
+
+    void SetExtent(const Vec2 extent)
+    {
+        extent_ = extent;
+    }
+
+private:
+    Vec2 extent_;
+};
+
+class PolygonShape : public Shape
+{
+public:
+    AABB ComputeAABB(Vec2 position, float angle) const override
+    {
+        //TODO Complete this function
+        return {};
+    }
+
+    const std::vector<Vec2>& GetVertices() const
+    {
+        return vertices_;
+    }
+
+    void SetVertices(const std::vector<Vec2>& vertices)
+    {
+        vertices_ = vertices;
+    }
+
+private:
+    std::vector<Vec2> vertices_;
+};
+
+class ShapeData{
+public:
+    ShapeType shapeType;
+
+    union {
+        CircleShape;
+        BoxShape;
+        PolygonShape;
+    } shape;
+};
+} //namespace neko::physics
