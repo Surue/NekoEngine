@@ -4,7 +4,7 @@ Neko is a 3D game engine based on SDL2 and OpenGL ES 3.0 that works on Desktop, 
 
 ## Requirements
 Because we use C++17 filesystem, you will need Ubuntu 19.10 to compile with the latest libstdc++, Visual Studio 2019 is recommended on Windows.
-You also need to have python 3.8 (minimum)
+You also need to have [python 3.8](https://www.python.org/downloads/windows/). Don't forget to add to the the variable PATH.  You also need to have the [VulkanSDK installed](https://vulkan.lunarg.com/). After installing Vulkan you'll need to retart your computer.
 ## Disclaimer
 This repos has been specifically made to create a custom 2D physics engine as a school project and is not intended for the development of a game.
 
