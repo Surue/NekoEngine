@@ -23,23 +23,20 @@
  */
 #pragma once
 
-#include <engine/entity.h>
-#include <engine/transform.h>
-#include <engine/body_2d.h>
-#include <engine/box_collider_2d.h>
-#include <engine/circle_collider_2d.h>
-#include <engine/polygon_collider_2d.h>
-#include <engine/engine.h>
-
 namespace neko{
-class PhysicsSimulationProgramInterface : public SystemInterface{
+class GrapherProgram : public PhysicsSimulationProgramInterface {
 public:
-    virtual void LoadSimulation(
-        EntityManager& entityManager,
-        Transform2dManager& transform2DManager,
-        Body2dManager& body2DManager,
-        BoxCollider2dManager& boxCollider2DManager,
-        CircleCollider2dManager& circleCollider2DManager,
-        PolygonCollider2dManager& polygonCollider2DManager) = 0;
+    void LoadSimulation(EntityManager& entityManager, Transform2dManager& transform2DManager, Body2dManager& body2DManager,
+                   BoxCollider2dManager& boxCollider2DManager, CircleCollider2dManager& circleCollider2DManager,
+                   PolygonCollider2dManager& polygonCollider2DManager) override;
+
+    void Init() override;
+
+    void Update(seconds dt) override;
+
+    void Destroy() override;
+
+private:
+    float FunctionX(float x);
 };
-} // namespace neko
+} //namespace neko

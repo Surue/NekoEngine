@@ -25,15 +25,23 @@
 
 #include <physics_simulation_program.h>
 
-namespace neko{
-class RigidBodyGravityProgramProgram : public PhysicsSimulationProgramInterface {
+namespace neko
+{
+class RigidBodyGravityProgramProgram : public PhysicsSimulationProgramInterface
+{
 public:
     virtual void LoadSimulation(
-        EntityManager& entityManager,
-        Transform2dManager& transform2DManager,
-        Body2dManager& body2DManager,
-        BoxCollider2dManager& boxCollider2DManager,
-        CircleCollider2dManager& circleCollider2DManager,
-        PolygonCollider2dManager& polygonCollider2DManager) override;
+            EntityManager& entityManager,
+            Transform2dManager& transform2DManager,
+            Body2dManager& body2DManager,
+            BoxCollider2dManager& boxCollider2DManager,
+            CircleCollider2dManager& circleCollider2DManager,
+            PolygonCollider2dManager& polygonCollider2DManager) override;
+
+    void Init() override;
+
+    void Update(seconds dt) override;
+
+    void Destroy() override;
 };
 } // namespace neko

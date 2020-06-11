@@ -55,11 +55,16 @@ void SimulationBrowser::SwitchToSimulation(size_t newSimulationIndex)
     const auto previousIndex = currentSimulationIndex_;
     currentSimulationIndex_ = newSimulationIndex;
 
+    simulations_[currentSimulationIndex_]->Destroy();
+
     //Clear entities
     const Entity lastEntity = entityManager_.GetLastEntity();
-    for (Entity e = 0; e < lastEntity; e++)
+    if(lastEntity != INVALID_ENTITY)
     {
-        entityManager_.DestroyEntity(e);
+        for (Entity e = 0; e <= lastEntity; e++)
+        {
+            entityManager_.DestroyEntity(e);
+        }
     }
 
     //Load new simulation
@@ -71,6 +76,8 @@ void SimulationBrowser::SwitchToSimulation(size_t newSimulationIndex)
             circleCollider2DManager_,
             polygonCollider2DManager_
     );
+
+    simulations_[currentSimulationIndex_]->Init();
 }
 
 void SimulationBrowser::Init()
@@ -81,15 +88,16 @@ void SimulationBrowser::Init()
                                                           boxCollider2DManager_,
                                                           circleCollider2DManager_,
                                                           polygonCollider2DManager_);
+    simulations_[currentSimulationIndex_]->Init();
 }
 
 void SimulationBrowser::Update(seconds dt)
 {
-
+    simulations_[currentSimulationIndex_]->Update(dt);
 }
 
 void SimulationBrowser::Destroy()
 {
-
+    simulations_[currentSimulationIndex_]->Destroy();
 }
 } //namespace neko
