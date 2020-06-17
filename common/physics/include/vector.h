@@ -59,7 +59,8 @@ public:
 
     void operator+=(const Vec2 rhs)
     {
-        //TODO Complete this function.
+        x += rhs.x;
+        y += rhs.y;
     }
 
     Vec2 operator-(const Vec2 rhs) const

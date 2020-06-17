@@ -218,7 +218,7 @@ TEST(Physics, Matrix_MultiplicationVector){
 }
 
 TEST(Physics, Matrix_RotationMatrix){
-    const neko::physics::Mat22 a = neko::physics::Mat22::GetRotationMatrix(45 * (neko::PI / 180.0f));
+    const neko::physics::Mat22 a = neko::physics::Mat22::GetRotationMatrix(45.0f * (neko::PI / 180.0f));
 
     ASSERT_EQ(a.v1.x, cos(45));
     ASSERT_EQ(a.v1.y, sin(45));

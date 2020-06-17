@@ -71,8 +71,7 @@ struct Mat22
 
     Vec2 operator*(const Vec2& rhs) const
     {
-        //TODO Complete this function,
-        return {};
+        return Vec2(rhs.x * v1.x + rhs.y * v1.y, rhs.x * v2.x + rhs.y * v2.y);
     }
 
     Vec2 operator*=(const Vec2& rhs)
@@ -90,8 +89,7 @@ struct Mat22
 
     static Mat22 GetRotationMatrix(float angleInRad)
     {
-        //TODO Complete this function,
-        return {};
+        return Mat22(Vec2(cos(angleInRad), sin(angleInRad)), Vec2(-sin(angleInRad), cos(angleInRad)));
     }
 
     std::string ToString()

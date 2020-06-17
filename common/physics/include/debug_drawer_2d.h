@@ -61,6 +61,8 @@ public:
      * \param radius
      */
     virtual void DrawCircle(Vec2 center, float radius) = 0;
+
+    virtual void DrawBox(Vec2 center, Vec2 extent, float angle) = 0;
 };
 
 class DebugDrawer2d : public DebugDrawer2dInterface, public SystemInterface
@@ -80,6 +82,8 @@ public:
 
     void DrawCircle(Vec2 center, float radius) override;
 
+    void DrawBox(Vec2 center, Vec2 extent, float angle) override;
+
     void SetWindow(Window* window) { window_ = window; }
 
 private:
@@ -91,6 +95,8 @@ private:
     gl::LineRenderer lineRenderer_;
 
     Window* window_;
+
+    const
 };
 
 class NullDebugDrawer2d : public DebugDrawer2dInterface
@@ -103,6 +109,8 @@ public:
     void DrawAABB(Vec2 bottomLeft, Vec2 topRight) override {}
 
     void DrawCircle(Vec2 center, float radius) override {}
+
+    void DrawBox(Vec2 center, Vec2 extent, float angle) override {}
 };
 
 using DebugDrawer2dLocator = Locator<DebugDrawer2dInterface, NullDebugDrawer2d>;

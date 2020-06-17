@@ -1,5 +1,7 @@
 #include <debug_drawer_2d.h>
 
+#include <matrix.h>
+
 namespace neko::physics {
 
 void DebugDrawer2d::Init()
@@ -38,23 +40,27 @@ void DebugDrawer2d::DrawVector(physics::Vec2 origin, physics::Vec2 direction, fl
 
 void DebugDrawer2d::DrawAABB(physics::Vec2 bottomLeft, physics::Vec2 topRight)
 {
+    //Draw line from bottom left to bottom right.
     lineRenderer_.DrawLine(Line(
             WorldToScreen(bottomLeft),
-            WorldToScreen(bottomLeft + Vec2(topRight.x, bottomLeft.y))
+            WorldToScreen(Vec2(topRight.x, bottomLeft.y))
             ));
 
+    //Draw line from bottom left to top Left.
     lineRenderer_.DrawLine(Line(
             WorldToScreen(bottomLeft),
-            WorldToScreen(bottomLeft + Vec2(bottomLeft.x, topRight.y))
+            WorldToScreen(Vec2(bottomLeft.x, topRight.y))
     ));
 
+    //Draw line from bottom right to top right.
     lineRenderer_.DrawLine(Line(
-            WorldToScreen(bottomLeft + Vec2(topRight.x, bottomLeft.y)),
+            WorldToScreen(Vec2(topRight.x, bottomLeft.y)),
             WorldToScreen(topRight)
     ));
 
+    //Draw line from top left to top right.
     lineRenderer_.DrawLine(Line(
-            WorldToScreen(bottomLeft + Vec2(bottomLeft.x, topRight.y)),
+            WorldToScreen(Vec2(bottomLeft.x, topRight.y)),
             WorldToScreen(topRight)
     ));
 }
@@ -75,5 +81,21 @@ void DebugDrawer2d::DrawCircle(Vec2 center, float radius)
         lineRenderer_.DrawLine(Line(WorldToScreen(lastPos), WorldToScreen(newPos)));
         lastPos = newPos;
     }
+}
+
+void DebugDrawer2d::DrawBox(Vec2 center, Vec2 extent, float angle)
+{
+    Mat22 rotationMatrix = Mat22::GetRotationMatrix(angle);
+
+    Vec2 posA, posB, posC, posD;
+    posA = center + rotationMatrix * Vec2(-extent.x, -extent.y);
+    posB = center + rotationMatrix * Vec2(extent.x, -extent.y);
+    posC = center + rotationMatrix * Vec2(extent.x, extent.y);
+    posD = center + rotationMatrix * Vec2(-extent.x, extent.y);
+
+    lineRenderer_.DrawLine(Line(WorldToScreen(posA), WorldToScreen(posB)));
+    lineRenderer_.DrawLine(Line(WorldToScreen(posB), WorldToScreen(posC)));
+    lineRenderer_.DrawLine(Line(WorldToScreen(posC), WorldToScreen(posD)));
+    lineRenderer_.DrawLine(Line(WorldToScreen(posD), WorldToScreen(posA)));
 }
 } // namespace neko::physics
