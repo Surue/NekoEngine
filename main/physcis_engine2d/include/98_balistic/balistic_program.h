@@ -41,5 +41,7 @@ public:
 
     void Destroy() override{}
 
+    void DrawImGui() override{};
+
 };
 } //namespace neko

@@ -27,7 +27,7 @@
 
 namespace neko
 {
-class RigidBodyGravityProgramProgram : public PhysicsSimulationProgramInterface
+class RigidBodyGravityProgram : public PhysicsSimulationProgramInterface
 {
 public:
     virtual void LoadSimulation(
@@ -37,6 +37,8 @@ public:
             BoxCollider2dManager& boxCollider2DManager,
             CircleCollider2dManager& circleCollider2DManager,
             PolygonCollider2dManager& polygonCollider2DManager) override;
+
+    void DrawImGui() override{};
 
     void Init() override;
 

@@ -23,12 +23,25 @@
  */
 #pragma once
 
-namespace neko{
-class GrapherProgram : public PhysicsSimulationProgramInterface {
+#include <physics_simulation_program.h>
+
+namespace neko
+{
+class QuadTreeProgram : public PhysicsSimulationProgramInterface
+{
 public:
-    void LoadSimulation(EntityManager& entityManager, Transform2dManager& transform2DManager, Body2dManager& body2DManager,
-                   BoxCollider2dManager& boxCollider2DManager, CircleCollider2dManager& circleCollider2DManager,
-                   PolygonCollider2dManager& polygonCollider2DManager) override;
+    QuadTreeProgram(Transform2dManager& transform2DManager,
+                    Body2dManager& body2DManager);
+
+    virtual void LoadSimulation(
+            EntityManager& entityManager,
+            Transform2dManager& transform2DManager,
+            Body2dManager& body2DManager,
+            BoxCollider2dManager& boxCollider2DManager,
+            CircleCollider2dManager& circleCollider2DManager,
+            PolygonCollider2dManager& polygonCollider2DManager) override;
+
+    void DrawImGui() override;
 
     void Init() override;
 
@@ -36,9 +49,13 @@ public:
 
     void Destroy() override;
 
-    void DrawImGui() override{};
-
 private:
-    float FunctionX(float x);
+    Transform2dManager& transform2DManager_;
+    Body2dManager& body2DManager_;
+
+    const int nbEntityToSpawn = 100;
+    Vec2f spawnArea = Vec2f(20, 20);
+
+    std::vector<Entity> entities_;
 };
-} //namespace neko
+} // namespace neko

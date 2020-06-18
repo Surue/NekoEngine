@@ -87,7 +87,7 @@ public:
     void SetWindow(Window* window) { window_ = window; }
 
 private:
-    const int pixelPerUnit_ = 50;
+    const int pixelPerUnit_ = 20;
     const int nbSegmentCircle_ = 20;
 
     Vec3f WorldToScreen(physics::Vec2 pos);

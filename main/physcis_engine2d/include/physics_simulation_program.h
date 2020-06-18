@@ -41,5 +41,7 @@ public:
         BoxCollider2dManager& boxCollider2DManager,
         CircleCollider2dManager& circleCollider2DManager,
         PolygonCollider2dManager& polygonCollider2DManager) = 0;
+
+    virtual void DrawImGui() = 0;
 };
 } // namespace neko

@@ -45,7 +45,8 @@ PhysicsEngine::PhysicsEngine(Configuration* config) :
     physics::DebugDrawer2dLocator::provide(&debugDrawer2D_);
 
     //Register all simulation
-    simulationBrowser_.RegisterSimulation("Rigidbody with gravity", std::make_unique<RigidBodyGravityProgramProgram>());
+    simulationBrowser_.RegisterSimulation("01 Rigidbody with gravity", std::make_unique<RigidBodyGravityProgram>());
+    simulationBrowser_.RegisterSimulation("02 Quadtree", std::make_unique<QuadTreeProgram>(transform2DManager_, body2DManager_));
     simulationBrowser_.RegisterSimulation("Balistic", std::make_unique<BalisticProgram>());
     simulationBrowser_.RegisterSimulation("Grapher", std::make_unique<GrapherProgram>());
 }

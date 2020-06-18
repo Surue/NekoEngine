@@ -3,7 +3,7 @@
 namespace neko
 {
 
-void RigidBodyGravityProgramProgram::LoadSimulation(
+void RigidBodyGravityProgram::LoadSimulation(
         EntityManager& entityManager,
         Transform2dManager& transform2DManager,
         Body2dManager& body2DManager,
@@ -27,17 +27,17 @@ void RigidBodyGravityProgramProgram::LoadSimulation(
     body2DManager.SetComponent(entity, body);
 }
 
-void RigidBodyGravityProgramProgram::Init()
+void RigidBodyGravityProgram::Init()
 {
 
 }
 
-void RigidBodyGravityProgramProgram::Update(seconds dt)
+void RigidBodyGravityProgram::Update(seconds dt)
 {
 
 }
 
-void RigidBodyGravityProgramProgram::Destroy()
+void RigidBodyGravityProgram::Destroy()
 {
 
 }

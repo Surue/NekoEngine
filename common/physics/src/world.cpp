@@ -14,7 +14,12 @@ void World::Init()
 void World::Update(seconds dt)
 {
     for(RigidBody& body : bodies_){
+        //TODO ICUBUEWUIVFBZUEHIUCVUZWEUIFO BCIWGREBFOUIV CBWRISUFZIC
+        auto pos = body.GetPosition();
 
+        pos = pos + body.GetLinearVelocity();
+
+        body.SetPosition(pos);
     }
 }
 

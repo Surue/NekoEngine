@@ -46,7 +46,13 @@ void SimulationBrowser::DrawImGui()
             }
         }
         ImGui::EndCombo();
+
+        ImGui::Separator();
     }
+
+    //Specific to each program
+    ImGui::Separator();
+    simulations_[currentSimulationIndex_]->DrawImGui();
     ImGui::End();
 }
 
