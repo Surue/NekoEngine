@@ -103,6 +103,10 @@ public:
         return possibleContacts;
     }
 
+    AABB GetBounds() const { return bounds_; }
+
+    const std::vector<QuadTree>& GetChildren() const { return children_; }
+
 private:
     static const int NB_CHILD_NODE = 4;
     static const int MAX_BODY = 10;

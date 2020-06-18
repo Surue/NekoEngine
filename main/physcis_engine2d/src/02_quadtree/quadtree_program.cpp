@@ -7,9 +7,11 @@
 namespace neko{
 QuadTreeProgram::QuadTreeProgram(
         Transform2dManager& transform2DManager,
-        Body2dManager& body2DManager) :
+        Body2dManager& body2DManager,
+        const physics::QuadTree& quadTree) :
         transform2DManager_(transform2DManager),
-        body2DManager_(body2DManager){}
+        body2DManager_(body2DManager),
+        quadTree_(quadTree){}
 
 void QuadTreeProgram::Init()
 {
@@ -32,8 +34,10 @@ void QuadTreeProgram::LoadSimulation(
 
         entities_[i] = entity;
 
+        //Add components
         transform2DManager.AddComponent(entity);
         body2DManager.AddComponent(entity);
+        boxCollider2DManager.AddComponent(entity);
 
         //Set position at the center of the screen
         transform2DManager.SetPosition(entity, Vec2f(RandomRange(-spawnArea.x, spawnArea.x), RandomRange(-spawnArea.y, spawnArea.y)));
@@ -47,6 +51,11 @@ void QuadTreeProgram::LoadSimulation(
         body.linearVelocity = Vec2f(RandomRange(-1, 1), RandomRange(-1, 1));
 
         body2DManager.SetComponent(entity, body);
+
+        //Set size of box collider
+        auto boxCollider = boxCollider2DManager.GetComponent(entity);
+        boxCollider.extent = Vec2f(RandomRange(0, 1), RandomRange(0, 1));
+        boxCollider2DManager.SetComponent(entity, boxCollider);
     }
 }
 
@@ -84,6 +93,9 @@ void QuadTreeProgram::Update(seconds dt)
 
     //Draw area
     physics::DebugDrawer2dLocator::get().DrawAABB(physics::Vec2(-spawnArea.x, -spawnArea.y), physics::Vec2(spawnArea.x, spawnArea.y), Color3(1, 1, 0));
+
+    //Draw quad tree
+    DrawQuadTreeNode(quadTree_);
 }
 
 void QuadTreeProgram::Destroy()
@@ -94,6 +106,16 @@ void QuadTreeProgram::Destroy()
 void QuadTreeProgram::DrawImGui() {
     //Set spawnArea
     ImGui::DragFloat2("Area", &spawnArea[0]);
+}
+
+void QuadTreeProgram::DrawQuadTreeNode(const physics::QuadTree& quadTree)
+{
+    physics::DebugDrawer2dLocator::get().DrawAABB(quadTree.GetBounds().bottomLeft, quadTree.GetBounds().topRight, Color3(0.5f, 0.5f, 0.5f));
+    auto children = quadTree.GetChildren();
+
+    for(const physics::QuadTree& child : children){
+        DrawQuadTreeNode(child);
+    }
 }
 
 } //namespace neko

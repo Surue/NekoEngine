@@ -24,17 +24,12 @@
 #pragma once
 
 #include <physics_simulation_program.h>
-#include <quad_tree.h>
 
 namespace neko
 {
-class QuadTreeProgram : public PhysicsSimulationProgramInterface
+class SimpleCollisionProgram : public PhysicsSimulationProgramInterface
 {
 public:
-    QuadTreeProgram(Transform2dManager& transform2DManager,
-                    Body2dManager& body2DManager,
-                    const physics::QuadTree& quadTree);
-
     virtual void LoadSimulation(
             EntityManager& entityManager,
             Transform2dManager& transform2DManager,
@@ -43,26 +38,15 @@ public:
             CircleCollider2dManager& circleCollider2DManager,
             PolygonCollider2dManager& polygonCollider2DManager) override;
 
-    void DrawImGui() override;
+    void DrawImGui() override{}
 
-    void Init() override;
+    void Init() override{}
 
-    void Update(seconds dt) override;
+    void Update(seconds dt) override {}
 
-    void Destroy() override;
+    void Destroy() override{}
 
 private:
 
-    void DrawQuadTreeNode(const physics::QuadTree& quadTree);
-
-    Transform2dManager& transform2DManager_;
-    Body2dManager& body2DManager_;
-
-    const int nbEntityToSpawn = 100;
-    Vec2f spawnArea = Vec2f(20, 20);
-
-    std::vector<Entity> entities_;
-
-    const physics::QuadTree& quadTree_;
 };
 } // namespace neko

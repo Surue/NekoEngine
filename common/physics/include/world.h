@@ -60,6 +60,8 @@ public:
 
     void SetGravity(Vec2 gravity) { gravity_ = gravity; }
 
+    const QuadTree& GetQuadTree() const { return quadTree_;}
+
 private:
     float fixedDeltaTime_;
     Vec2 gravity_;

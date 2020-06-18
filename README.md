@@ -51,6 +51,13 @@ Here is the list of individual test that can be access through the main project 
 This test instantiate one rigidbody in the center of the windows with a body. The expected result is that the body should 
 fall down.
 
+### 02 Quadtree
+This test is here to visualize the use of the quadTree. The quadtree is drawn in grey.
+
+### 03 Simple collision
+The expected behavior is to see the circle fall, hit the box then completely stop moving. The box object should never
+move as it's a static object.
+
 ## Update the repo
 To update the repos you must add an upstream with this repos https://github.com/Surue/NekoEngine
 ```$git add remote upstream https://github.com/Surue/NekoEngine.git``` (this must be done only once)

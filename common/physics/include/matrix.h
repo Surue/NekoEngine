@@ -39,34 +39,31 @@ struct Mat22
         return {};
     };
 
-    Mat22 operator+=(const Mat22& rhs)
+    void operator+=(const Mat22& rhs)
     {
         //TODO Complete this function,
-        return {};
     }
 
     Mat22 operator-(const Mat22& rhs) const
     {
-        //TODO Complete this function,
+        //TODO Complete this function
         return {};
     }
 
-    Mat22 operator-=(const Mat22& rhs)
+    void operator-=(const Mat22& rhs)
     {
-        //TODO Complete this function,
-        return {};
+        //TODO Complete this function
     }
 
     Mat22 operator*(const Mat22& rhs) const
     {
-        //TODO Complete this function,
+        //TODO Complete this function
         return {};
     }
 
-    Mat22 operator*=(const Mat22& rhs)
+    void operator*=(const Mat22& rhs)
     {
-        //TODO Complete this function,
-        return {};
+        //TODO Complete this function
     }
 
     Vec2 operator*(const Vec2& rhs) const
@@ -74,16 +71,15 @@ struct Mat22
         return Vec2(rhs.x * v1.x + rhs.y * v1.y, rhs.x * v2.x + rhs.y * v2.y);
     }
 
-    Vec2 operator*=(const Vec2& rhs)
+    void operator*=(const Vec2& rhs)
     {
-        //TODO Complete this function,
-        return {};
+        //TODO Complete this function
     }
 
 
     static Mat22 Identity()
     {
-        //TODO Complete this function,
+        //TODO Complete this function
         return {};
     }
 
@@ -94,7 +90,7 @@ struct Mat22
 
     std::string ToString()
     {
-        //TODO Complete this function,
+        //TODO Complete this function
         return "";
     }
 
