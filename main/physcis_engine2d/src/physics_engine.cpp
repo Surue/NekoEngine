@@ -46,8 +46,8 @@ PhysicsEngine::PhysicsEngine(Configuration* config) :
 
     //Register all simulation
     simulationBrowser_.RegisterSimulation("Rigidbody with gravity", std::make_unique<RigidBodyGravityProgramProgram>());
-    simulationBrowser_.RegisterSimulation("Grapher", std::make_unique<GrapherProgram>());
     simulationBrowser_.RegisterSimulation("Balistic", std::make_unique<BalisticProgram>());
+    simulationBrowser_.RegisterSimulation("Grapher", std::make_unique<GrapherProgram>());
 }
 
 void PhysicsEngine::Init()

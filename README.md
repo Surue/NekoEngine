@@ -31,7 +31,7 @@ This repos has been specifically made to create a custom 2D physics engine as a 
 
 ## Objectives 
 The physics engine must simulate a 2d rigid physics. Their must be:
- - Different type fo body (static, dynamic, kinematic)
+ - Different type of body (static, dynamic, kinematic)
  - Collision/Trigger (box, circle, polygon)
  - Bounding volume implementation (AABB)
  - Space Partitioning (QuadTree)
@@ -39,9 +39,17 @@ The physics engine must simulate a 2d rigid physics. Their must be:
  - RayCasting
  - Explosion effect 
  
- To do so, every files in common/physics can and must be modified. You can also create your own files.
+ To do so, every files in externals/physics can and must be modified. You can also create your own files.
 
 Every test in test_physics must succeed and a custom test must be created to display a specific feature of the physics engine.
+
+## Tests
+You can find the google tests in test/test_physics.cpp, they cover vector, matrix and aabb. 
+
+Here is the list of individual test that can be access through the main project physics_engine.
+### 01 Rigidbody Gravity
+This test instantiate one rigidbody in the center of the windows with a body. The expected result is that the body should 
+fall down.
 
 ## Update the repo
 To update the repos you must add an upstream with this repos https://github.com/Surue/NekoEngine
@@ -52,7 +60,8 @@ Every time you wish to update the repos :
 2. ```$git pull upstream develop```
 
 ## Drawing debug data
-It's possible to draw basics shapes on the screen:
+It's possible to draw basics shapes on the screen using the following functions. Every one of them accept an optional 
+to set a specific color.
 ### Line
 ``` DebugDrawer2dLocator::get().DrawLine(p1, p2); ```
 
@@ -61,6 +70,9 @@ It's possible to draw basics shapes on the screen:
 
 ### AABB
 ``` DebugDrawer2dLocator::get().DrawAABB(bottomLeft, topRight); ```
+
+### Box
+``` DebugDrawer2dLocator::get().DrawBox(center, extent); ```
 
 ### Circle
 ``` DebugDrawer2dLocator::get().DrawCircle(center, radius); ```

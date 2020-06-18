@@ -20,8 +20,8 @@ void DebugDrawer2d::Destroy()
 
 }
 
-void DebugDrawer2d::DrawLine(physics::Vec2 p1, physics::Vec2 p2) {
-    lineRenderer_.DrawLine(Line(WorldToScreen(p1), WorldToScreen(p2)));
+void DebugDrawer2d::DrawLine(physics::Vec2 p1, physics::Vec2 p2, const Color3& color) {
+    lineRenderer_.DrawLine(Line(WorldToScreen(p1), WorldToScreen(p2), color));
 }
 
 Vec3f DebugDrawer2d::WorldToScreen(physics::Vec2 pos)
@@ -31,41 +31,45 @@ Vec3f DebugDrawer2d::WorldToScreen(physics::Vec2 pos)
     return Vec3f((pos.x / size.x) * pixelPerUnit_, (pos.y / size.y) * pixelPerUnit_, 0);
 }
 
-void DebugDrawer2d::DrawVector(physics::Vec2 origin, physics::Vec2 direction, float length)
+void DebugDrawer2d::DrawVector(physics::Vec2 origin, physics::Vec2 direction, float length, const Color3& color)
 {
     Vec3f endPosition = WorldToScreen(origin + direction * length);
 
-    lineRenderer_.DrawLine(Line(WorldToScreen(origin), endPosition));
+    lineRenderer_.DrawLine(Line(WorldToScreen(origin), endPosition, color));
 }
 
-void DebugDrawer2d::DrawAABB(physics::Vec2 bottomLeft, physics::Vec2 topRight)
+void DebugDrawer2d::DrawAABB(physics::Vec2 bottomLeft, physics::Vec2 topRight, const Color3& color)
 {
     //Draw line from bottom left to bottom right.
     lineRenderer_.DrawLine(Line(
             WorldToScreen(bottomLeft),
-            WorldToScreen(Vec2(topRight.x, bottomLeft.y))
+            WorldToScreen(Vec2(topRight.x, bottomLeft.y)),
+            color
             ));
 
     //Draw line from bottom left to top Left.
     lineRenderer_.DrawLine(Line(
             WorldToScreen(bottomLeft),
-            WorldToScreen(Vec2(bottomLeft.x, topRight.y))
+            WorldToScreen(Vec2(bottomLeft.x, topRight.y)),
+            color
     ));
 
     //Draw line from bottom right to top right.
     lineRenderer_.DrawLine(Line(
             WorldToScreen(Vec2(topRight.x, bottomLeft.y)),
-            WorldToScreen(topRight)
+            WorldToScreen(topRight),
+            color
     ));
 
     //Draw line from top left to top right.
     lineRenderer_.DrawLine(Line(
             WorldToScreen(Vec2(bottomLeft.x, topRight.y)),
-            WorldToScreen(topRight)
+            WorldToScreen(topRight),
+            color
     ));
 }
 
-void DebugDrawer2d::DrawCircle(Vec2 center, float radius)
+void DebugDrawer2d::DrawCircle(Vec2 center, float radius, const Color3& color)
 {
 
     float x = radius * cosf(0);
@@ -78,12 +82,12 @@ void DebugDrawer2d::DrawCircle(Vec2 center, float radius)
         float x = radius * cosf(theta);
         float y = radius * sinf(theta);
         Vec2 newPos = {x + center.x, y + center.y};
-        lineRenderer_.DrawLine(Line(WorldToScreen(lastPos), WorldToScreen(newPos)));
+        lineRenderer_.DrawLine(Line(WorldToScreen(lastPos), WorldToScreen(newPos), color));
         lastPos = newPos;
     }
 }
 
-void DebugDrawer2d::DrawBox(Vec2 center, Vec2 extent, float angle)
+void DebugDrawer2d::DrawBox(Vec2 center, Vec2 extent, float angle, const Color3& color)
 {
     Mat22 rotationMatrix = Mat22::GetRotationMatrix(angle);
 
@@ -93,9 +97,9 @@ void DebugDrawer2d::DrawBox(Vec2 center, Vec2 extent, float angle)
     posC = center + rotationMatrix * Vec2(extent.x, extent.y);
     posD = center + rotationMatrix * Vec2(-extent.x, extent.y);
 
-    lineRenderer_.DrawLine(Line(WorldToScreen(posA), WorldToScreen(posB)));
-    lineRenderer_.DrawLine(Line(WorldToScreen(posB), WorldToScreen(posC)));
-    lineRenderer_.DrawLine(Line(WorldToScreen(posC), WorldToScreen(posD)));
-    lineRenderer_.DrawLine(Line(WorldToScreen(posD), WorldToScreen(posA)));
+    lineRenderer_.DrawLine(Line(WorldToScreen(posA), WorldToScreen(posB), color));
+    lineRenderer_.DrawLine(Line(WorldToScreen(posB), WorldToScreen(posC), color));
+    lineRenderer_.DrawLine(Line(WorldToScreen(posC), WorldToScreen(posD), color));
+    lineRenderer_.DrawLine(Line(WorldToScreen(posD), WorldToScreen(posA), color));
 }
 } // namespace neko::physics

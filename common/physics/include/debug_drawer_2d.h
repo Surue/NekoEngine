@@ -38,7 +38,7 @@ public:
      * @param p1
      * @param p2
      */
-    virtual void DrawLine(Vec2 p1, Vec2 p2) = 0;
+    virtual void DrawLine(Vec2 p1, Vec2 p2, const Color3& color = Color3(1, 1, 1)) = 0;
 
     /**
      * \brief Draw a vector from an origin with a certain direction and length
@@ -46,23 +46,23 @@ public:
      * \param direction
      * \param length
      */
-    virtual void DrawVector(Vec2 origin, Vec2 direction, float length) = 0;
+    virtual void DrawVector(Vec2 origin, Vec2 direction, float length, const Color3& color = Color3(1, 1, 1)) = 0;
 
     /**
      * \brief Draw an AABB
      * \param bottomLeft
      * \param topRight
      */
-    virtual void DrawAABB(Vec2 bottomLeft, Vec2 topRight) = 0;
+    virtual void DrawAABB(Vec2 bottomLeft, Vec2 topRight, const Color3& color = Color3(0, 1 ,0)) = 0;
 
     /**
      * \brief Draw a circle a the center with the given radius
      * \param center
      * \param radius
      */
-    virtual void DrawCircle(Vec2 center, float radius) = 0;
+    virtual void DrawCircle(Vec2 center, float radius, const Color3& color = Color3(1, 1, 1)) = 0;
 
-    virtual void DrawBox(Vec2 center, Vec2 extent, float angle) = 0;
+    virtual void DrawBox(Vec2 center, Vec2 extent, float angle, const Color3& color = Color3(1, 1, 1)) = 0;
 };
 
 class DebugDrawer2d : public DebugDrawer2dInterface, public SystemInterface
@@ -74,15 +74,15 @@ public:
 
     void Destroy() override;
 
-    void DrawLine(Vec2 p1, Vec2 p2) override;
+    void DrawLine(Vec2 p1, Vec2 p2, const Color3& color) override;
 
-    void DrawVector(Vec2 origin, Vec2 direction, float length) override;
+    void DrawVector(Vec2 origin, Vec2 direction, float length, const Color3& color) override;
 
-    void DrawAABB(Vec2 bottomLeft, Vec2 topRight) override;
+    void DrawAABB(Vec2 bottomLeft, Vec2 topRight, const Color3& color) override;
 
-    void DrawCircle(Vec2 center, float radius) override;
+    void DrawCircle(Vec2 center, float radius, const Color3& color) override;
 
-    void DrawBox(Vec2 center, Vec2 extent, float angle) override;
+    void DrawBox(Vec2 center, Vec2 extent, float angle, const Color3& color) override;
 
     void SetWindow(Window* window) { window_ = window; }
 
@@ -95,22 +95,20 @@ private:
     gl::LineRenderer lineRenderer_;
 
     Window* window_;
-
-    const
 };
 
 class NullDebugDrawer2d : public DebugDrawer2dInterface
 {
 public:
-    void DrawLine(Vec2 p1, Vec2 p2) override {}
+    void DrawLine(Vec2 p1, Vec2 p2, const Color3& color) override {}
 
-    void DrawVector(Vec2 origin, Vec2 direction, float length) override {}
+    void DrawVector(Vec2 origin, Vec2 direction, float length, const Color3& color) override {}
 
-    void DrawAABB(Vec2 bottomLeft, Vec2 topRight) override {}
+    void DrawAABB(Vec2 bottomLeft, Vec2 topRight, const Color3& color) override {}
 
-    void DrawCircle(Vec2 center, float radius) override {}
+    void DrawCircle(Vec2 center, float radius, const Color3& color) override {}
 
-    void DrawBox(Vec2 center, Vec2 extent, float angle) override {}
+    void DrawBox(Vec2 center, Vec2 extent, float angle, const Color3& color) override {}
 };
 
 using DebugDrawer2dLocator = Locator<DebugDrawer2dInterface, NullDebugDrawer2d>;
