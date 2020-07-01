@@ -75,9 +75,10 @@ public:
      * \brief Draw a polygon
      * \param center
      * \param vertices
+     * \param angle
      * \param color
      */
-    virtual void DrawPolygon(Vec2 center, std::vector<Vec2> vertices, const Color3& color = Color3(1, 1, 1)) = 0;
+    virtual void DrawPolygon(Vec2 center, std::vector<Vec2> vertices, float angle, const Color3& color = Color3(1, 1, 1)) = 0;
 };
 
 class DebugDrawer2d : public DebugDrawer2dInterface, public SystemInterface
@@ -99,7 +100,7 @@ public:
 
     void DrawBox(Vec2 center, Vec2 extent, float angle, const Color3& color) override;
 
-    void DrawPolygon(Vec2 center, std::vector<Vec2> vertices, const Color3& color) override;
+    void DrawPolygon(Vec2 center, std::vector<Vec2> vertices, float angle, const Color3& color) override;
 
     void SetWindow(Window* window) { window_ = window; }
 
@@ -127,7 +128,7 @@ public:
 
     void DrawBox(Vec2 center, Vec2 extent, float angle, const Color3& color) override {}
 
-    void DrawPolygon(Vec2 center, std::vector<Vec2> vertices, const Color3& color) override {}
+    void DrawPolygon(Vec2 center, std::vector<Vec2> vertices, float angle, const Color3& color) override {}
 };
 
 using DebugDrawer2dLocator = Locator<DebugDrawer2dInterface, NullDebugDrawer2d>;

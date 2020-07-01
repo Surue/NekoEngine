@@ -27,7 +27,7 @@ void TorqueProgram::LoadSimulation(EntityManager& entityManager, Transform2dMana
         //Set the body type to dynamic
         auto body = body2DManager.GetComponent(entity);
         body.bodyType = BodyType::DYNAMIC;
-        body.gravityScale = 1.0f;
+        body.gravityScale = 0.0f;
         body2DManager.SetComponent(entity, body);
 
         //Set circle collider

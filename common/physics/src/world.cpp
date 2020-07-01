@@ -14,7 +14,14 @@ void World::Init()
 void World::Update(seconds dt)
 {
     for(RigidBody& body : bodies_){
+        auto pos = body.GetPosition();
 
+        body.SetLinearVelocity(body.GetLinearVelocity() + Vec2(0, dt.count() * gravity_.y * body.GetGravityScale()));
+
+        pos = pos + body.GetLinearVelocity() * dt.count();
+
+        body.SetPosition(pos);
+        
         //TODO Check collision
 
         //TODO Update object velocities with gravity
@@ -42,7 +49,7 @@ void World::Update(seconds dt)
                 case ShapeType::POLYGON:
                 {
                     const auto& polyShape = std::get<PolygonShape>(colliderShape.shape);
-                    DebugDrawer2dLocator::get().DrawPolygon(pos + collider.GetOffset(), polyShape.GetVertices());
+                    DebugDrawer2dLocator::get().DrawPolygon(pos + collider.GetOffset(), polyShape.GetVertices(), body.GetAngle());
                 }
                     break;
             }

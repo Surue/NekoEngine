@@ -66,6 +66,9 @@ It's expected that the most right ball never stop bouncing while the ball to the
 Their is 4 quad each with a given friction (0, 0.33, 0.66, 1) falling on a box collider with a friction of 0.
 You can change the friction of each platforms and their rotation. You can also reset the simulation.
 
+### 06 Torque
+In this simulation there is falling pentagon that collide with randomly placed platforms.
+
 ## Update the repo
 To update the repos you must add an upstream with this repos https://github.com/Surue/NekoEngine
 ```$git add remote upstream https://github.com/Surue/NekoEngine.git``` (this must be done only once)
@@ -87,10 +90,13 @@ to set a specific color.
 ``` DebugDrawer2dLocator::get().DrawAABB(bottomLeft, topRight); ```
 
 ### Box
-``` DebugDrawer2dLocator::get().DrawBox(center, extent); ```
+``` DebugDrawer2dLocator::get().DrawBox(center, extent, angle); ```
 
 ### Circle
 ``` DebugDrawer2dLocator::get().DrawCircle(center, radius); ```
+
+### Polygon
+``` DebugDrawer2dLocator::get().DrawPolygon(center, vertices, angle); ```
 
 ### Add new drawing function
 To add a new function:
