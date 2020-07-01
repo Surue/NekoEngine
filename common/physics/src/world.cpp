@@ -14,14 +14,15 @@ void World::Init()
 void World::Update(seconds dt)
 {
     for(RigidBody& body : bodies_){
-        //TODO ICUBUEWUIVFBZUEHIUCVUZWEUIFO BCIWGREBFOUIV CBWRISUFZIC
-        auto pos = body.GetPosition();
 
-        //x(t) = t * vo + x0
-        pos = pos + body.GetLinearVelocity();
+        //TODO Check collision
 
-        body.SetPosition(pos);
+        //TODO Update object velocities with gravity
 
+        //TODO Move objects regarding their velocities
+
+        //Draw all collider
+        //TODO Move it somewhere else or at least clean this code
         for(const auto& collider : body.GetColliders()){
             const auto& colliderShape = collider.GetShape();
             switch(colliderShape.shapeType){
@@ -39,6 +40,10 @@ void World::Update(seconds dt)
                 }
                     break;
                 case ShapeType::POLYGON:
+                {
+                    const auto& polyShape = std::get<PolygonShape>(colliderShape.shape);
+                    DebugDrawer2dLocator::get().DrawPolygon(pos + collider.GetOffset(), polyShape.GetVertices());
+                }
                     break;
             }
         }

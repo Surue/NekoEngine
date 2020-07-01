@@ -102,4 +102,14 @@ void DebugDrawer2d::DrawBox(Vec2 center, Vec2 extent, float angle, const Color3&
     lineRenderer_.DrawLine(Line(WorldToScreen(posC), WorldToScreen(posD), color));
     lineRenderer_.DrawLine(Line(WorldToScreen(posD), WorldToScreen(posA), color));
 }
+
+void DebugDrawer2d::DrawPolygon(Vec2 center, std::vector<Vec2> vertices, const Color3& color)
+{
+    const int size = vertices.size();
+    for(int i = 0; i <= size; i++){
+        lineRenderer_.DrawLine(Line(
+                WorldToScreen(vertices[i % size] + center),
+                WorldToScreen(vertices[(i + 1) % size] + center), color));
+    }
+}
 } // namespace neko::physics

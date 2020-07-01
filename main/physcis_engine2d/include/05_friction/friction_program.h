@@ -40,7 +40,7 @@ public:
             CircleCollider2dManager& circleCollider2DManager,
             PolygonCollider2dManager& polygonCollider2DManager) override;
 
-    void DrawImGui() override;;
+    void DrawImGui() override;
 
     void Init() override {}
 

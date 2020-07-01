@@ -23,53 +23,40 @@
  */
 #pragma once
 
-#include <rigidbody.h>
-#include <quad_tree.h>
-#include <contact.h>
+#include <physics_simulation_program.h>
 
-#include <engine/system.h>
-
-namespace neko::physics
+namespace neko
 {
-class World : public SystemInterface
+class TorqueProgram : public PhysicsSimulationProgramInterface
 {
 public:
-    void Init() override;
+    TorqueProgram(Transform2dManager& transform2DManager);
+
+    virtual void LoadSimulation(
+            EntityManager& entityManager,
+            Transform2dManager& transform2DManager,
+            Body2dManager& body2DManager,
+            BoxCollider2dManager& boxCollider2DManager,
+            CircleCollider2dManager& circleCollider2DManager,
+            PolygonCollider2dManager& polygonCollider2DManager) override;
+
+    void DrawImGui() override{}
+
+    void Init() override {}
 
     void Update(seconds dt) override;
 
-    void Destroy() override;
-
-    /**
-     * \brief Set bodies for the current frame.
-     * \param bodies
-     */
-    void SetBodies(std::vector<RigidBody>& bodies) { bodies_ = bodies; }
-
-    /**
-     * \brief Get the bodies after the physics update.
-     * \return updated bodies
-     */
-    std::vector<RigidBody>& RetrieveBodies() { return bodies_; }
-
-    float GetFixedDeltaTime() const { return fixedDeltaTime_; }
-
-    void SetFixedDeltaTime(float dt) { fixedDeltaTime_ = dt; }
-
-    Vec2 GetGravity() const { return gravity_; }
-
-    void SetGravity(Vec2 gravity) { gravity_ = gravity; }
-
-    const QuadTree& GetQuadTree() const { return quadTree_;}
+    void Destroy() override{}
 
 private:
-    float fixedDeltaTime_;
-    Vec2 gravity_ = Vec2(0.0f, -9.81f);
+    std::vector<Vec2f> GeneratePentagon(float radius);
 
-    std::vector<RigidBody> bodies_;
+    const int nbPentagonPoint_ = 5;
+    const int nbPentagon_ = 10;
+    const int nbPlatform_ = 10;
 
-    ContactManager contactManager_;
+    std::vector<Entity> bodies_;
 
-    QuadTree quadTree_;
+    Transform2dManager& transform2DManager_;
 };
-} // namespace neko::physics
+} // namespace neko
