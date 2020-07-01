@@ -69,6 +69,15 @@ void SimulationBrowser::SwitchToSimulation(size_t newSimulationIndex)
     {
         for (Entity e = 0; e <= lastEntity; e++)
         {
+            //Reset velocity
+            auto body = body2DManager_.GetComponent(e);
+
+            body.linearVelocity = Vec2f(0, 0);
+            body.angularVelocity = 0;
+
+            body2DManager_.SetComponent(e, body);
+
+            //Clear mask
             entityManager_.DestroyEntity(e);
         }
     }

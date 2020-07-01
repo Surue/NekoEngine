@@ -58,6 +58,10 @@ This test is here to visualize the use of the quadTree. The quadtree is drawn in
 The expected behavior is to see the circle fall, hit the box then completely stop moving. The box object should never
 move as it's a static object.
 
+### 04 Restitution
+Their is 4 ball each with a given restitution (1, 0.66, 0.33, 0) falling on the same box collider with a restitution of 1. 
+It's expected that the most left ball never stop bouncing while the ball to the right never bounce. 
+
 ## Update the repo
 To update the repos you must add an upstream with this repos https://github.com/Surue/NekoEngine
 ```$git add remote upstream https://github.com/Surue/NekoEngine.git``` (this must be done only once)

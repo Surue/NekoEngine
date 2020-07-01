@@ -39,7 +39,7 @@ TEST(Physics, Vec2_Substraction)
     //Test operator -=
     const neko::physics::Vec2 d{3.0f, 4.0f};
     neko::physics::Vec2 e = d;
-    e += a;
+    e -= a;
     ASSERT_EQ(e.x, d.x - a.x);
     ASSERT_EQ(e.y, d.y - a.y);
 }

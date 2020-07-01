@@ -48,6 +48,7 @@ PhysicsEngine::PhysicsEngine(Configuration* config) :
     simulationBrowser_.RegisterSimulation("01 Rigidbody with gravity", std::make_unique<RigidBodyGravityProgram>());
     simulationBrowser_.RegisterSimulation("02 Quadtree", std::make_unique<QuadTreeProgram>(transform2DManager_, body2DManager_, world_.GetQuadTree()));
     simulationBrowser_.RegisterSimulation("03 Simple Collision", std::make_unique<SimpleCollisionProgram>());
+    simulationBrowser_.RegisterSimulation("04 Restitution", std::make_unique<RestitutionProgram>());
     simulationBrowser_.RegisterSimulation("Balistic", std::make_unique<BalisticProgram>());
     simulationBrowser_.RegisterSimulation("Grapher", std::make_unique<GrapherProgram>());
 }

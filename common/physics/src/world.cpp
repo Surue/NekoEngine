@@ -17,9 +17,31 @@ void World::Update(seconds dt)
         //TODO ICUBUEWUIVFBZUEHIUCVUZWEUIFO BCIWGREBFOUIV CBWRISUFZIC
         auto pos = body.GetPosition();
 
+        //x(t) = t * vo + x0
         pos = pos + body.GetLinearVelocity();
 
         body.SetPosition(pos);
+
+        for(const auto& collider : body.GetColliders()){
+            const auto& colliderShape = collider.GetShape();
+            switch(colliderShape.shapeType){
+                case ShapeType::BOX:
+                {
+                    const auto& boxShape = std::get<BoxShape>(colliderShape.shape);
+                    DebugDrawer2dLocator::get().DrawBox(pos + collider.GetOffset(), boxShape.GetExtent(),
+                                                        body.GetAngle());
+                }
+                    break;
+                case ShapeType::CIRCLE:
+                {
+                    const auto& circleShape = std::get<CircleShape>(colliderShape.shape);
+                    DebugDrawer2dLocator::get().DrawCircle(pos + collider.GetOffset(), circleShape.GetRadius());
+                }
+                    break;
+                case ShapeType::POLYGON:
+                    break;
+            }
+        }
     }
 }
 
