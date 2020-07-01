@@ -59,8 +59,12 @@ The expected behavior is to see the circle fall, hit the box then completely sto
 move as it's a static object.
 
 ### 04 Restitution
-Their is 4 ball each with a given restitution (1, 0.66, 0.33, 0) falling on the same box collider with a restitution of 1. 
-It's expected that the most left ball never stop bouncing while the ball to the right never bounce. 
+Their is 4 ball each with a given restitution (0, 0.33, 0.66, 1) falling on the same box collider with a restitution of 1. 
+It's expected that the most right ball never stop bouncing while the ball to the left never bounce. 
+
+### 05 Friction
+Their is 4 quad each with a given friction (0, 0.33, 0.66, 1) falling on a box collider with a friction of 0.
+You can change the friction of each platforms and their rotation. You can also reset the simulation.
 
 ## Update the repo
 To update the repos you must add an upstream with this repos https://github.com/Surue/NekoEngine
