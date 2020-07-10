@@ -199,12 +199,12 @@ TEST(Physics, Matrix_MultiplicationMatrix){
     const neko::physics::Mat22 a{{2.0f, 1.0f}, {1.0f, 0.0f}};
     const neko::physics::Mat22 b{{-2.0f, -3.0f}, {4.0f, 2.0f}};
 
-    auto c = a - b;
+    auto c = a * b;
 
-    ASSERT_EQ(c.v1.x, a.v1.x * b.v1.x + a.v2.x * b.v1.y);
-    ASSERT_EQ(c.v1.y, a.v1.y * b.v2.x + a.v2.y * b.v2.y);
-    ASSERT_EQ(c.v2.x, a.v2.x * b.v1.x + a.v2.x * b.v1.y);
-    ASSERT_EQ(c.v2.x, a.v2.y * b.v2.x + a.v2.y * b.v2.y);
+    ASSERT_EQ(c.v1.x, 0);
+    ASSERT_EQ(c.v1.y, -4);
+    ASSERT_EQ(c.v2.x, -2);
+    ASSERT_EQ(c.v2.y, -3);
 }
 
 TEST(Physics, Matrix_MultiplicationVector){
@@ -220,10 +220,10 @@ TEST(Physics, Matrix_MultiplicationVector){
 TEST(Physics, Matrix_RotationMatrix){
     const neko::physics::Mat22 a = neko::physics::Mat22::GetRotationMatrix(45.0f * (neko::PI / 180.0f));
 
-    ASSERT_EQ(a.v1.x, cos(45));
-    ASSERT_EQ(a.v1.y, sin(45));
-    ASSERT_EQ(a.v2.x, -sin(45));
-    ASSERT_EQ(a.v2.y, cos(45));
+    ASSERT_EQ(a.v1.x, cos(45 * (neko::PI / 180.0f)));
+    ASSERT_EQ(a.v1.y, sin(45 * (neko::PI / 180.0f)));
+    ASSERT_EQ(a.v2.x, -sin(45 * (neko::PI / 180.0f)));
+    ASSERT_EQ(a.v2.y, cos(45 * (neko::PI / 180.0f)));
 }
 
 TEST(Physics, AABB_GetCenter){
@@ -288,4 +288,12 @@ TEST(Physics, AABB_Overlap){
 
     ASSERT_TRUE(aabb.Overlap(aabb4));
     ASSERT_TRUE(aabb4.Overlap(aabb));
+}
+
+TEST(Physics, sample){
+    neko::physics::Vec2 a = neko::physics::Vec2(0, 0);
+
+    float magnitude = a.Magnitude();
+
+    ASSERT_FLOAT_EQ(magnitude, 1);
 }

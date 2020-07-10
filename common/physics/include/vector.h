@@ -24,6 +24,7 @@
 #pragma once
 
 #include <string>
+#include <cmath>
 
 namespace neko::physics
 {
@@ -112,8 +113,7 @@ public:
      */
     float Magnitude() const
     {
-        //TODO Complete this function.
-        return 0;
+        return sqrtf(x*x + y*y);
     }
 
     /**
@@ -123,8 +123,7 @@ public:
      */
     float SqrMagnitude() const
     {
-        //TODO Complete this function.
-        return 0;
+        return x*x + y*y;
     }
 
     /**
@@ -163,6 +162,7 @@ public:
         return 0;
     }
 
+
     static float AngleBetween(const Vec2 v1, const Vec2 v2)
     {
         //TODO Complete this function.
@@ -176,7 +176,7 @@ public:
     std::string ToString()
     {
         //TODO Complete this function.
-        return "";
+        return "()";
     }
 };
 

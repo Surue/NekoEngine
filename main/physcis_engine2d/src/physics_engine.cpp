@@ -5,6 +5,7 @@
 #include <04_restitution/restitution_program.h>
 #include <05_friction/friction_program.h>
 #include <06_torque/torque_program.h>
+#include <97_planet/planet_program.h>
 #include <98_balistic/balistic_program.h>
 #include <99_grapher/grapher_program.h>
 
@@ -59,6 +60,7 @@ PhysicsEngine::PhysicsEngine(Configuration* config) :
     simulationBrowser_.RegisterSimulation("04 Restitution", std::make_unique<RestitutionProgram>());
     simulationBrowser_.RegisterSimulation("05 Friction", std::make_unique<FrictionProgram>(transform2DManager_, boxCollider2DManager_));
     simulationBrowser_.RegisterSimulation("06 Torque", std::make_unique<TorqueProgram>(transform2DManager_));
+    simulationBrowser_.RegisterSimulation("97 Planet", std::make_unique<PlanetProgram>());
     simulationBrowser_.RegisterSimulation("Balistic", std::make_unique<BalisticProgram>());
     simulationBrowser_.RegisterSimulation("Grapher", std::make_unique<GrapherProgram>());
 }

@@ -25,22 +25,44 @@
 
 #include <physics_simulation_program.h>
 
-namespace neko{
-class GrapherProgram : public PhysicsSimulationProgramInterface {
-public:
-    void LoadSimulation(EntityManager& entityManager, Transform2dManager& transform2DManager, Body2dManager& body2DManager,
-                   BoxCollider2dManager& boxCollider2DManager, CircleCollider2dManager& circleCollider2DManager,
-                   PolygonCollider2dManager& polygonCollider2DManager) override;
+namespace neko
+{
+struct Planet{
+    Planet() = default;
+    Planet(physics::Vec2 pos, float radius, float mass, physics::Vec2 vel) : position(pos), radius(radius), mass(mass), velocity(vel){}
 
-    void Init() override;
+    physics::Vec2 position;
+    float radius;
+    float mass;
+    physics::Vec2 velocity;
+};
+
+class PlanetProgram : public PhysicsSimulationProgramInterface
+{
+public:
+    PlanetProgram(){};
+
+    virtual void LoadSimulation(
+            EntityManager& entityManager,
+            Transform2dManager& transform2DManager,
+            Body2dManager& body2DManager,
+            BoxCollider2dManager& boxCollider2DManager,
+            CircleCollider2dManager& circleCollider2DManager,
+            PolygonCollider2dManager& polygonCollider2DManager) override;
+
+    void DrawImGui() override{}
+
+    void Init() override {}
 
     void Update(seconds dt) override;
 
-    void Destroy() override;
-
-    void DrawImGui() override{};
+    void Destroy() override{}
 
 private:
-    float FunctionX(float x);
+    const int nbPlanet = 10;
+    const float minRadius = 1.0f;
+    const float maxRadius = 10.0f;
+
+    std::vector<Planet> planets_;
 };
-} //namespace neko
+} // namespace neko

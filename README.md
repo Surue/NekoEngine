@@ -71,7 +71,7 @@ In this simulation there is falling pentagon that collide with randomly placed p
 
 ## Update the repo
 To update the repos you must add an upstream with this repos https://github.com/Surue/NekoEngine
-```$git add remote upstream https://github.com/Surue/NekoEngine.git``` (this must be done only once)
+```$git remote add upstream https://github.com/Surue/NekoEngine.git``` (this must be done only once)
 
 Every time you wish to update the repos :
 1. ```$git fetch upstream develop```
